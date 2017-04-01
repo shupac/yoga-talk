@@ -1,0 +1,10 @@
+<section>
+  <select [(ngModel)]="selectedVoice">
+    <option
+      *ngFor="let voice of voices"
+      [ngValue]="voice.dataName"
+      >{{ voice.displayName }}</option>
+  </select>
+  <button (click)="startSequence()">Start</button>
+  <button (click)="stopSequence()">Stop</button>
+</section>
