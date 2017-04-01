@@ -1,7 +1,7 @@
 export default [
   'baddha konasana',
-  'astavakrasana',
   'tittibhasana',
+  'astavakrasana',
   'eka pada bakasana',
   'virasana',
   // 'savasana',

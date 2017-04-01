@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { Pose, SequenceService } from '../sequence.service';
 
 @Component({
@@ -7,6 +7,8 @@ import { Pose, SequenceService } from '../sequence.service';
   styleUrls: ['./sequence.component.css']
 })
 export class SequenceComponent {
+  @Output() selectPose: EventEmitter<number> = new EventEmitter();
+
   constructor(private service: SequenceService) { }
 
   get sequence(): Pose[] {

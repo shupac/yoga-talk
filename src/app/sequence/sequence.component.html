@@ -1,9 +1,11 @@
-<h2>Sequence</h2>
-<ul>
-  <li
+<section>
+  <h2>Sequence</h2>
+  <div
     *ngFor="let pose of sequence, let i = index"
-    [class.playing]="i === currentIndex"
+    class="pose-item"
+    [class.playing]="i===currentIndex"
+    (click)="selectPose.emit(i)"
     >
     {{ pose.name }} - {{ pose.breaths }}
-  </li>
-</ul>
+  </div>
+</section>

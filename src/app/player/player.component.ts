@@ -31,11 +31,12 @@ export class PlayerComponent {
       .filter(voice => voice.lang.match('en'));
   }
 
-  startSequence() {
+  startSequence(index?: number) {
+    if (this.playing) this.stopSequence();
     let sequence = this.service.getSequence();
     this.voiceData = this.availableVoices
       .find(voice => voice.name === this.selectedVoice);
-    this.service.currentIndex = 0;
+    this.service.currentIndex = index || 0;
     this.speakAndCueNext(sequence);
     this.playing = true;
   }

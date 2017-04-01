@@ -17,8 +17,8 @@ export class Pose {
 }
 
 const lexicon = {
-  'baddha konasana': 'bada conaasina',
-  'tittibhasana': 'teetee baasina',
+  'baddha konasana': 'baada conaasina',
+  'tittibhasana': 'teetibaasina',
   'astavakrasana': 'aasta vikraasina',
   'savasana': 'shavaasina',
   'bakasana': 'bakaasina',

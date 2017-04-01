@@ -1,3 +1,15 @@
+:host {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.pose-item {
+  padding: 10px 20px;
+  background-color: #eee;
+  border: 1px solid #fff;
+}
+
 .playing {
   font-weight: bolder;
+  background-color: #ddd;
 }
