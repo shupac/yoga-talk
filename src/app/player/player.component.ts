@@ -11,33 +11,42 @@ export class PlayerComponent {
   synth = (<any>window).speechSynthesis;
   voices = VoiceChoices;
   availableVoices;
-  selectedVoice = 'Fiona';
+  selectedVoice = 'Tessa';
+  playing = false;
 
   constructor(private service: SequenceService) {
+
   }
 
   ngOnInit() {
     if (this.synth && this.synth.onvoiceschanged !== undefined) {
-      this.synth.onvoiceschanged = () => this.availableVoices = this.synth.getVoices();
+      this.synth.onvoiceschanged = this.getVoices.bind(this);
     }
+    else this.getVoices();
+  }
+
+  private getVoices() {
+    this.availableVoices = this.synth.getVoices().filter(voice => voice.lang.match('en'));
   }
 
   startSequence() {
-    let voiceData = this.availableVoices.find(voice => voice.name === this.selectedVoice);
-    console.log(voiceData);
     let sequence = this.service.getSequence();
-    sequence.forEach(pose => this.speak(pose.name, voiceData));
-  }
+    let voiceData = this.availableVoices.find(voice => voice.name === this.selectedVoice);
+    sequence.forEach(pose => this.speak(pose.pronunciation || pose.name, voiceData));
+    // this.playing = true;
 
-  private speak(text: string, voice) {
-    let speech = new (<any>window).SpeechSynthesisUtterance(text);
-    speech.voice = voice;
-    this.synth.speak(speech);
+
   }
 
   stopSequence() {
+    this.synth.cancel();
+    this.playing = false;
+  }
 
+  private speak(text: string, voice) {
+    let message = new (<any>window).SpeechSynthesisUtterance(text);
+    message.voice = voice;
+    // message.lang = 'hi-IN';
+    this.synth.speak(message);
   }
 }
-
-

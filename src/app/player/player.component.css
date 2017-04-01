@@ -1,0 +1,10 @@
+section, .controls {
+  display: flex;
+  flex-direction: column;
+}
+
+select, button {
+  margin-top: 10px;
+  height: 30px;
+  font-size: 1.2em;
+}

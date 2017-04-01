@@ -5,6 +5,8 @@
       [ngValue]="voice.dataName"
       >{{ voice.displayName }}</option>
   </select>
-  <button (click)="startSequence()">Start</button>
-  <button (click)="stopSequence()">Stop</button>
+  <div class="controls">
+    <button (click)="startSequence()" *ngIf="!playing">Start</button>
+    <button (click)="stopSequence()" *ngIf="playing">Stop</button>
+  </div>
 </section>
