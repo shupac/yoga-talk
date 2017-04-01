@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
+import { Settings } from './settings';
+import STUB_POSES from './stub-poses';
 
 export class Pose {
   id: number;
   name: string;
-  breaths: number;
+  breaths: number = Settings.defaultBreaths;
   duration: number;
   pronunciation: string;
 
-  constructor(values: Object = {}) {
+  constructor(
+    values: Object = {}
+  ) {
     Object.assign(this, values)
   }
 }
@@ -18,31 +22,17 @@ const lexicon = {
   'astavakrasana': 'aasta vikraasina',
   'savasana': 'shavaasina',
   'bakasana': 'bakaasina',
-  'eka pada': 'ecaa paada',
+  'eka pada bakasana': 'ecaa paada bakaasina',
   'virasana': 'viraasina'
 }
 
+@Injectable()
 export class SequenceService {
   poses: Pose[] = [];
+  currentIndex: number;
 
   constructor() {
-    let poses = [
-      new Pose({ name: 'baddha konasana' }),
-      new Pose({ name: 'tittibhasana' }),
-      new Pose({ name: 'astavakrasana' }),
-      new Pose({ name: 'virasana' }),
-      new Pose({ name: 'savasana' }),
-      new Pose({ name: 'chatarunga' }),
-      new Pose({ name: 'down dog' }),
-      new Pose({ name: 'half moon' }),
-      new Pose({ name: 'cobra' }),
-      new Pose({ name: 'lounge lizard' }),
-      new Pose({ name: 'twisting lunge' }),
-      new Pose({ name: 'seated sidebend' }),
-      new Pose({ name: 'handstand' }),
-    ];
-
-    poses.forEach(pose => this.addPose(pose));
+    STUB_POSES.map(name => new Pose({name})).forEach(pose => this.addPose(pose));
   }
 
   addPose(pose) {
@@ -53,6 +43,4 @@ export class SequenceService {
   getSequence() {
     return this.poses;
   }
-
-
 }

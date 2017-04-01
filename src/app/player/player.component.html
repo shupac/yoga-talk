@@ -2,8 +2,8 @@
   <select [(ngModel)]="selectedVoice">
     <option
       *ngFor="let voice of voices"
-      [ngValue]="voice.dataName"
-      >{{ voice.displayName }}</option>
+      [ngValue]="voice.dataName">
+      {{ voice.displayName }}</option>
   </select>
   <div class="controls">
     <button (click)="startSequence()" *ngIf="!playing">Start</button>

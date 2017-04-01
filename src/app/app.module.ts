@@ -7,7 +7,8 @@ import { AppComponent } from './app.component';
 import { PoseComponent } from './pose/pose.component';
 import { PlayerComponent } from './player/player.component';
 import { NewPoseComponent } from './new-pose/new-pose.component';
-import { SequenceListComponent } from './sequence-list/sequence-list.component';
+import { SequenceComponent } from './sequence/sequence.component';
+import { SettingsComponent } from './settings/settings.component';
 
 import { SequenceService } from './sequence.service';
 
@@ -17,7 +18,8 @@ import { SequenceService } from './sequence.service';
     PoseComponent,
     PlayerComponent,
     NewPoseComponent,
-    SequenceListComponent
+    SequenceComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

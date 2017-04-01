@@ -1,4 +1,14 @@
 <section>
-  <input type="text" [(ngModel)]="pose.name" (keydown.enter)="addPose()">
+  <div>
+    <label>Pose name</label>
+    <input type="text" [(ngModel)]="pose.name" (keydown.enter)="addPose()">
+  </div>
+  <div>
+    <label>Breath count</label>
+    <input
+    type="text"
+    [(ngModel)]="pose.breaths"
+    (keydown.enter)="addPose()">
+  </div>
 </section>
 

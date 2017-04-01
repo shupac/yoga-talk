@@ -9,10 +9,11 @@ import { Pose, SequenceService } from '../sequence.service';
 export class NewPoseComponent {
   pose: Pose = new Pose();
 
-  constructor(private service: SequenceService) { }
+  constructor(private service: SequenceService) {}
 
   addPose() {
     console.log('add pose', this.pose.name);
+    this.pose.breaths = +this.pose.breaths;
     this.service.addPose(this.pose);
     this.pose = new Pose();
   }
