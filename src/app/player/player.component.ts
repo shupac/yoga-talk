@@ -11,6 +11,7 @@ import { Settings } from '../settings';
 export class PlayerComponent {
   synth = (<any>window).speechSynthesis;
   voices = VoiceChoices;
+  voiceData;
   availableVoices;
   selectedVoice = 'Tessa';
   playing = false;
@@ -32,10 +33,10 @@ export class PlayerComponent {
 
   startSequence() {
     let sequence = this.service.getSequence();
-    let voiceData = this.availableVoices
+    this.voiceData = this.availableVoices
       .find(voice => voice.name === this.selectedVoice);
     this.service.currentIndex = 0;
-    this.speakAndCueNext(sequence, voiceData);
+    this.speakAndCueNext(sequence);
     this.playing = true;
   }
 
@@ -46,19 +47,20 @@ export class PlayerComponent {
     clearTimeout(this.cueTimeout);
   }
 
-  private speakAndCueNext(sequence, voice) {
+  private speakAndCueNext(sequence) {
     let pose = sequence[this.service.currentIndex];
     if (!pose) return this.stopSequence();
-    this.speak(pose.pronunciation || pose.name, voice);
+    this.speak(pose.pronunciation || pose.name);
+    this.speak(pose.breaths + ' breaths');
     this.cueTimeout = setTimeout(() => {
       this.service.currentIndex++;
-      this.speakAndCueNext(sequence, voice);
+      this.speakAndCueNext(sequence);
     }, pose.breaths * Settings.secPerBreath * 1000);
   }
 
-  private speak(text: string, voice) {
+  private speak(text: string) {
     let message = new (<any>window).SpeechSynthesisUtterance(text);
-    message.voice = voice;
+    message.voice = this.voiceData;
     this.synth.speak(message);
   }
 }
