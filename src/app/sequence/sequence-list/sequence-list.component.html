@@ -9,11 +9,19 @@
       <div *ngSwitchCase="'pose'">{{ node.name }}</div>
       <div *ngSwitchCase="'series'">
         <app-series
+          type="series"
           [poses]="node.poses"
+          [firstTransitions]="node.firstTransitions"
+          [secondTransitions]="node.secondTransitions"
         ></app-series>
       </div>
       <div *ngSwitchCase="'vignette'">
-        vignette {{ node.name }}
+        <app-series
+          type="vignette"
+          [poses]="node.poses"
+          [firstTransitions]="node.firstTransitions"
+          [secondTransitions]="node.secondTransitions"
+        ></app-series>
       </div>
     </div>
     

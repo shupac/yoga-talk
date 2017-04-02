@@ -29,7 +29,7 @@ export default [
         breaths: 2
       }
     ],
-    transitions: [
+    firstTransitions: [
       {
         type: 'pose',
         name: 'down dog',

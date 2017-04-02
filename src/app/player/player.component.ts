@@ -54,10 +54,12 @@ export class PlayerComponent {
     if (!pose) return this.stopSequence();
     this.speak(pose.name);
     if (Settings.breathCount) this.speak(pose.breaths + ' breaths');
+
+    let duration = pose.duration || pose.breaths * Settings.secPerBreath;
     this.cueTimeout = setTimeout(() => {
       this.service.currentIndex++;
       this.speakAndCueNext(sequence);
-    }, pose.breaths * Settings.secPerBreath * 1000);
+    }, duration * 1000);
   }
 
   private speak(text: string) {

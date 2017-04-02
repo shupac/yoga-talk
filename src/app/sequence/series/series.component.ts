@@ -7,13 +7,16 @@ import { SplitSeries } from '../../sequence.service';
   styleUrls: ['./series.component.scss']
 })
 export class SeriesComponent {
+  @Input() private 'type': string;
   @Input() private 'poses';
+  @Input() private 'firstTransitions';
+  @Input() private 'secondTransitions';
 
   series: SplitSeries;
 
   constructor() { }
 
   addPose() {
-    
+
   }
 }

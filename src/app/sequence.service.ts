@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Settings } from './settings';
-import STUB_POSES from './stub-poses';
 import STUB_SEQUENCE from './stub-sequence';
 
 export class Pose {
@@ -56,14 +55,13 @@ export class SequenceService {
   }
 
   getDisplaySequence() {
-    return this.getSpeechSequence();
-    // return this.poses;
+    // return this.getSpeechSequence();
+    return this.poses;
   }
 
   getSpeechSequence() {
     let sequence = [];
     this.poses.forEach(node => sequence = sequence.concat(this.expandNode(node)));
-    console.log(sequence);
     return sequence;
   }
 
@@ -77,11 +75,11 @@ export class SequenceService {
       }
     }
     if (node.type === 'series') {
-      expanded.push(new Pose({name: 'Split side series', breaths: 0}));
+      expanded.push(new Pose({name: 'Split side series', duration: Settings.noPoseDuration}));
       expanded = expanded.concat(this.expandSeries(node));
     }
     if (node.type === 'vignette') {
-      expanded.push(new Pose({name: node.poses.length + ' pose vignette', breaths: 0}));
+      expanded.push(new Pose({name: node.poses.length + ' pose vignette', duration: Settings.noPoseDuration}));
       expanded = expanded.concat(this.expandSeries(node));
     }
     return expanded;
