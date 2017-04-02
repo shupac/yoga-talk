@@ -29,7 +29,7 @@ export class PlayerComponent {
 
   startSequence(index?: number) {
     if (this.playing) this.stopSequence();
-    let sequence = this.service.getSequence();
+    let sequence = this.service.getDisplaySequence();
     this.voiceData = this.availableVoices
       .find(voice => voice.name === this.selectedVoice);
     this.service.currentIndex = index || 0;

@@ -7,10 +7,11 @@ import { AppComponent } from './app.component';
 import { PoseComponent } from './pose/pose.component';
 import { PlayerComponent } from './player/player.component';
 import { NewPoseComponent } from './new-pose/new-pose.component';
-import { SequenceComponent } from './sequence/sequence.component';
+import { SequenceListComponent } from './sequence/sequence-list/sequence-list.component';
 import { SettingsComponent } from './settings/settings.component';
 
 import { SequenceService } from './sequence.service';
+import { SeriesComponent } from './sequence/series/series.component';
 
 @NgModule({
   declarations: [
@@ -18,8 +19,9 @@ import { SequenceService } from './sequence.service';
     PoseComponent,
     PlayerComponent,
     NewPoseComponent,
-    SequenceComponent,
-    SettingsComponent
+    SequenceListComponent,
+    SettingsComponent,
+    SeriesComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,21 @@
+<section>
+  <h2>Sequence</h2>
+  <div
+    *ngFor="let node of sequence, let i = index"
+    class="node-container"
+    [class.playing]="i===currentIndex"
+    >
+    <div [ngSwitch]="node.type">
+      <div *ngSwitchCase="'pose'">{{ node.name }}</div>
+      <div *ngSwitchCase="'series'">
+        <app-series
+          [poses]="node.poses"
+        ></app-series>
+      </div>
+      <div *ngSwitchCase="'vignette'">
+        vignette {{ node.name }}
+      </div>
+    </div>
+    
+  </div>
+</section>

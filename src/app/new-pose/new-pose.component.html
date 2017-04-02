@@ -1,14 +1,20 @@
 <section>
-  <div>
-    <label>Pose name</label>
-    <input type="text" [(ngModel)]="pose.name" (keydown.enter)="addPose()">
-  </div>
-  <div>
-    <label>Breath count</label>
-    <input
+  <input
+    type="text"
+    [(ngModel)]="pose.name"
+    (keydown.enter)="addPose()"
+    placeholder="Pose name"
+    >
+  <input
+    class="breaths"
     type="text"
     [(ngModel)]="pose.breaths"
-    (keydown.enter)="addPose()">
-  </div>
+    (keydown.enter)="addPose()"
+    placeholder="Duration"
+    >
+  <select>
+    <option>breaths</option>
+    <option>seconds</option>
+  </select>
 </section>
 
