@@ -3,6 +3,7 @@ import { Settings } from './settings';
 import STUB_POSES from './stub-poses';
 
 export class Pose {
+  type: 'pose';
   id: number;
   name: string;
   breaths: number = Settings.defaultBreaths;
@@ -13,6 +14,28 @@ export class Pose {
     values: Object = {}
   ) {
     Object.assign(this, values)
+  }
+}
+
+class SplitSeries {
+  type: 'series';
+  id: number;
+  poses: Pose[] = [];
+
+  addPose(pose) {
+    this.poses.push(pose);
+  }
+
+  getPoses() {
+    return this.poses;
+  }
+
+  getSequence() {
+    return []
+      .concat(new Pose({ name: 'left side series' }))
+      .concat(this.poses)
+      .concat(new Pose({ name: 'right side series' }))
+      .concat(this.poses);
   }
 }
 

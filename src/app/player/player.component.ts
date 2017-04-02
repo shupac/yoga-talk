@@ -12,9 +12,9 @@ import Lexicon from './lexicon';
 })
 export class PlayerComponent {
   voices = VoiceChoices;
-  voiceData;
   availableVoices;
   selectedVoice = Settings.defaultVoice;
+  voiceData;
   playing = false;
   cueTimeout;
 

@@ -1,11 +1,16 @@
 <section>
   <h2>Sequence</h2>
   <div
-    *ngFor="let pose of sequence, let i = index"
-    class="pose-item"
+    *ngFor="let node of sequence, let i = index"
+    class="node-container"
     [class.playing]="i===currentIndex"
-    (click)="selectPose.emit(i)"
+    (click)="selectNode.emit(i)"
     >
-    {{ pose.name }} - {{ pose.breaths }}
+    <div [ngSwitch]="node.type">
+      <div *ngSwitchCase="pose">{{ node.name }}</div>
+      <div *ngSwitchCase="series"></div>
+      <div *ngSwitchCase="vignette"></div>
+    </div>
+    
   </div>
 </section>
