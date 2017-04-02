@@ -14,7 +14,7 @@ export class PlayerComponent {
   voices = VoiceChoices;
   voiceData;
   availableVoices;
-  selectedVoice = 'Tessa';
+  selectedVoice = Settings.defaultVoice;
   playing = false;
   cueTimeout;
 
@@ -53,7 +53,7 @@ export class PlayerComponent {
     let pose = sequence[this.service.currentIndex];
     if (!pose) return this.stopSequence();
     this.speak(pose.name);
-    this.speak(pose.breaths + ' breaths');
+    if (Settings.breathCount) this.speak(pose.breaths + ' breaths');
     this.cueTimeout = setTimeout(() => {
       this.service.currentIndex++;
       this.speakAndCueNext(sequence);
