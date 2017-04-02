@@ -16,7 +16,7 @@ export default [
       {
         type: 'pose',
         name: 'warrior 2',
-        breaths: 0
+        breaths: 2
       },
       {
         type: 'pose',
@@ -35,6 +35,41 @@ export default [
         name: 'down dog',
         unary: true,
         breaths: 1
+      }
+    ]
+  },
+  {
+    type: 'vignette',
+    poses: [
+      {
+        type: 'pose',
+        name: 'warrior 1 archer',
+        breaths: 2
+      },
+      {
+        type: 'pose',
+        name: 'eagle arms',
+        breaths: 2
+      },
+      {
+        type: 'pose',
+        name: 'bird wing',
+        breaths: 2
+      }
+    ],
+    firstTransitions: [
+      {
+        type: 'pose',
+        name: 'half salutation',
+        unary: true,
+        breaths: 1
+      }
+    ],
+    secondTransitions: [
+      {
+        type: 'pose',
+        name: 'forearm balance splits',
+        breaths: 5
       }
     ]
   },

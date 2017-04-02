@@ -76,7 +76,12 @@ export class SequenceService {
         expanded.push(Object.assign({}, node, {name: node.name + ' right side'}));
       }
     }
-    else if (node.type === 'series') {
+    if (node.type === 'series') {
+      expanded.push(new Pose({name: 'Split side series', breaths: 0}));
+      expanded = expanded.concat(this.expandSeries(node));
+    }
+    if (node.type === 'vignette') {
+      expanded.push(new Pose({name: node.poses.length + ' pose vignette', breaths: 0}));
       expanded = expanded.concat(this.expandSeries(node));
     }
     return expanded;
@@ -84,7 +89,6 @@ export class SequenceService {
 
   private expandSeries(series) {
     let expanded = [];
-    expanded.push(new Pose({name: 'Split side series', breaths: 0}));
     series.poses.forEach((node, index) => {
       if (node.type === 'pose') {
         if (index === 0) expanded.push(Object.assign({}, node, {name: node.name + ' left side'}));
@@ -92,7 +96,7 @@ export class SequenceService {
       }
       if (node.type === 'series') expanded = expanded.concat(this.expandSeries(node));
     });
-    series.transitions.forEach(node => {
+    if (series.firstTransitions) series.firstTransitions.forEach(node => {
       expanded = expanded.concat(this.expandNode(node));
     });
     series.poses.forEach((node, index) => {
@@ -101,6 +105,9 @@ export class SequenceService {
         else expanded.push(node);
       }
       if (node.type === 'series') expanded = expanded.concat(this.expandSeries(node));
+    });
+    if (series.secondTransitions) series.secondTransitions.forEach(node => {
+      expanded = expanded.concat(this.expandNode(node));
     });
     return expanded;
   }
