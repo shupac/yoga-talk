@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { VoiceChoices } from './voice-choices';
 import { SequenceService } from '../sequence.service';
 import { Settings } from '../settings';
+import Lexicon from './lexicon';
 
 @Component({
   selector: 'app-player',
@@ -51,7 +52,7 @@ export class PlayerComponent {
   private speakAndCueNext(sequence) {
     let pose = sequence[this.service.currentIndex];
     if (!pose) return this.stopSequence();
-    this.speak(pose.pronunciation || pose.name);
+    this.speak(pose.name);
     this.speak(pose.breaths + ' breaths');
     this.cueTimeout = setTimeout(() => {
       this.service.currentIndex++;
@@ -60,6 +61,7 @@ export class PlayerComponent {
   }
 
   private speak(text: string) {
+    text = Lexicon[text] || text;
     let message = new (<any>window).SpeechSynthesisUtterance(text);
     message.voice = this.voiceData;
     this.synth.speak(message);

@@ -16,16 +16,6 @@ export class Pose {
   }
 }
 
-const lexicon = {
-  'baddha konasana': 'baada conaasina',
-  'tittibhasana': 'teetibaasina',
-  'astavakrasana': 'aasta vikraasina',
-  'savasana': 'shavaasina',
-  'bakasana': 'bakaasina',
-  'eka pada bakasana': 'ecaa paada bakaasina',
-  'virasana': 'viraasina'
-}
-
 @Injectable()
 export class SequenceService {
   poses: Pose[] = [];
@@ -36,7 +26,6 @@ export class SequenceService {
   }
 
   addPose(pose) {
-    pose.pronunciation = lexicon[pose.name];
     this.poses.push(pose);
   }
 

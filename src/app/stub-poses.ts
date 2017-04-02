@@ -1,5 +1,7 @@
 export default [
   'baddha konasana',
+  'cobra',
+  'lounge lizard',
   'tittibhasana',
   'astavakrasana',
   'eka pada bakasana',
@@ -8,8 +10,6 @@ export default [
   // 'chatarunga',
   // 'down dog',
   // 'half moon',
-  // 'cobra',
-  // 'lounge lizard',
   // 'twisting lunge',
   // 'seated sidebend',
   // 'handstand',
