@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { VoiceChoices } from './voice-choices';
 import { SequenceService } from '../sequence.service';
 import { Settings } from '../settings';
+import { Synth, Utterance } from './speech';
 import Lexicon from './lexicon';
 
 @Component({
@@ -10,7 +11,6 @@ import Lexicon from './lexicon';
   styleUrls: ['./player.component.css']
 })
 export class PlayerComponent {
-  synth = (<any>window).speechSynthesis;
   voices = VoiceChoices;
   voiceData;
   availableVoices;
@@ -21,15 +21,10 @@ export class PlayerComponent {
   constructor(private service: SequenceService) {}
 
   ngOnInit() {
-    if (this.synth && this.synth.onvoiceschanged !== undefined) {
-      this.synth.onvoiceschanged = this.getVoices.bind(this);
+    if (Synth && Synth.onvoiceschanged !== undefined) {
+      Synth.onvoiceschanged = this.getVoices.bind(this);
     }
     else this.getVoices();
-  }
-
-  private getVoices() {
-    this.availableVoices = this.synth.getVoices()
-      .filter(voice => voice.lang.match('en'));
   }
 
   startSequence(index?: number) {
@@ -43,10 +38,15 @@ export class PlayerComponent {
   }
 
   stopSequence() {
-    this.synth.cancel();
+    Synth.cancel();
     this.playing = false;
     this.service.currentIndex = null;
     clearTimeout(this.cueTimeout);
+  }
+
+  private getVoices() {
+    this.availableVoices = Synth.getVoices()
+      .filter(voice => voice.lang.match('en'));
   }
 
   private speakAndCueNext(sequence) {
@@ -62,8 +62,8 @@ export class PlayerComponent {
 
   private speak(text: string) {
     text = Lexicon[text] || text;
-    let message = new (<any>window).SpeechSynthesisUtterance(text);
+    let message = new Utterance(text);
     message.voice = this.voiceData;
-    this.synth.speak(message);
+    Synth.speak(message);
   }
 }
