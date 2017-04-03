@@ -29,10 +29,10 @@ export class PlayerComponent {
 
   startSequence(index?: number) {
     if (this.playing) this.stopSequence();
-    let sequence = this.service.getDisplaySequence();
+    let sequence = this.service.speechSequence;
     this.voiceData = this.availableVoices
       .find(voice => voice.name === this.selectedVoice);
-    this.service.currentIndex = index || 0;
+    this.service.currentSpeechIndex = index || 0;
     this.speakAndCueNext(sequence);
     this.playing = true;
   }
@@ -40,7 +40,7 @@ export class PlayerComponent {
   stopSequence() {
     Synth.cancel();
     this.playing = false;
-    this.service.currentIndex = null;
+    this.service.currentSpeechIndex = null;
     clearTimeout(this.cueTimeout);
   }
 
@@ -50,14 +50,14 @@ export class PlayerComponent {
   }
 
   private speakAndCueNext(sequence) {
-    let pose = sequence[this.service.currentIndex];
+    let pose = sequence[this.service.currentSpeechIndex];
     if (!pose) return this.stopSequence();
     this.speak(pose.name);
     if (Settings.breathCount) this.speak(pose.breaths + ' breaths');
 
     let duration = pose.duration || pose.breaths * Settings.secPerBreath;
     this.cueTimeout = setTimeout(() => {
-      this.service.currentIndex++;
+      this.service.currentSpeechIndex++;
       this.speakAndCueNext(sequence);
     }, duration * 1000);
   }

@@ -1,17 +1,24 @@
 <div [ngSwitch]="type">
-  <h4 *ngSwitchCase="'series'">Same Side Series</h4>
+  <h4 *ngSwitchCase="'series'">Single Side Series</h4>
   <h4 *ngSwitchCase="'vignette'">{{ poses.length }} Pose Vignette</h4>
 </div>
-<div *ngFor="let pose of poses">
-  {{ pose.name }}
+
+<ol>
+  <li *ngFor="let pose of poses">
+    <app-pose [pose]="pose" [currentId]="currentId"></app-pose>
+  </li>
+</ol>
+
+<div *ngIf="firstTransitions && firstTransitions.length">
+  1st side transition:
+  <span *ngFor="let pose of firstTransitions">
+    <app-pose [pose]="pose" [currentId]="currentId"></app-pose>
+  </span>
 </div>
 
-{{ firstTransitions && firstTransitions.length ? 'First side transition' : null }}
-<div *ngFor="let pose of firstTransitions">
-  {{ pose.name }}
-</div>
-
-{{ secondTransitions && secondTransitions.length ? 'Second side transition' : null }}
-<div *ngFor="let pose of secondTransitions">
-  {{ pose.name }}
+<div *ngIf="secondTransitions && secondTransitions.length">
+  2nd side transition:
+  <span *ngFor="let pose of secondTransitions">
+    <app-pose [pose]="pose" [currentId]="currentId"></app-pose>
+  </span>
 </div>

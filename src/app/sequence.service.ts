@@ -3,6 +3,7 @@ import { Settings } from './settings';
 import STUB_SEQUENCE from './stub-sequence';
 
 export class Pose {
+  static nextId = 0;
   type = 'pose';
   id: number;
   name: string;
@@ -18,6 +19,7 @@ export class Pose {
 }
 
 export class SplitSeries {
+  static nextId = 0;
   type = 'series';
   id: number;
   poses: Pose[] = [];
@@ -42,24 +44,27 @@ export class SplitSeries {
 @Injectable()
 export class SequenceService {
   poses = [];
-  currentIndex: number;
+  currentSpeechIndex: number = null;
 
   constructor() {
-    // STUB_POSES.map(name => new Pose({name})).forEach(pose => this.addPose(pose));
-    // this.poses.push(new SplitSeries());
     this.poses = STUB_SEQUENCE;
+  }
+
+  get currentPoseId() {
+    if (this.currentSpeechIndex === null) return null;
+    return this.speechSequence[this.currentSpeechIndex].id;
   }
 
   addPose(pose) {
     this.poses.push(pose);
   }
 
-  getDisplaySequence() {
+  get displaySequence() {
     // return this.getSpeechSequence();
     return this.poses;
   }
 
-  getSpeechSequence() {
+  get speechSequence() {
     let sequence = [];
     this.poses.forEach(node => sequence = sequence.concat(this.expandNode(node)));
     return sequence;
@@ -75,7 +80,7 @@ export class SequenceService {
       }
     }
     if (node.type === 'series') {
-      expanded.push(new Pose({name: 'Split side series', duration: Settings.noPoseDuration}));
+      expanded.push(new Pose({name: 'Single side series', duration: Settings.noPoseDuration}));
       expanded = expanded.concat(this.expandSeries(node));
     }
     if (node.type === 'vignette') {

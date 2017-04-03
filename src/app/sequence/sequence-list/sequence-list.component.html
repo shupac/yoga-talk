@@ -1,29 +1,42 @@
 <section>
   <h2>Sequence</h2>
+
   <div
-    *ngFor="let node of sequence, let i = index"
+    *ngFor="let node of sequence"
     class="node-container"
-    [class.playing]="i===currentIndex"
     >
     <div [ngSwitch]="node.type">
-      <div *ngSwitchCase="'pose'">{{ node.name }}</div>
+
+      <div *ngSwitchCase="'pose'">
+        <app-pose
+          [pose]="node"
+          [currentId]="currentPoseId"
+          >
+        </app-pose>
+      </div>
+
       <div *ngSwitchCase="'series'">
         <app-series
           type="series"
           [poses]="node.poses"
           [firstTransitions]="node.firstTransitions"
           [secondTransitions]="node.secondTransitions"
-        ></app-series>
+          [currentId]="currentPoseId"
+          >
+        </app-series>
       </div>
+
       <div *ngSwitchCase="'vignette'">
         <app-series
           type="vignette"
           [poses]="node.poses"
           [firstTransitions]="node.firstTransitions"
           [secondTransitions]="node.secondTransitions"
-        ></app-series>
+          [currentId]="currentPoseId"
+          >
+        </app-series>
       </div>
+
     </div>
-    
   </div>
 </section>

@@ -9,15 +9,13 @@ import { Pose, SequenceService } from '../../sequence.service';
 export class SequenceListComponent {
   @Output() selectPose: EventEmitter<number> = new EventEmitter();
 
-  constructor(private service: SequenceService) {
-    this.service.getSpeechSequence();
-  }
+  constructor(private service: SequenceService) {}
 
   get sequence() {
-    return this.service.getDisplaySequence();
+    return this.service.displaySequence;
   }
 
-  get currentIndex() {
-    return this.service.currentIndex;
+  get currentPoseId() {
+    return this.service.currentPoseId;
   }
 }

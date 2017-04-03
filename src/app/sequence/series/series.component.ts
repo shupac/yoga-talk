@@ -4,13 +4,14 @@ import { SplitSeries } from '../../sequence.service';
 @Component({
   selector: 'app-series',
   templateUrl: './series.component.html',
-  styleUrls: ['./series.component.scss']
+  styleUrls: ['./series.component.css']
 })
 export class SeriesComponent {
-  @Input() private 'type': string;
-  @Input() private 'poses';
-  @Input() private 'firstTransitions';
-  @Input() private 'secondTransitions';
+  @Input() private currentId;
+  @Input() private type: string;
+  @Input() private poses;
+  @Input() private firstTransitions;
+  @Input() private secondTransitions;
 
   series: SplitSeries;
 

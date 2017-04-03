@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-pose',
   templateUrl: './pose.component.html',
   styleUrls: ['./pose.component.css']
 })
-export class PoseComponent implements OnInit {
+export class PoseComponent {
+  @Input() private currentId;
+  @Input() private pose;
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }
