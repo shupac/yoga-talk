@@ -8,6 +8,8 @@ export class Pose {
   id: number;
   name: string;
   breaths: number = Settings.defaultBreaths;
+  sides: string = 'unilateral';
+  timing: string = 'breaths';
   duration: number;
   pronunciation: string;
 
@@ -18,36 +20,39 @@ export class Pose {
   }
 }
 
-export class SplitSeries {
+export class Series {
   static nextId = 0;
   type = 'series';
   id: number;
-  poses: Pose[] = [];
+  name: string;
+  nodes: Pose[] = [];
 
   addPose(pose) {
-    this.poses.push(pose);
+    this.nodes.push(pose);
   }
 
   getPoses() {
-    return this.poses;
+    return this.nodes;
   }
 
   getSequence() {
     return []
       .concat(new Pose({ name: 'left side series' }))
-      .concat(this.poses)
+      .concat(this.nodes)
       .concat(new Pose({ name: 'right side series' }))
-      .concat(this.poses);
+      .concat(this.nodes);
   }
 }
 
 @Injectable()
 export class SequenceService {
-  poses = [];
+  nodes = [];
   currentSpeechIndex: number = null;
 
   constructor() {
-    this.poses = STUB_SEQUENCE;
+    // this.nodes = STUB_SEQUENCE;
+    this.addPose(new Pose({ name: 'baddha konasana', sides: 'bilateral'}));
+    this.addPose(new Pose({ name: 'seated twist', sides: 'unilateral'}));
   }
 
   get currentPoseId() {
@@ -56,25 +61,33 @@ export class SequenceService {
   }
 
   addPose(pose) {
-    this.poses.push(pose);
+    pose.id = Pose.nextId;
+    Pose.nextId++;
+    this.nodes.push(pose);
+  }
+
+  addSeries(series) {
+    series.id = Series.nextId;
+    Series.nextId++;
+    this.nodes.push(series);
   }
 
   get displaySequence() {
-    // return this.getSpeechSequence();
-    return this.poses;
+    // return this.speechSequence;
+    return this.nodes;
   }
 
   get speechSequence() {
     let sequence = [];
-    this.poses.forEach(node => sequence = sequence.concat(this.expandNode(node)));
+    this.nodes.forEach(node => sequence = sequence.concat(this.expandNode(node)));
     return sequence;
   }
 
   private expandNode(node) {
     let expanded = [];
     if (node.type === 'pose') {
-      if (node.unary) expanded.push(node);
-      else {
+      if (node.sides === 'bilateral') expanded.push(node);
+      else if (node.sides === 'unilateral') {
         expanded.push(Object.assign({}, node, {name: node.name + ' left side'}));
         expanded.push(Object.assign({}, node, {name: node.name + ' right side'}));
       }
@@ -84,7 +97,7 @@ export class SequenceService {
       expanded = expanded.concat(this.expandSeries(node));
     }
     if (node.type === 'vignette') {
-      expanded.push(new Pose({name: node.poses.length + ' pose vignette', duration: Settings.noPoseDuration}));
+      expanded.push(new Pose({name: node.nodes.length + ' pose vignette', duration: Settings.noPoseDuration}));
       expanded = expanded.concat(this.expandSeries(node));
     }
     return expanded;
@@ -92,7 +105,7 @@ export class SequenceService {
 
   private expandSeries(series) {
     let expanded = [];
-    series.poses.forEach((node, index) => {
+    series.nodes.forEach((node, index) => {
       if (node.type === 'pose') {
         if (index === 0) expanded.push(Object.assign({}, node, {name: node.name + ' left side'}));
         else expanded.push(node);
@@ -102,7 +115,7 @@ export class SequenceService {
     if (series.firstTransitions) series.firstTransitions.forEach(node => {
       expanded = expanded.concat(this.expandNode(node));
     });
-    series.poses.forEach((node, index) => {
+    series.nodes.forEach((node, index) => {
       if (node.type === 'pose') {
         if (index === 0) expanded.push(Object.assign({}, node, {name: node.name + ' right side'}));
         else expanded.push(node);

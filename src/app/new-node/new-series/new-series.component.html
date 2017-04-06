@@ -1,0 +1,9 @@
+<div>
+  <input
+    type="text"
+    [(ngModel)]="series.name"
+    (keydown.enter)="addSeries()"
+    placeholder="Series name"
+    >
+</div>
+<button (click)="addSeries()">Add Series</button>

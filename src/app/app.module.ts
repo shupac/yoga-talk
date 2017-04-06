@@ -12,6 +12,8 @@ import { SettingsComponent } from './settings/settings.component';
 
 import { SequenceService } from './sequence.service';
 import { SeriesComponent } from './sequence/series/series.component';
+import { NewNodeComponent } from './new-node/new-node/new-node.component';
+import { NewSeriesComponent } from './new-node/new-series/new-series.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { SeriesComponent } from './sequence/series/series.component';
     PoseComponent,
     SequenceListComponent,
     SettingsComponent,
-    SeriesComponent
+    SeriesComponent,
+    NewNodeComponent,
+    NewSeriesComponent
   ],
   imports: [
     BrowserModule,

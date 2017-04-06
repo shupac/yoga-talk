@@ -1,10 +1,16 @@
-<section>
+<div>
   <input
     type="text"
     [(ngModel)]="pose.name"
     (keydown.enter)="addPose()"
     placeholder="Pose name"
     >
+</div>
+<div>
+  <select [(ngModel)]="pose.sides">
+    <option ngValue="unilateral">unilateral</option>
+    <option ngValue="bilateral">bilateral</option>
+  </select>
   <input
     class="breaths"
     type="text"
@@ -12,9 +18,9 @@
     (keydown.enter)="addPose()"
     placeholder="Duration"
     >
-  <select>
-    <option>breaths</option>
-    <option>seconds</option>
+  <select [(ngModel)]="pose.timing">
+    <option ngValue="breaths">breaths</option>
+    <option ngValue="duration">seconds</option>
   </select>
-</section>
-
+</div>
+<button (click)="addPose()">Add Pose</button>

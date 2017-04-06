@@ -3,13 +3,14 @@ export default [
     id: 0,
     type: 'pose',
     name: 'baddha konasana',
-    unary: true,
+    sides: 'bilateral',
     breaths: 2
   },
   {
     id: 1,
     type: 'pose',
     name: 'seated twist',
+    sides: 'unilateral',
     breaths: 2
   },
   {
@@ -19,18 +20,21 @@ export default [
         id: 2,
         type: 'pose',
         name: 'warrior 2',
+        sides: 'unilateral',
         breaths: 2
       },
       {
         id: 3,
         type: 'pose',
         name: 'reverse warrior',
+        sides: 'unilateral',
         breaths: 2
       },
       {
         id: 4,
         type: 'pose',
         name: 'extended warrior variation',
+        sides: 'unilateral',
         breaths: 2
       }
     ],
@@ -39,7 +43,7 @@ export default [
         id: 5,
         type: 'pose',
         name: 'down dog',
-        unary: true,
+        sides: 'bilateral',
         breaths: 1
       }
     ]
@@ -51,18 +55,21 @@ export default [
         id: 6,
         type: 'pose',
         name: 'warrior 1 archer',
+        sides: 'unilateral',
         breaths: 2
       },
       {
         id: 7,
         type: 'pose',
         name: 'eagle arms',
+        sides: 'unilateral',
         breaths: 2
       },
       {
         id: 8,
         type: 'pose',
         name: 'bird wing',
+        sides: 'unilateral',
         breaths: 2
       }
     ],
@@ -71,7 +78,7 @@ export default [
         id: 9,
         type: 'pose',
         name: 'half salutation',
-        unary: true,
+        sides: 'bilateral',
         breaths: 1
       }
     ],
@@ -80,6 +87,7 @@ export default [
         id: 10,
         type: 'pose',
         name: 'forearm balance splits',
+        sides: 'unilateral',
         breaths: 5
       }
     ]
@@ -88,7 +96,7 @@ export default [
     id: 11,
     type: 'pose',
     name: 'savasana',
-    unary: true,
+    sides: 'bilateral',
     breaths: 5
   }
 ];

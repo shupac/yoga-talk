@@ -1,0 +1,13 @@
+<section>
+  <h2>Add to sequence</h2>
+  <div>
+    <select [(ngModel)]="type">
+      <option ngValue="pose">Pose</option>
+      <option ngValue="series">Series</option>
+    </select>
+  </div>
+
+  <app-new-pose *ngIf="type==='pose'"></app-new-pose>
+  <app-new-series *ngIf="type==='series'"></app-new-series>
+</section>
+
