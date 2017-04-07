@@ -19,6 +19,7 @@ export class NewNodeComponent {
   selectTarget(id) {
     console.log('add to', id);
     this.target = id;
+    if (id !== 'root') this.type = 'pose';
   }
 
   addPose(pose) {

@@ -11,9 +11,12 @@ export class SequenceService {
 
   constructor() {
     // this.nodes = STUB_SEQUENCE;
-    // this.addPose(new Pose({ name: 'baddha konasana', sides: 'bilateral'}));
-    // this.addPose(new Pose({ name: 'seated twist', sides: 'unilateral'}));
-    // this.addSeries(new Series({ name: 'Standing Pose Series' }));
+    this.addPose(new Pose({ name: 'baddha konasana', sides: 'bilateral'}), 'root');
+    this.addPose(new Pose({ name: 'seated twist', sides: 'unilateral'}), 'root');
+    this.addSeries(new Series({ name: 'Standing Pose Series' }), 'root');
+    this.addPose(new Pose({ name: 'warrior 2', sides: 'unilateral'}), 0);
+    this.addPose(new Pose({ name: 'reverse warrior', sides: 'unilateral'}), 0);
+    this.addPose(new Pose({ name: 'savasana', sides: 'bilateral'}), 'root');
   }
 
   get currentPoseId() {
@@ -65,11 +68,7 @@ export class SequenceService {
       }
     }
     if (node.type === 'series') {
-      expanded.push(new Pose({name: 'Single side series', duration: Settings.noPoseDuration}));
-      expanded = expanded.concat(this.expandSeries(node));
-    }
-    if (node.type === 'vignette') {
-      expanded.push(new Pose({name: node.nodes.length + ' pose vignette', duration: Settings.noPoseDuration}));
+      expanded.push(new Pose({name: node.name, duration: Settings.noPoseDuration}));
       expanded = expanded.concat(this.expandSeries(node));
     }
     return expanded;
