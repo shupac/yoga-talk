@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { DndModule } from 'ng2-dnd';
 
 import { NewNodeModule } from './new-node/new-node.module';
 import { SequenceModule } from './sequence/sequence.module';
@@ -18,7 +19,8 @@ import { SequenceService } from './_data/sequence.service';
     FormsModule,
     HttpModule,
     NewNodeModule,
-    SequenceModule
+    SequenceModule,
+    DndModule.forRoot()
   ],
   declarations: [
     AppComponent,

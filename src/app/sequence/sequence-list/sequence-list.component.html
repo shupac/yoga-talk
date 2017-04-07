@@ -1,32 +1,44 @@
 <section>
   <h2 (click)="selectSeries.emit('root')">Sequence</h2>
+  Drag Containers <input type="checkbox" [(ngModel)]="dragOperation"/>
 
   <div
-    *ngFor="let node of sequence"
-    class="node-container"
-    >
-    <div [ngSwitch]="node.type">
+    dnd-sortable-container
+    [sortableData]="sequence"
+    [dropZones]="['sequence-dropZone']">
+    <div
+      *ngFor="let node of sequence, let i = index"
+      class="node-container"
+      dnd-sortable
+      [sortableIndex]="i"
+      [dragEnabled]="dragOperation"
+      >
+      <div [ngSwitch]="node.type">
 
-      <div *ngSwitchCase="'pose'">
-        <app-pose
-          [pose]="node"
-          [currentId]="currentPoseId"
-          >
-        </app-pose>
-      </div>
+        <div *ngSwitchCase="'pose'">
+          <app-pose
+            [pose]="node"
+            [currentId]="currentPoseId"
+            >
+          </app-pose>
+        </div>
 
-      <div *ngSwitchCase="'series'">
-        <app-series
-          [id]="node.id"
-          [name]="node.name"
-          [poses]="node.nodes"
-          [firstTransitions]="node.firstTransitions"
-          [secondTransitions]="node.secondTransitions"
-          [currentId]="currentPoseId"
-          (selectSeries)="selectSeries.emit($event)"
-          >
-        </app-series>
+        <div *ngSwitchCase="'series'">
+          <app-series
+            [id]="node.id"
+            [name]="node.name"
+            [poses]="node.nodes"
+            [firstTransitions]="node.firstTransitions"
+            [secondTransitions]="node.secondTransitions"
+            [currentId]="currentPoseId"
+            (selectSeries)="selectSeries.emit($event)"
+            [dragEnabled]="!dragOperation"
+            >
+          </app-series>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+

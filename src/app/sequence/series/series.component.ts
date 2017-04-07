@@ -12,6 +12,7 @@ export class SeriesComponent {
   @Input() private firstTransitions;
   @Input() private secondTransitions;
   @Input() private currentId;
+  @Input() private dragEnabled: boolean;
   @Output() private selectSeries: EventEmitter<number> = new EventEmitter();
 
   constructor() { }

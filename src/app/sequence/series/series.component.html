@@ -2,8 +2,15 @@
   <h4 (click)="selectSeries.emit(id)">{{ name }}</h4>
 </div>
 
-<ol>
-  <li *ngFor="let pose of poses">
+<ol
+  dnd-sortable-container
+  [sortableData]="poses"
+  [dropZones]="['series-dropZone']">
+  <li
+    *ngFor="let pose of poses, let i = index"
+    dnd-sortable
+    [sortableIndex]="i"
+    [dragEnabled]="dragEnabled">
     <app-pose [pose]="pose" [currentId]="currentId"></app-pose>
   </li>
 </ol>
