@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Series } from '../../sequence.service';
 
 @Component({
   selector: 'app-series',
@@ -13,11 +12,5 @@ export class SeriesComponent {
   @Input() private firstTransitions;
   @Input() private secondTransitions;
 
-  series: Series;
-
   constructor() { }
-
-  addPose() {
-
-  }
 }

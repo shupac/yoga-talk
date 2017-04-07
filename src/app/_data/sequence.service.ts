@@ -1,54 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Settings } from './settings';
-import STUB_SEQUENCE from './stub-sequence';
-
-export class Pose {
-  static nextId = 0;
-  type = 'pose';
-  id: number;
-  name: string;
-  breaths: number = Settings.defaultBreaths;
-  sides: string = 'unilateral';
-  timing: string = 'breaths';
-  duration: number;
-  pronunciation: string;
-
-  constructor(
-    values: Object = {}
-  ) {
-    Object.assign(this, values)
-  }
-}
-
-export class Series {
-  static nextId = 0;
-  type = 'series';
-  id: number;
-  name: string;
-  nodes: Pose[] = [];
-
-  constructor(
-    values: Object = {}
-  ) {
-    Object.assign(this, values)
-  }
-
-  addPose(pose) {
-    this.nodes.push(pose);
-  }
-
-  getPoses() {
-    return this.nodes;
-  }
-
-  getSequence() {
-    return []
-      .concat(new Pose({ name: 'left side series' }))
-      .concat(this.nodes)
-      .concat(new Pose({ name: 'right side series' }))
-      .concat(this.nodes);
-  }
-}
+import { Pose } from './pose.model';
+import { Series } from './series.model';
+import { Settings } from '../settings';
+import STUB_SEQUENCE from '../stub-sequence';
 
 @Injectable()
 export class SequenceService {
@@ -57,9 +11,9 @@ export class SequenceService {
 
   constructor() {
     // this.nodes = STUB_SEQUENCE;
-    this.addPose(new Pose({ name: 'baddha konasana', sides: 'bilateral'}));
-    this.addPose(new Pose({ name: 'seated twist', sides: 'unilateral'}));
-    this.addSeries(new Series({ name: 'Standing Pose Series' }));
+    // this.addPose(new Pose({ name: 'baddha konasana', sides: 'bilateral'}));
+    // this.addPose(new Pose({ name: 'seated twist', sides: 'unilateral'}));
+    // this.addSeries(new Series({ name: 'Standing Pose Series' }));
   }
 
   get currentPoseId() {
@@ -77,6 +31,10 @@ export class SequenceService {
     series.id = Series.nextId;
     Series.nextId++;
     this.nodes.push(series);
+  }
+
+  getSeriesName(id) {
+    if (id === 'root') return 'Sequence';
   }
 
   get displaySequence() {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Pose, SequenceService } from '../../sequence.service';
+import { Pose } from '../../_data/pose.model';
 
 @Component({
   selector: 'app-new-pose',
@@ -10,11 +10,11 @@ export class NewPoseComponent {
   pose: Pose = new Pose();
   type = 'pose';
 
-  constructor(private service: SequenceService) {}
+  constructor() {}
 
   addPose() {
     this.pose.breaths = +this.pose.breaths;
-    this.service.addPose(this.pose);
+    // this.service.addPose(this.pose);
     this.pose = new Pose();
   }
 }

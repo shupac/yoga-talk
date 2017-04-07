@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { Pose, SequenceService } from '../../sequence.service';
+import { SequenceService } from '../../_data/sequence.service';
 
 @Component({
   selector: 'app-sequence-list',
@@ -8,6 +8,7 @@ import { Pose, SequenceService } from '../../sequence.service';
 })
 export class SequenceListComponent {
   @Output() selectPose: EventEmitter<number> = new EventEmitter();
+  @Output() selectSequence: EventEmitter<number> = new EventEmitter();
 
   constructor(private service: SequenceService) {}
 

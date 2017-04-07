@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Series, SequenceService } from '../../sequence.service';
+import { Series } from '../../_data/series.model';
 
 @Component({
   selector: 'app-new-series',
@@ -9,9 +9,9 @@ import { Series, SequenceService } from '../../sequence.service';
 export class NewSeriesComponent {
   series: Series = new Series();
 
-  constructor(private service: SequenceService) { }
+  constructor() { }
 
   addSeries() {
-    this.service.addSeries(this.series);
+    // this.service.addSeries(this.series);
   }
 }

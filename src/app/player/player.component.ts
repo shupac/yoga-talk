@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { VoiceChoices } from './voice-choices';
-import { SequenceService } from '../sequence.service';
+import { SequenceService } from '../_data/sequence.service';
 import { Settings } from '../settings';
 import { Synth, Utterance } from './speech';
 import Lexicon from './lexicon';

@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { PlayerComponent } from './player/player.component';
 import { SettingsComponent } from './settings/settings.component';
 
-import { SequenceService } from './sequence.service';
+import { SequenceService } from './_data/sequence.service';
 
 @NgModule({
   imports: [
