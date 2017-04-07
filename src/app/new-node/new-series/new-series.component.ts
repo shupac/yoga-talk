@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { Series } from '../../_data/series.model';
 
 @Component({
@@ -7,11 +7,14 @@ import { Series } from '../../_data/series.model';
   styleUrls: ['./new-series.component.css']
 })
 export class NewSeriesComponent {
+  @Output() 'add': EventEmitter<Series> = new EventEmitter();
+
   series: Series = new Series();
 
   constructor() { }
 
   addSeries() {
-    // this.service.addSeries(this.series);
+    this.add.emit(this.series);
+    this.series = new Series();
   }
 }

@@ -8,8 +8,14 @@
       </select>
     </div>
 
-    <app-new-pose *ngIf="type==='pose'"></app-new-pose>
-    <app-new-series *ngIf="type==='series'"></app-new-series>
+    <app-new-pose
+      *ngIf="type==='pose'"
+      (add)="addPose($event)"
+      ></app-new-pose>
+    <app-new-series
+      *ngIf="type==='series'"
+      (add)="addSeries($event)"
+      ></app-new-series>
   </div>
 </section>
 

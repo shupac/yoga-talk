@@ -20,4 +20,13 @@ export class NewNodeComponent {
     console.log('add to', id);
     this.target = id;
   }
+
+  addPose(pose) {
+    console.log('add pose', pose);
+    this.service.addPose(pose, this.target);
+  }
+
+  addSeries(series) {
+    this.service.addSeries(series, this.target);
+  }
 }

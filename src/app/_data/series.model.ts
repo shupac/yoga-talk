@@ -15,6 +15,8 @@ export class Series {
 
   addPose(pose) {
     this.nodes.push(pose);
+    console.log('add to series', this.name, pose);
+    console.log(this.nodes);
   }
 
   getPoses() {

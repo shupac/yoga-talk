@@ -18,7 +18,7 @@ export class AppComponent {
     this.player.startSequence(index);
   }
 
-  onSelectSequence(id) {
+  onSelectSeries(id) {
     this.newNode.selectTarget(id);
   }
 }

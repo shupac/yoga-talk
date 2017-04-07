@@ -8,7 +8,7 @@ import { SequenceService } from '../../_data/sequence.service';
 })
 export class SequenceListComponent {
   @Output() selectPose: EventEmitter<number> = new EventEmitter();
-  @Output() selectSequence: EventEmitter<number> = new EventEmitter();
+  @Output() selectSeries: EventEmitter<number> = new EventEmitter();
 
   constructor(private service: SequenceService) {}
 
