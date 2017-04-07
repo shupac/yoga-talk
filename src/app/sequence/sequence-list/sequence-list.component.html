@@ -1,6 +1,6 @@
 <section>
   <h2 (click)="selectSeries.emit('root')">Sequence</h2>
-  Drag Containers <input type="checkbox" [(ngModel)]="dragOperation"/>
+  Edit Series <input type="checkbox" [(ngModel)]="dragOperation"/>
 
   <div
     dnd-sortable-container
@@ -11,7 +11,7 @@
       class="node-container"
       dnd-sortable
       [sortableIndex]="i"
-      [dragEnabled]="dragOperation"
+      [dragEnabled]="!dragOperation"
       >
       <div [ngSwitch]="node.type">
 
@@ -32,7 +32,7 @@
             [secondTransitions]="node.secondTransitions"
             [currentId]="currentPoseId"
             (selectSeries)="selectSeries.emit($event)"
-            [dragEnabled]="!dragOperation"
+            [dragEnabled]="dragOperation"
             >
           </app-series>
         </div>

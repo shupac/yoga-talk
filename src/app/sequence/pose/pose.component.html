@@ -1,3 +1,19 @@
-<div [class.playing]="pose.id===currentId">
-  {{ pose.name }}
+<div
+  [class.playing]="pose.id===currentId"
+  (mouseenter)="hover=true"
+  (mouseleave)="hover=false">
+  <div *ngIf="!edit">
+    <span>{{ pose.name }}</span>
+    <button
+      *ngIf="hover"
+      (click)="edit=true">edit</button>
+  </div>
+  <div *ngIf="edit">
+    <input
+      *ngIf="edit"
+      [(ngModel)]="pose.name"
+      />
+    <button
+      (click)="edit=false">done</button>
+  </div>
 </div>

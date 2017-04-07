@@ -9,6 +9,7 @@
   <li
     *ngFor="let pose of poses, let i = index"
     dnd-sortable
+    [effectCursor]="none"
     [sortableIndex]="i"
     [dragEnabled]="dragEnabled">
     <app-pose [pose]="pose" [currentId]="currentId"></app-pose>
