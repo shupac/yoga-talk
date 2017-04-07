@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { SplitSeries } from '../../sequence.service';
+import { Series } from '../../sequence.service';
 
 @Component({
   selector: 'app-series',
@@ -8,12 +8,12 @@ import { SplitSeries } from '../../sequence.service';
 })
 export class SeriesComponent {
   @Input() private currentId;
-  @Input() private type: string;
+  @Input() private name: string;
   @Input() private poses;
   @Input() private firstTransitions;
   @Input() private secondTransitions;
 
-  series: SplitSeries;
+  series: Series;
 
   constructor() { }
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Pose, SequenceService } from '../sequence.service';
+import { Pose, SequenceService } from '../../sequence.service';
 
 @Component({
   selector: 'app-new-pose',

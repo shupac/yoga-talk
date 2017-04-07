@@ -3,34 +3,27 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { NewNodeModule } from './new-node/new-node.module';
+import { SequenceModule } from './sequence/sequence.module';
+
 import { AppComponent } from './app.component';
 import { PlayerComponent } from './player/player.component';
-import { NewPoseComponent } from './new-pose/new-pose.component';
-import { PoseComponent } from './sequence/pose/pose.component';
-import { SequenceListComponent } from './sequence/sequence-list/sequence-list.component';
 import { SettingsComponent } from './settings/settings.component';
 
 import { SequenceService } from './sequence.service';
-import { SeriesComponent } from './sequence/series/series.component';
-import { NewNodeComponent } from './new-node/new-node/new-node.component';
-import { NewSeriesComponent } from './new-node/new-series/new-series.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    PlayerComponent,
-    NewPoseComponent,
-    PoseComponent,
-    SequenceListComponent,
-    SettingsComponent,
-    SeriesComponent,
-    NewNodeComponent,
-    NewSeriesComponent
-  ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    NewNodeModule,
+    SequenceModule
+  ],
+  declarations: [
+    AppComponent,
+    PlayerComponent,
+    SettingsComponent
   ],
   providers: [SequenceService],
   bootstrap: [AppComponent]

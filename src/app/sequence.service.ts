@@ -27,6 +27,12 @@ export class Series {
   name: string;
   nodes: Pose[] = [];
 
+  constructor(
+    values: Object = {}
+  ) {
+    Object.assign(this, values)
+  }
+
   addPose(pose) {
     this.nodes.push(pose);
   }
@@ -53,6 +59,7 @@ export class SequenceService {
     // this.nodes = STUB_SEQUENCE;
     this.addPose(new Pose({ name: 'baddha konasana', sides: 'bilateral'}));
     this.addPose(new Pose({ name: 'seated twist', sides: 'unilateral'}));
+    this.addSeries(new Series({ name: 'Standing Pose Series' }));
   }
 
   get currentPoseId() {
