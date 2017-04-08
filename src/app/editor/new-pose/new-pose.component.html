@@ -8,8 +8,8 @@
 
 <div>
   <select [(ngModel)]="pose.sides">
-    <option ngValue="unilateral">unilateral</option>
-    <option ngValue="bilateral">bilateral</option>
+    <option ngValue="unilateral">left &amp; right</option>
+    <option ngValue="bilateral" *ngIf="type!=='pose'">bilateral</option>
   </select>
   <input
     class="breaths"
@@ -19,7 +19,7 @@
     placeholder="Duration"
     >
   <select [(ngModel)]="pose.timing">
-    <option ngValue="breaths">breaths</option>
+    <option ngValue="breaths">breaths{{ pose.sides==='unilateral' ? ' each side' : null }}</option>
     <option ngValue="duration">seconds</option>
   </select>
 </div>

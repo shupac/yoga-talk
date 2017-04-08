@@ -1,5 +1,5 @@
 <section>
-  <h2 (click)="selectSeries.emit('root')">Sequence</h2>
+  <h2 (click)="selectSeries.emit('root')">{{ props.name }}</h2>
   Edit Series <input type="checkbox" [(ngModel)]="dragOperation"/>
 
   <div

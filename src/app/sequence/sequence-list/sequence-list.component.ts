@@ -18,6 +18,10 @@ export class SequenceListComponent {
     private playerService: PlayerService
   ) {}
 
+  get props() {
+    return this.sequenceService.properties;
+  }
+
   get sequence() {
     return this.sequenceService.displaySequence;
   }

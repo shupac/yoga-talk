@@ -6,7 +6,10 @@ import STUB_SEQUENCE from '../stub-sequence';
 
 @Injectable()
 export class SequenceService {
-  name: string = 'Sequence';
+  properties = {
+    name: 'Sequence',
+    type: 'root'
+  }
   nodes = [];
   currentSpeechIndex: number = null;
 
@@ -42,7 +45,7 @@ export class SequenceService {
   }
 
   getNode(target) {
-    if (target === 'root') return this.name;
+    if (target === 'root') return this.properties;
     if (target.type === 'pose') return this.findPose(target.id);
     if (target.type === 'series') return this.findSeries(target.id);
   }

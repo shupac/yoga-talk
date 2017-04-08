@@ -1,11 +1,13 @@
 <section>
-  <h2>Add to {{ target.name }}</h2>
-  <div *ngIf="target!=null">
+  <h2>{{ target.name }}</h2>
+
+  <input [(ngModel)]="target.name" />
+
+  <div *ngIf="target.type==='root'">
     <select [(ngModel)]="type">
       <option ngValue="pose">Pose</option>
       <option ngValue="series">Series</option>
     </select>
-
     <app-new-pose
       *ngIf="type==='pose'"
       (add)="addPose($event)"
@@ -15,5 +17,19 @@
       (add)="addSeries($event)"
       ></app-new-series>
   </div>
+
+  <div *ngIf="target.type==='series'">
+    <select [(ngModel)]="type">
+      <option ngValue="pose">Pose</option>
+      <option ngValue="transition1">1st Transition</option>
+      <option ngValue="transition2">2nd Transition</option>
+    </select>
+    <app-new-pose
+      [type]="type"
+      (add)="addPose($event)"
+      ></app-new-pose>
+  </div>
+
+
 </section>
 

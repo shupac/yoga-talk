@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Pose } from '../../_data/pose.model';
 
 @Component({
@@ -7,10 +7,10 @@ import { Pose } from '../../_data/pose.model';
   styleUrls: ['./new-pose.component.css']
 })
 export class NewPoseComponent {
-  @Output() 'add': EventEmitter<Pose> = new EventEmitter();
+  @Input() private 'type': string;
+  @Output() private 'add': EventEmitter<Pose> = new EventEmitter();
 
   pose: Pose = new Pose();
-  type = 'pose';
 
   constructor() {}
 
@@ -18,5 +18,9 @@ export class NewPoseComponent {
     this.pose.breaths = +this.pose.breaths;
     this.add.emit(this.pose);
     this.pose = new Pose();
+  }
+
+  setSides(sides) {
+    this.pose.sides = sides;
   }
 }
