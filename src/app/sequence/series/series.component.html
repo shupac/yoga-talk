@@ -2,10 +2,9 @@
   <h4
     (mouseenter)="hover=true"
     (mouseleave)="hover=false">
-    <span (click)="selectSeries.emit(node.id)">
+    <span (click)="selectSeries.emit()">
       {{ node.name }}
     </span>
-    <button (click)="editSeries.emit()">Edit</button>
   </h4>
 </div>
 
@@ -22,7 +21,11 @@
     (onDragStart)="sortStart.emit()"
     (onDragEnd)="sortEnd.emit()"
     >
-    <app-pose [pose]="pose" [currentId]="currentId"></app-pose>
+    <app-pose
+      [pose]="pose"
+      [currentId]="currentId"
+      (click)="selectPose.emit(pose)"
+      ></app-pose>
   </li>
 </ol>
 

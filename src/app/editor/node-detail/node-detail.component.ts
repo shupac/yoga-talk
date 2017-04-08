@@ -2,24 +2,21 @@ import { Component } from '@angular/core';
 import { SequenceService } from '../../_data/sequence.service';
 
 @Component({
-  selector: 'app-new-node',
-  templateUrl: './new-node.component.html',
-  styleUrls: ['./new-node.component.css']
+  selector: 'app-node-detail',
+  templateUrl: './node-detail.component.html',
+  styleUrls: ['./node-detail.component.css']
 })
-export class NewNodeComponent {
+export class NodeDetailComponent {
+  node;
   type = 'pose';
-  target: string | number = 'root';
+  target = 'root';
 
   constructor(private service: SequenceService) {}
 
-  get targetName() {
-    return this.service.getSeriesName(this.target);
-  }
-
-  selectTarget(id) {
-    console.log('add to', id);
-    this.target = id;
-    if (id !== 'root') this.type = 'pose';
+  selectTarget(target) {
+    console.log('add to', target);
+    this.target = target;
+    if (target !== 'root') this.type = 'pose';
   }
 
   addPose(pose) {

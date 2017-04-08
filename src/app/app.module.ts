@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { DndModule } from 'ng2-dnd';
 
-import { NewNodeModule } from './new-node/new-node.module';
+import { EditorModule } from './editor/editor.module';
 import { SequenceModule } from './sequence/sequence.module';
 
 import { AppComponent } from './app.component';
@@ -19,7 +19,7 @@ import { PlayerService } from './_data/player.service';
     BrowserModule,
     FormsModule,
     HttpModule,
-    NewNodeModule,
+    EditorModule,
     SequenceModule,
     DndModule.forRoot()
   ],

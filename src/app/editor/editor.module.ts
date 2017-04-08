@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { NewNodeComponent } from './new-node/new-node.component';
+import { NodeDetailComponent } from './node-detail/node-detail.component';
 import { NewPoseComponent } from './new-pose/new-pose.component';
 import { NewSeriesComponent } from './new-series/new-series.component';
 
@@ -12,12 +12,12 @@ import { NewSeriesComponent } from './new-series/new-series.component';
     FormsModule
   ],
   declarations: [
-    NewNodeComponent,
+    NodeDetailComponent,
     NewPoseComponent,
     NewSeriesComponent
   ],
   exports: [
-    NewNodeComponent
+    NodeDetailComponent
   ]
 })
-export class NewNodeModule { }
+export class EditorModule { }

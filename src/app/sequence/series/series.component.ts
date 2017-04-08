@@ -11,8 +11,8 @@ export class SeriesComponent {
   @Input() private node: Pose;
   @Input() private currentId;
   @Input() private dragEnabled: boolean;
+  @Output() private selectPose: EventEmitter<Pose> = new EventEmitter();
   @Output() private selectSeries: EventEmitter<number> = new EventEmitter();
-  @Output() private editSeries: EventEmitter<number> = new EventEmitter();
   @Output() private sortStart: EventEmitter<any> = new EventEmitter();
   @Output() private sortEnd: EventEmitter<any> = new EventEmitter();
 

@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { PlayerComponent } from './player/player.component';
-import { NewNodeComponent } from './new-node/new-node/new-node.component';
+import { NodeDetailComponent } from './editor/node-detail/node-detail.component';
 
 @Component({
   selector: 'app-root',
@@ -11,14 +11,10 @@ export class AppComponent {
   @ViewChild(PlayerComponent)
   private player: PlayerComponent;
 
-  @ViewChild(NewNodeComponent)
-  private newNode: NewNodeComponent;
+  @ViewChild(NodeDetailComponent)
+  private newNode: NodeDetailComponent;
 
-  onSelectPose(index) {
-    this.player.startSequence(index);
-  }
-
-  onSelectSeries(id) {
-    this.newNode.selectTarget(id);
+  onSelect(target) {
+    this.newNode.selectTarget(target);
   }
 }

@@ -21,6 +21,7 @@
           <app-pose
             [pose]="node"
             [currentId]="currentPoseId"
+            (click)="selectPose.emit(node)"
             >
           </app-pose>
         </div>
@@ -30,8 +31,8 @@
             [node]="node"
             [currentId]="currentPoseId"
             [dragEnabled]="dragOperation"
-            (selectSeries)="selectSeries.emit($event)"
-            (editSeries)="dragOperation=!dragOperation"
+            (selectPose)="selectPose.emit($event)"
+            (selectSeries)="selectSeries.emit(node)"
             (sortStart)="handleDragStart()"
             (sortEnd)="handleDragEnd()"
             >

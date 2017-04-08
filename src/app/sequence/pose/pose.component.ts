@@ -9,8 +9,6 @@ export class PoseComponent {
   @Input() private currentId;
   @Input() private pose;
 
-  edit: boolean = false;
-
   constructor() { }
 
 }

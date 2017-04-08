@@ -1,14 +1,14 @@
 <div class="row">
   <div class="col-4">
-    <app-settings></app-settings>
-    <app-new-node></app-new-node>
+    <app-sequence-list
+      (selectSeries)="onSelect($event)"
+      (selectPose)="onSelect($event)">
+    </app-sequence-list>
   </div>
 
   <div class="col-4">
-    <app-sequence-list
-      (selectSeries)="onSelectSeries($event)"
-      (selectPose)="onSelectPose($event)">
-    </app-sequence-list>
+    <!-- <app-settings></app-settings> -->
+    <app-node-detail></app-node-detail>
   </div>
 
   <div class="col-4">

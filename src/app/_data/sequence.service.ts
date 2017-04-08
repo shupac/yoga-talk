@@ -6,6 +6,7 @@ import STUB_SEQUENCE from '../stub-sequence';
 
 @Injectable()
 export class SequenceService {
+  name: string = 'Sequence';
   nodes = [];
   currentSpeechIndex: number = null;
 
@@ -40,9 +41,10 @@ export class SequenceService {
     this.nodes.push(series);
   }
 
-  getSeriesName(id) {
-    if (id === 'root') return 'Sequence';
-    else return this.findSeries(id).name;
+  getNode(target) {
+    if (target === 'root') return this.name;
+    if (target.type === 'pose') return this.findPose(target.id);
+    if (target.type === 'series') return this.findSeries(target.id);
   }
 
   get displaySequence() {
@@ -54,6 +56,14 @@ export class SequenceService {
     let sequence = [];
     this.nodes.forEach(node => sequence = sequence.concat(this.expandNode(node)));
     return sequence;
+  }
+
+  private findPose(id, nodes?) {
+    nodes = nodes || this.nodes;
+    return nodes.find(node => {
+      if (node.type === 'pose' && node.id === id) return node;
+      if (node.type === 'series') return this.findPose(id, node.nodes);
+    });
   }
 
   private findSeries(id) {
