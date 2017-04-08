@@ -1,9 +1,7 @@
-<div>
-  <input
-    type="text"
-    [(ngModel)]="series.name"
-    (keydown.enter)="addSeries()"
-    placeholder="Series name"
-    >
-</div>
+<input
+  type="text"
+  [(ngModel)]="series.name"
+  (keydown.enter)="addSeries()"
+  placeholder="Series name"
+  >
 <button (click)="addSeries()">Add Series</button>

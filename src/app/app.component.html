@@ -1,7 +1,17 @@
-<app-player></app-player>
-<app-settings></app-settings>
-<app-new-node></app-new-node>
-<app-sequence-list
-  (selectSeries)="onSelectSeries($event)"
-  (selectPose)="onSelectPose($event)">
-</app-sequence-list>
+<div class="row">
+  <div class="col-4">
+    <app-settings></app-settings>
+    <app-new-node></app-new-node>
+  </div>
+
+  <div class="col-4">
+    <app-sequence-list
+      (selectSeries)="onSelectSeries($event)"
+      (selectPose)="onSelectPose($event)">
+    </app-sequence-list>
+  </div>
+
+  <div class="col-4">
+    <app-player></app-player>
+  </div>
+</div>

@@ -22,7 +22,9 @@ import { SeriesComponent } from './series/series.component';
     SeriesComponent
   ],
   exports: [
-    SequenceListComponent
+    SequenceListComponent,
+    PoseComponent,
+    SeriesComponent
   ]
 })
 export class SequenceModule {}

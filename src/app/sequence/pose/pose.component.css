@@ -1,3 +1,16 @@
+.pose-item {
+  height: 25px;
+  line-height: 25px;
+}
+
+.pose-item:hover {
+  background-color: #eee;
+}
+
+button {
+  float: right;
+}
+
 .playing {
   font-weight: bolder;
   background-color: #ddd;

@@ -13,9 +13,12 @@ export class SequenceService {
     // this.nodes = STUB_SEQUENCE;
     this.addPose(new Pose({ name: 'baddha konasana', sides: 'bilateral'}), 'root');
     this.addPose(new Pose({ name: 'seated twist', sides: 'unilateral'}), 'root');
-    this.addSeries(new Series({ name: 'Standing Pose Series' }), 'root');
+    this.addSeries(new Series({ name: 'Vignette 1' }), 'root');
     this.addPose(new Pose({ name: 'warrior 2', sides: 'unilateral'}), 0);
     this.addPose(new Pose({ name: 'reverse warrior', sides: 'unilateral'}), 0);
+    this.addSeries(new Series({ name: 'Vignette 2' }), 'root');
+    this.addPose(new Pose({ name: 'warrior 1', sides: 'unilateral'}), 1);
+    this.addPose(new Pose({ name: 'archer', sides: 'unilateral'}), 1);
     this.addPose(new Pose({ name: 'savasana', sides: 'bilateral'}), 'root');
   }
 
@@ -29,7 +32,6 @@ export class SequenceService {
     Pose.nextId++;
     if (target === 'root') this.nodes.push(pose);
     else this.findSeries(target).addPose(pose);
-    console.log(this.nodes);
   }
 
   addSeries(series, targetId) {

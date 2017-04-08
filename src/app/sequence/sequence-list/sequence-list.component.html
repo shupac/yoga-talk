@@ -12,6 +12,8 @@
       dnd-sortable
       [sortableIndex]="i"
       [dragEnabled]="!dragOperation"
+      (onDragStart)="handleDragStart()"
+      (onDragEnd)="handleDragEnd()"
       >
       <div [ngSwitch]="node.type">
 
@@ -25,14 +27,13 @@
 
         <div *ngSwitchCase="'series'">
           <app-series
-            [id]="node.id"
-            [name]="node.name"
-            [poses]="node.nodes"
-            [firstTransitions]="node.firstTransitions"
-            [secondTransitions]="node.secondTransitions"
+            [node]="node"
             [currentId]="currentPoseId"
-            (selectSeries)="selectSeries.emit($event)"
             [dragEnabled]="dragOperation"
+            (selectSeries)="selectSeries.emit($event)"
+            (editSeries)="dragOperation=!dragOperation"
+            (sortStart)="handleDragStart()"
+            (sortEnd)="handleDragEnd()"
             >
           </app-series>
         </div>

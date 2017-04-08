@@ -12,6 +12,7 @@ import { PlayerComponent } from './player/player.component';
 import { SettingsComponent } from './settings/settings.component';
 
 import { SequenceService } from './_data/sequence.service';
+import { PlayerService } from './_data/player.service';
 
 @NgModule({
   imports: [
@@ -27,7 +28,7 @@ import { SequenceService } from './_data/sequence.service';
     PlayerComponent,
     SettingsComponent
   ],
-  providers: [SequenceService],
+  providers: [SequenceService, PlayerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

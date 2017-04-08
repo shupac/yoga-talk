@@ -1,12 +1,10 @@
 <section>
   <h2>Add to {{ targetName }}</h2>
   <div *ngIf="target!=null">
-    <div>
-      <select [(ngModel)]="type">
-        <option ngValue="pose">Pose</option>
-        <option ngValue="series">Series</option>
-      </select>
-    </div>
+    <select [(ngModel)]="type">
+      <option ngValue="pose">Pose</option>
+      <option ngValue="series">Series</option>
+    </select>
 
     <app-new-pose
       *ngIf="type==='pose'"

@@ -9,4 +9,31 @@
     <button (click)="startSequence()" *ngIf="!playing">Start</button>
     <button (click)="stopSequence()" *ngIf="playing">Stop</button>
   </div>
+
+  <div
+    *ngFor="let node of sequence, let i = index"
+    class="node-container"
+    >
+    <div [ngSwitch]="node.type">
+
+      <div *ngSwitchCase="'pose'">
+        <app-pose
+          [pose]="node"
+          [currentId]="currentPoseId"
+          >
+        </app-pose>
+      </div>
+
+      <div *ngSwitchCase="'series'">
+        <app-series
+          [node]="node"
+          [currentId]="currentPoseId"
+          [dragEnabled]="dragOperation"
+          (selectSeries)="selectSeries.emit($event)"
+          (editSeries)="dragOperation=!dragOperation"
+          >
+        </app-series>
+      </div>
+    </div>
+  </div>
 </section>

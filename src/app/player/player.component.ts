@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { VoiceChoices } from './voice-choices';
 import { SequenceService } from '../_data/sequence.service';
+import { PlayerService } from '../_data/player.service';
 import { Settings } from '../settings';
 import { Synth, Utterance } from './speech';
 import Lexicon from './lexicon';
@@ -17,8 +18,12 @@ export class PlayerComponent {
   voiceData;
   playing = false;
   cueTimeout;
+  sequenceCache = [];
 
-  constructor(private service: SequenceService) {}
+  constructor(
+    private sequenceService: SequenceService,
+    private playerService: PlayerService
+  ) {}
 
   ngOnInit() {
     if (Synth && Synth.onvoiceschanged !== undefined) {
@@ -27,20 +32,29 @@ export class PlayerComponent {
     else this.getVoices();
   }
 
+  get sequence() {
+    if (this.playerService.isSorting) {
+      return this.sequenceCache;
+    }
+    else {
+      this.sequenceCache = this.sequenceService.speechSequence;
+      return this.sequenceService.speechSequence;
+    }
+  }
+
   startSequence(index?: number) {
     if (this.playing) this.stopSequence();
-    let sequence = this.service.speechSequence;
     this.voiceData = this.availableVoices
       .find(voice => voice.name === this.selectedVoice);
-    this.service.currentSpeechIndex = index || 0;
-    this.speakAndCueNext(sequence);
+    this.sequenceService.currentSpeechIndex = index || 0;
+    this.speakAndCueNext(this.sequence);
     this.playing = true;
   }
 
   stopSequence() {
     Synth.cancel();
     this.playing = false;
-    this.service.currentSpeechIndex = null;
+    this.sequenceService.currentSpeechIndex = null;
     clearTimeout(this.cueTimeout);
   }
 
@@ -50,14 +64,14 @@ export class PlayerComponent {
   }
 
   private speakAndCueNext(sequence) {
-    let pose = sequence[this.service.currentSpeechIndex];
+    let pose = sequence[this.sequenceService.currentSpeechIndex];
     if (!pose) return this.stopSequence();
     this.speak(pose.name);
     if (Settings.breathCount) this.speak(pose.breaths + ' breaths');
 
     let duration = pose.duration || pose.breaths * Settings.secPerBreath;
     this.cueTimeout = setTimeout(() => {
-      this.service.currentSpeechIndex++;
+      this.sequenceService.currentSpeechIndex++;
       this.speakAndCueNext(sequence);
     }, duration * 1000);
   }

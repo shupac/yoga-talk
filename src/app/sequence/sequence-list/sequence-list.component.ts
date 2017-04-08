@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { SequenceService } from '../../_data/sequence.service';
+import { PlayerService } from '../../_data/player.service';
 
 @Component({
   selector: 'app-sequence-list',
@@ -12,13 +13,24 @@ export class SequenceListComponent {
 
   dragOperation: boolean = false;
 
-  constructor(private service: SequenceService) {}
+  constructor(
+    private sequenceService: SequenceService,
+    private playerService: PlayerService
+  ) {}
 
   get sequence() {
-    return this.service.displaySequence;
+    return this.sequenceService.displaySequence;
   }
 
   get currentPoseId() {
-    return this.service.currentPoseId;
+    return this.sequenceService.currentPoseId;
+  }
+
+  handleDragStart() {
+    this.playerService.isSorting = true;
+  }
+
+  handleDragEnd() {
+    this.playerService.isSorting = false;
   }
 }

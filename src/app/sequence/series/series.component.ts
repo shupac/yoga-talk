@@ -1,4 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Pose } from '../../_data/pose.model';
+import { Series } from '../../_data/series.model';
 
 @Component({
   selector: 'app-series',
@@ -6,14 +8,15 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./series.component.css']
 })
 export class SeriesComponent {
-  @Input() private id: number;
-  @Input() private name: string;
-  @Input() private poses;
-  @Input() private firstTransitions;
-  @Input() private secondTransitions;
+  @Input() private node: Pose;
   @Input() private currentId;
   @Input() private dragEnabled: boolean;
   @Output() private selectSeries: EventEmitter<number> = new EventEmitter();
+  @Output() private editSeries: EventEmitter<number> = new EventEmitter();
+  @Output() private sortStart: EventEmitter<any> = new EventEmitter();
+  @Output() private sortEnd: EventEmitter<any> = new EventEmitter();
+
+  edit: boolean = false;
 
   constructor() { }
 }
