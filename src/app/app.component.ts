@@ -14,7 +14,13 @@ export class AppComponent {
   @ViewChild(NodeDetailComponent)
   private newNode: NodeDetailComponent;
 
-  onSelect(target) {
-    this.newNode.selectTarget(target);
+  editable: boolean = true;
+
+  onSelect(node) {
+    this.newNode.selectNode(node);
+  }
+
+  toggleEdit() {
+    this.editable = !this.editable;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { SequenceService } from '../../_data/sequence.service';
 import { PlayerService } from '../../_data/player.service';
 
@@ -8,8 +8,9 @@ import { PlayerService } from '../../_data/player.service';
   styleUrls: ['./sequence-list.component.css']
 })
 export class SequenceListComponent {
-  @Output() selectPose: EventEmitter<number> = new EventEmitter();
-  @Output() selectSeries: EventEmitter<number> = new EventEmitter();
+  @Input() private editable: boolean;
+  @Output() private selectPose: EventEmitter<number> = new EventEmitter();
+  @Output() private selectSeries: EventEmitter<number> = new EventEmitter();
 
   dragOperation: boolean = false;
 

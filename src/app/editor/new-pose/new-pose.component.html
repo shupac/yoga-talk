@@ -4,7 +4,6 @@
   (keydown.enter)="addPose()"
   placeholder="Pose name"
   >
-<button (click)="addPose()">Add Pose</button>
 
 <div>
   <select [(ngModel)]="pose.sides">
@@ -20,6 +19,10 @@
     >
   <select [(ngModel)]="pose.timing">
     <option ngValue="breaths">breaths{{ pose.sides==='unilateral' ? ' each side' : null }}</option>
-    <option ngValue="duration">seconds</option>
+    <option ngValue="duration">seconds{{ pose.sides==='unilateral' ? ' each side' : null }}</option>
   </select>
+</div>
+
+<div>
+  <button (click)="addPose()">Add Pose</button>
 </div>

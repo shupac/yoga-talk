@@ -31,6 +31,23 @@ export class SequenceService {
     return this.speechSequence[this.currentSpeechIndex].id;
   }
 
+  get displaySequence() {
+    // return this.speechSequence;
+    return this.nodes;
+  }
+
+  get speechSequence() {
+    let sequence = [];
+    this.nodes.forEach(node => sequence = sequence.concat(this.expandNode(node)));
+    return sequence;
+  }
+
+  getNode(target) {
+    if (target === 'root') return this.properties;
+    if (target.type === 'pose') return this.findPose(target.id);
+    if (target.type === 'series') return this.findSeries(target.id);
+  }
+
   addPose(pose, target) {
     pose.id = Pose.nextId;
     Pose.nextId++;
@@ -44,22 +61,10 @@ export class SequenceService {
     this.nodes.push(series);
   }
 
-  getNode(target) {
-    if (target === 'root') return this.properties;
-    if (target.type === 'pose') return this.findPose(target.id);
-    if (target.type === 'series') return this.findSeries(target.id);
+  savePose(pose) {
+    console.log('service save pose', pose);
   }
 
-  get displaySequence() {
-    // return this.speechSequence;
-    return this.nodes;
-  }
-
-  get speechSequence() {
-    let sequence = [];
-    this.nodes.forEach(node => sequence = sequence.concat(this.expandNode(node)));
-    return sequence;
-  }
 
   private findPose(id, nodes?) {
     nodes = nodes || this.nodes;

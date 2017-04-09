@@ -13,37 +13,39 @@ export class NodeDetailComponent {
 
   node;
   type = 'pose';
-  target;
 
   constructor(private service: SequenceService) {}
 
   ngOnInit() {
-    this.selectTarget('root');
+    this.selectNode('root');
   }
 
   ngDoCheck() {
-    console.log(this.target.type, this.type);
     if (!this.newPoseComponent) return;
-    if (this.target.type === 'series') {
+    if (this.node.type === 'series') {
       if (this.type === 'pose') this.newPoseComponent.setSides('unilateral');
       if (this.type === 'series') this.type = 'pose';
     }
-    if (this.target.type === 'root' && (this.type !== 'pose' && this.type !== 'series'))
+    if (this.node.type === 'root' && (this.type !== 'pose' && this.type !== 'series'))
       this.type = 'pose';
   }
 
-  selectTarget(target) {
-    if (target === 'root') this.target = this.service.getNode('root');
-    else this.target = target;
-    console.log('select target', this.target);
+  selectNode(node) {
+    if (node === 'root') this.node = this.service.getNode('root');
+    else this.node = node;
+    console.log(this.node);
   }
 
   addPose(pose) {
     console.log('add pose', pose);
-    this.service.addPose(pose, this.target);
+    this.service.addPose(pose, this.node);
   }
 
   addSeries(series) {
-    this.service.addSeries(series, this.target);
+    this.service.addSeries(series, this.node);
+  }
+
+  savePose() {
+    this.service.savePose(this.node);
   }
 }

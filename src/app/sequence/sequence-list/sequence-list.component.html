@@ -1,6 +1,5 @@
 <section>
-  <h2 (click)="selectSeries.emit('root')">{{ props.name }}</h2>
-  Edit Series <input type="checkbox" [(ngModel)]="dragOperation"/>
+  <h2 (click)="editable && selectSeries.emit('root')">{{ props.name }}</h2>
 
   <div
     dnd-sortable-container
@@ -11,7 +10,7 @@
       class="node-container"
       dnd-sortable
       [sortableIndex]="i"
-      [dragEnabled]="!dragOperation"
+      [dragEnabled]="!dragOperation && editable"
       (onDragStart)="handleDragStart()"
       (onDragEnd)="handleDragEnd()"
       >
@@ -21,7 +20,7 @@
           <app-pose
             [pose]="node"
             [currentId]="currentPoseId"
-            (click)="selectPose.emit(node)"
+            (click)="editable && selectPose.emit(node)"
             >
           </app-pose>
         </div>
@@ -30,9 +29,9 @@
           <app-series
             [node]="node"
             [currentId]="currentPoseId"
-            [dragEnabled]="dragOperation"
-            (selectPose)="selectPose.emit($event)"
-            (selectSeries)="selectSeries.emit(node)"
+            [dragEnabled]="dragOperation && editable"
+            (selectPose)="editable && selectPose.emit($event)"
+            (selectSeries)="editable && selectSeries.emit(node)"
             (sortStart)="handleDragStart()"
             (sortEnd)="handleDragEnd()"
             >
@@ -40,6 +39,10 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <div *ngIf="editable">
+    <button (click)="dragOperation=!dragOperation">Reorder {{ dragOperation ? 'Sequence' : 'Series' }}</button>
   </div>
 </section>
 

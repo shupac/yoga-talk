@@ -6,6 +6,7 @@ import { DndModule } from 'ng2-dnd';
 
 import { EditorModule } from './editor/editor.module';
 import { SequenceModule } from './sequence/sequence.module';
+import { SharedModule } from './_shared/shared.module';
 
 import { AppComponent } from './app.component';
 import { PlayerComponent } from './player/player.component';
@@ -21,6 +22,7 @@ import { PlayerService } from './_data/player.service';
     HttpModule,
     EditorModule,
     SequenceModule,
+    SharedModule,
     DndModule.forRoot()
   ],
   declarations: [
