@@ -30,11 +30,11 @@
     <h4>Add Element</h4>
 
     <div *ngIf="node.type === 'root'">
-      <app-button-bar
-        [(model)]="type"
-        label="Type"
-        [options]="['pose', 'series']"
-        ></app-button-bar>
+      <label class="button-bar-label">Type</label>
+      <div myButtonBar [(value)]="type">
+        <span myRadioValue="pose">Pose</span>
+        <span myRadioValue="series">Series</span>
+      </div>
 
       <app-new-pose
         *ngIf="type === 'pose'"

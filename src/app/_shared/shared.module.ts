@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ButtonBarComponent } from './button-bar/button-bar.component';
+import { ButtonBarDirective, RadioButtonDirective } from './button-bar.directive';
 
 @NgModule({
-  imports: [CommonModule],
-  declarations: [ButtonBarComponent],
-  exports: [ButtonBarComponent]
+  declarations: [
+    ButtonBarDirective,
+    RadioButtonDirective
+  ],
+  exports: [
+    ButtonBarDirective,
+    RadioButtonDirective
+  ]
 })
 export class SharedModule {}
