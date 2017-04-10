@@ -1,4 +1,4 @@
-<section>
+<section *ngIf="node">
   <div class="header">
     <h4>Name</h4>
     <input [(ngModel)]="node.name" />
@@ -29,33 +29,42 @@
   <div *ngIf="node.type !== 'pose'">
     <h4>Add Element</h4>
 
+    <label class="detail-label">Name</label>
+    <input [(ngModel)]="name" (keydown.enter)="addNode()">
+
     <div *ngIf="node.type === 'root'">
-      <label class="button-bar-label">Type</label>
-      <div myButtonBar [(value)]="type">
-        <span myRadioValue="pose">Pose</span>
-        <span myRadioValue="series">Series</span>
+      <div>
+        <label class="detail-label">Type</label>
+        <div myButtonBar [(value)]="type">
+          <span myRadioValue="pose">Pose</span>
+          <span myRadioValue="series">Series</span>
+        </div>
       </div>
 
       <app-new-pose
         *ngIf="type === 'pose'"
         (add)="addPose($event)"
+        [name]="name"
         ></app-new-pose>
 
       <app-new-series
         *ngIf="type === 'series'"
         (add)="addSeries($event)"
+        [name]="name"
         ></app-new-series>
     </div>
 
     <div *ngIf="node.type === 'series'">
-      <select [(ngModel)]="type">
-        <option ngValue="pose">Pose</option>
-        <option ngValue="transition1">1st Transition</option>
-        <option ngValue="transition2">2nd Transition</option>
-      </select>
+      <label class="detail-label">Type</label>
+      <div myButtonBar [(value)]="type">
+        <span myRadioValue="pose">Pose</span>
+        <span myRadioValue="transition1">1st Transition</span>
+        <span myRadioValue="transition2">2nd Transition</span>
+      </div>
+
       <app-new-pose
-        [type]="type"
         (add)="addPose($event)"
+        [name]="name"
         ></app-new-pose>
     </div>
   </div>

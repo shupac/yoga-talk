@@ -7,14 +7,15 @@ import { Pose } from '../../_data/pose.model';
   styleUrls: ['./new-pose.component.css']
 })
 export class NewPoseComponent {
-  @Input() private 'type': string;
-  @Output() private 'add': EventEmitter<Pose> = new EventEmitter();
+  @Input() private name: string;
+  @Output() private add: EventEmitter<Pose> = new EventEmitter();
 
   pose: Pose = new Pose();
 
   constructor() {}
 
-  addPose() {
+  addPose(name?: string) {
+    this.pose.name = name || this.name;
     this.pose.breaths = +this.pose.breaths;
     this.add.emit(this.pose);
     this.pose = new Pose();

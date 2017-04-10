@@ -13,6 +13,7 @@ export class SequenceListComponent {
   @Output() private selectSeries: EventEmitter<number> = new EventEmitter();
 
   dragOperation: boolean = false;
+  properties;
 
   constructor(
     private sequenceService: SequenceService,

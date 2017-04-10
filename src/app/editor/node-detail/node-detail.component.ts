@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { SequenceService } from '../../_data/sequence.service';
 import { NewPoseComponent } from '../new-pose/new-pose.component';
+import { NewSeriesComponent } from '../new-series/new-series.component';
 
 @Component({
   selector: 'app-node-detail',
@@ -11,13 +12,17 @@ export class NodeDetailComponent {
   @ViewChild(NewPoseComponent)
   private newPoseComponent: NewPoseComponent;
 
+  @ViewChild(NewSeriesComponent)
+  private newSeriesComponent: NewSeriesComponent;
+
   node;
-  type = 'pose';
+  type: string = 'pose';
+  name: string;
 
   constructor(private service: SequenceService) {}
 
   ngOnInit() {
-    this.selectNode('root');
+    this.node = this.service.properties;
   }
 
   ngDoCheck() {
@@ -31,21 +36,30 @@ export class NodeDetailComponent {
   }
 
   selectNode(node) {
-    if (node === 'root') this.node = this.service.getNode('root');
-    else this.node = node;
-    console.log(this.node);
+    this.node = node;
+  }
+
+  addNode() {
+    if (this.type === 'pose') this.newPoseComponent.addPose(this.name);
+    if (this.type === 'series') this.newSeriesComponent.addSeries(this.name);
   }
 
   addPose(pose) {
-    console.log('add pose', pose);
     this.service.addPose(pose, this.node);
+    this.name = '';
   }
 
   addSeries(series) {
-    this.service.addSeries(series, this.node);
+    let node = this.service.addSeries(series, this.node);
+    if (node.type === 'series') this.selectNode(node);
+    this.name = '';
   }
 
   savePose() {
     this.service.savePose(this.node);
+  }
+
+  deletePose() {
+    this.service.deletePose(this.node);
   }
 }

@@ -14,16 +14,7 @@ export class SequenceService {
   currentSpeechIndex: number = null;
 
   constructor() {
-    // this.nodes = STUB_SEQUENCE;
-    this.addPose(new Pose({ name: 'baddha konasana', sides: 'bilateral'}), 'root');
-    this.addPose(new Pose({ name: 'seated twist', sides: 'unilateral'}), 'root');
-    this.addSeries(new Series({ name: 'Vignette 1' }), 'root');
-    this.addPose(new Pose({ name: 'warrior 2', sides: 'unilateral'}), 0);
-    this.addPose(new Pose({ name: 'reverse warrior', sides: 'unilateral'}), 0);
-    this.addSeries(new Series({ name: 'Vignette 2' }), 'root');
-    this.addPose(new Pose({ name: 'warrior 1', sides: 'unilateral'}), 1);
-    this.addPose(new Pose({ name: 'archer', sides: 'unilateral'}), 1);
-    this.addPose(new Pose({ name: 'savasana', sides: 'bilateral'}), 'root');
+    this.stubPoses();
   }
 
   get currentPoseId() {
@@ -43,28 +34,42 @@ export class SequenceService {
   }
 
   getNode(target) {
-    if (target === 'root') return this.properties;
+    if (target.type === 'root') return this.properties;
     if (target.type === 'pose') return this.findPose(target.id);
     if (target.type === 'series') return this.findSeries(target.id);
   }
 
   addPose(pose, target) {
+    console.log('service add pose', pose, target);
     pose.id = Pose.nextId;
     Pose.nextId++;
-    if (target === 'root') this.nodes.push(pose);
-    else this.findSeries(target).addPose(pose);
+    if (target.type === 'root') this.nodes.push(pose);
+    else this.findSeries(target.id).addPose(pose);
   }
 
   addSeries(series, targetId) {
     series.id = Series.nextId;
     Series.nextId++;
     this.nodes.push(series);
+    return series;
   }
 
   savePose(pose) {
     console.log('service save pose', pose);
   }
 
+  deletePose(pose) {
+    console.log('service delete pose', pose);
+    this.nodes = this.nodes.filter(node => {
+      if (node.type === 'pose' && node.id !== pose.id) return true;
+      else if (node.type === 'series') {
+        node.nodes = node.nodes.filter(node => node.id !== pose.id);
+        node.firstTransitions = node.firstTransitions.filter(node => node.id !== pose.id);
+        node.secondTransitions = node.secondTransitions.filter(node => node.id !== pose.id);
+        return true;
+      }
+    })
+  }
 
   private findPose(id, nodes?) {
     nodes = nodes || this.nodes;
@@ -74,7 +79,7 @@ export class SequenceService {
     });
   }
 
-  private findSeries(id) {
+  private findSeries(id): Series {
     return this.nodes.find(node => node.type === 'series' && node.id === id);
   }
 
@@ -96,7 +101,7 @@ export class SequenceService {
 
   private expandSeries(series) {
     let expanded = [];
-    series.nodes.forEach((node, index) => {
+    series.poses.forEach((node, index) => {
       if (node.type === 'pose') {
         if (index === 0) expanded.push(Object.assign({}, node, {name: node.name + ' left side'}));
         else expanded.push(node);
@@ -106,7 +111,7 @@ export class SequenceService {
     if (series.firstTransitions) series.firstTransitions.forEach(node => {
       expanded = expanded.concat(this.expandNode(node));
     });
-    series.nodes.forEach((node, index) => {
+    series.poses.forEach((node, index) => {
       if (node.type === 'pose') {
         if (index === 0) expanded.push(Object.assign({}, node, {name: node.name + ' right side'}));
         else expanded.push(node);
@@ -117,5 +122,17 @@ export class SequenceService {
       expanded = expanded.concat(this.expandNode(node));
     });
     return expanded;
+  }
+
+  private stubPoses() {
+    this.addPose(new Pose({ name: 'baddha konasana', sides: 'bilateral'}), {type: 'root'});
+    this.addPose(new Pose({ name: 'seated twist', sides: 'unilateral'}), {type: 'root'});
+    this.addSeries(new Series({ name: 'Vignette 1' }), {type: 'root'});
+    this.addPose(new Pose({ name: 'warrior 2', sides: 'unilateral'}), {type: 'series', id: 0});
+    this.addPose(new Pose({ name: 'reverse warrior', sides: 'unilateral'}), {type: 'series', id: 0});
+    this.addSeries(new Series({ name: 'Vignette 2' }), {type: 'root'});
+    this.addPose(new Pose({ name: 'warrior 1', sides: 'unilateral'}), {type: 'series', id: 1});
+    this.addPose(new Pose({ name: 'archer', sides: 'unilateral'}), {type: 'series', id: 1});
+    this.addPose(new Pose({ name: 'savasana', sides: 'bilateral'}), {type: 'root'});
   }
 }

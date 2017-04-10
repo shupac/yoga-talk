@@ -1,5 +1,5 @@
 <section>
-  <h2 (click)="editable && selectSeries.emit('root')">{{ props.name }}</h2>
+  <h2 (click)="editable && selectSeries.emit(props)">{{ props.name }}</h2>
 
   <div
     dnd-sortable-container

@@ -12,12 +12,12 @@ export class AppComponent {
   private player: PlayerComponent;
 
   @ViewChild(NodeDetailComponent)
-  private newNode: NodeDetailComponent;
+  private nodeDetail: NodeDetailComponent;
 
   editable: boolean = true;
 
   onSelect(node) {
-    this.newNode.selectNode(node);
+    this.nodeDetail.selectNode(node);
   }
 
   toggleEdit() {

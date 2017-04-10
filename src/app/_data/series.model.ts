@@ -6,6 +6,8 @@ export class Series {
   id: number;
   name: string;
   nodes: Pose[] = [];
+  firstTransitions: Pose[] = [];
+  secondTransitions: Pose[] = [];
 
   constructor(
     values: Object = {}

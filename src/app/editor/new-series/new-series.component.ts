@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Series } from '../../_data/series.model';
 
 @Component({
@@ -7,13 +7,15 @@ import { Series } from '../../_data/series.model';
   styleUrls: ['./new-series.component.css']
 })
 export class NewSeriesComponent {
-  @Output() 'add': EventEmitter<Series> = new EventEmitter();
+  @Input() private name: string;
+  @Output() private add: EventEmitter<Series> = new EventEmitter();
 
   series: Series = new Series();
 
   constructor() { }
 
-  addSeries() {
+  addSeries(name?: string) {
+    this.series.name = name || this.name;
     this.add.emit(this.series);
     this.series = new Series();
   }
