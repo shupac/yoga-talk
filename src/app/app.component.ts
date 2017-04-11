@@ -17,7 +17,7 @@ export class AppComponent {
   editable: boolean = true;
 
   onSelect(node) {
-    this.nodeDetail.selectNode(node);
+    this.nodeDetail.selectTarget(node);
   }
 
   toggleEdit() {

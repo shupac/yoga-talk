@@ -8,6 +8,7 @@ import { Pose } from '../../_data/pose.model';
 })
 export class NewPoseComponent {
   @Input() private name: string;
+  @Input() private type: string;
   @Output() private add: EventEmitter<Pose> = new EventEmitter();
 
   pose: Pose = new Pose();

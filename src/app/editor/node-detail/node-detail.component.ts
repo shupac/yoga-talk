@@ -15,51 +15,51 @@ export class NodeDetailComponent {
   @ViewChild(NewSeriesComponent)
   private newSeriesComponent: NewSeriesComponent;
 
-  node;
-  type: string = 'pose';
+  target;
+  nodeType: string = 'pose';
   name: string;
 
   constructor(private service: SequenceService) {}
 
   ngOnInit() {
-    this.node = this.service.properties;
+    this.target = this.service.properties;
   }
 
   ngDoCheck() {
     if (!this.newPoseComponent) return;
-    if (this.node.type === 'series') {
-      if (this.type === 'pose') this.newPoseComponent.setSides('unilateral');
-      if (this.type === 'series') this.type = 'pose';
+    if (this.target.type === 'series') {
+      if (this.nodeType === 'pose') this.newPoseComponent.setSides('unilateral');
+      if (this.nodeType === 'series') this.nodeType = 'pose';
     }
-    if (this.node.type === 'root' && (this.type !== 'pose' && this.type !== 'series'))
-      this.type = 'pose';
+    if (this.target.type === 'root' && (this.nodeType !== 'pose' && this.nodeType !== 'series'))
+      this.nodeType = 'pose';
   }
 
-  selectNode(node) {
-    this.node = node;
+  selectTarget(target) {
+    this.target = target;
   }
 
   addNode() {
-    if (this.type === 'pose') this.newPoseComponent.addPose(this.name);
-    if (this.type === 'series') this.newSeriesComponent.addSeries(this.name);
+    if (this.nodeType === 'pose') this.newPoseComponent.addPose(this.name);
+    if (this.nodeType === 'series') this.newSeriesComponent.addSeries(this.name);
   }
 
   addPose(pose) {
-    this.service.addPose(pose, this.node);
+    this.service.addPose(pose, this.target);
     this.name = '';
   }
 
   addSeries(series) {
-    let node = this.service.addSeries(series, this.node);
-    if (node.type === 'series') this.selectNode(node);
+    let node = this.service.addSeries(series, this.target);
+    if (node.type === 'series') this.selectTarget(node);
     this.name = '';
   }
 
   savePose() {
-    this.service.savePose(this.node);
+    this.service.savePose(this.target);
   }
 
   deletePose() {
-    this.service.deletePose(this.node);
+    this.service.deletePose(this.target);
   }
 }
