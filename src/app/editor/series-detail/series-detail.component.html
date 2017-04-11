@@ -1,20 +1,36 @@
-<div *ngIf="!target">
-  <label class="detail-label">Name</label>
-  <input [(ngModel)]="series.name" />
+<div class="row" *ngIf="!target">
+  <div class="col-2">
+    <label class="detail-label">Name</label>
+  </div>
+  <div class="col">
+    <input [(ngModel)]="series.name" />
+  </div>
 </div>
 
 <div *ngIf="target">
   <h1>Series</h1>
-  <label class="detail-label">Name</label>
-  <input [(ngModel)]="target.name" />
+  <div class="row">
+    <div class="col-2">
+      <label class="detail-label">Name</label>
+    </div>
+    <div class="col">
+      <input [(ngModel)]="target.name" />
+    </div>
+  </div>
 
 
   <h2>Add Element</h2>
-  <label class="detail-label">Type</label>
-  <div myButtonBar [(value)]="newNodeType">
-    <span myRadioValue="pose">Pose</span>
-    <span myRadioValue="transition1">Left Transition</span>
-    <span myRadioValue="transition2">Right Transition</span>
+  <div class="row">
+    <div class="col-2">
+      <label class="detail-label">Type</label>
+    </div>
+    <div class="col">
+      <div myButtonBar [(value)]="newNodeType">
+        <span myRadioValue="pose">Pose</span>
+        <span myRadioValue="transition1">Left Transition</span>
+        <span myRadioValue="transition2">Right Transition</span>
+      </div>
+    </div>
   </div>
 
   <app-pose-detail
@@ -22,9 +38,9 @@
     (add)="onPoseAction($event)"
     ></app-pose-detail>
 
-  <button>Add Pose</button>
-</div>
+  <button class="btn btn-primary">Add Pose</button>
 
-<div>
-  <button (click)="delete.emit(series)">Delete Series</button>
+  <div class="delete-container">
+    <button class="btn btn-danger" (click)="delete.emit(series)">Delete Series</button>
+  </div>
 </div>

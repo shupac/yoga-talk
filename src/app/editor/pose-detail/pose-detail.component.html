@@ -1,35 +1,50 @@
-<div>
-  <div>
-    <label class="detail-label">Name</label>
-    <input [(ngModel)]="pose.name">
-  </div>
+<div *ngIf="target">
+  <h1>Pose</h1>
+</div>
 
-  <div>
-    <label class="detail-label">Sides</label>
-    <div myButtonBar [(value)]="pose.sides">
-      <span myRadioValue="unilateral">Left &amp; Right</span>
-      <span myRadioValue="bilateral" *ngIf="!unilateralOnly">Bilateral</span>
+<div>
+  <div class="row">
+    <div class="col-2">
+      <label class="detail-label">Name</label>
+    </div>
+    <div class="col">
+      <input [(ngModel)]="pose.name">
     </div>
   </div>
 
-  <div>
-    <label class="detail-label">Duration</label>
+  <div class="row">
+    <div class="col-2">
+      <label class="detail-label">Sides</label>
+    </div>
+    <div class="col">
+      <div myButtonBar [(value)]="pose.sides">
+        <span myRadioValue="unilateral">Left &amp; Right</span>
+        <span myRadioValue="bilateral" *ngIf="!unilateralOnly">Bilateral</span>
+      </div>
+    </div>
+  </div>
 
-    <input
-      class="breaths"
-      type="text"
-      [(ngModel)]="pose.duration"
-      (keydown.enter)="addPose()"
-      placeholder="Duration"
-      >
+  <div class="row">
+    <div class="col-2">
+      <label class="detail-label">Duration</label>
+    </div>
+    <div class="col">
+      <input
+        class="breaths"
+        type="text"
+        [(ngModel)]="pose.duration"
+        (keydown.enter)="addPose()"
+        placeholder="Duration"
+        >
 
-    <div myButtonBar [(value)]="pose.timing">
-      <span myRadioValue="breaths">Breaths</span>
-      <span myRadioValue="minutes">Minutes</span>
+      <div myButtonBar [(value)]="pose.timing">
+        <span myRadioValue="breaths">Breaths</span>
+        <span myRadioValue="minutes">Minutes</span>
+      </div>
     </div>
   </div>
 </div>
 
-<div *ngIf="target">
-  <button (click)="action.emit({type: 'delete', pose: pose})">Delete Pose</button>
+<div class="delete-container" *ngIf="target">
+  <button class="btn btn-danger" (click)="action.emit({type: 'delete', pose: pose})">Delete Pose</button>
 </div>

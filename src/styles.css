@@ -1,3 +1,7 @@
+.row {
+  margin: 16px 0;
+}
+
 .dnd-drag-start {
     -moz-transform:scale(0.8);
     -webkit-transform:scale(0.8);

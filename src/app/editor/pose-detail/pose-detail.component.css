@@ -2,6 +2,6 @@ input.breaths {
   width: 30px;
 }
 
-button {
-  margin-top: 20px;
+.delete-container {
+  margin: 40px 0;
 }
