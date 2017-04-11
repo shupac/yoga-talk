@@ -127,13 +127,14 @@ export class SequenceService {
   private stubPoses() {
     STUB_SEQUENCE.forEach(node => {
       if (node.type === 'pose') {
-        this.addPose(new Pose({
+        let pose = new Pose({
           name: node.name,
-          sides: node['sides'],
-          unilateralOnly: node['unilateralOnly'],
-          duration: node['duration'],
-          timing: node['timing']
-        }), node['parent']);
+          sides: node['sides']
+        });
+        if (node['unilateralOnly']) pose.unilateralOnly = node['unilateralOnly'];
+        if (node['timing']) pose.timing = node['timing'];
+        if (node['duration']) pose.duration = node['duration'];
+        this.addPose(pose, node['parent']);
       }
 
       if (node.type === 'series') {

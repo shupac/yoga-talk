@@ -3,7 +3,6 @@ export default [
     type: 'pose',
     name: 'baddha konasana',
     sides: 'bilateral',
-    unilateralOnly: false,
     parent: {
       type: 'root'
     }
@@ -12,7 +11,6 @@ export default [
     type: 'pose',
     name: 'seated twist',
     sides: 'unilateral',
-    unilateralOnly: false,
     parent: {
       type: 'root'
     }
@@ -74,7 +72,6 @@ export default [
   {
     type: 'pose',
     name: 'savasana',
-    unilateralOnly: false,
     sides: 'bilateral',
     duration: 5,
     timing: 'minutes',
