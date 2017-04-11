@@ -1,0 +1,30 @@
+<div *ngIf="!target">
+  <label class="detail-label">Name</label>
+  <input [(ngModel)]="series.name" />
+</div>
+
+<div *ngIf="target">
+  <h1>Series</h1>
+  <label class="detail-label">Name</label>
+  <input [(ngModel)]="target.name" />
+
+
+  <h2>Add Element</h2>
+  <label class="detail-label">Type</label>
+  <div myButtonBar [(value)]="newNodeType">
+    <span myRadioValue="pose">Pose</span>
+    <span myRadioValue="transition1">Left Transition</span>
+    <span myRadioValue="transition2">Right Transition</span>
+  </div>
+
+  <app-pose-detail
+    [unilateralOnly]="newNodeType === 'pose'"
+    (add)="onPoseAction($event)"
+    ></app-pose-detail>
+
+  <button>Add Pose</button>
+</div>
+
+<div>
+  <button (click)="delete.emit(series)">Delete Series</button>
+</div>

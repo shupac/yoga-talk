@@ -5,11 +5,11 @@ export class Pose {
   type = 'pose';
   id: number;
   name: string;
-  breaths: number = Settings.defaultBreaths;
   sides: string = 'unilateral';
   timing: string = 'breaths';
-  duration: number;
+  duration: number = Settings.defaultBreaths;
   pronunciation: string;
+  unilateralOnly: boolean = false;
 
   constructor(
     values: Object = {}

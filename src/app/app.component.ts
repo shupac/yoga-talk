@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { PlayerComponent } from './player/player.component';
-import { NodeDetailComponent } from './editor/node-detail/node-detail.component';
+import { RootDetailComponent } from './editor/root-detail/root-detail.component';
 
 @Component({
   selector: 'app-root',
@@ -11,13 +11,13 @@ export class AppComponent {
   @ViewChild(PlayerComponent)
   private player: PlayerComponent;
 
-  @ViewChild(NodeDetailComponent)
-  private nodeDetail: NodeDetailComponent;
+  @ViewChild(RootDetailComponent)
+  private rootDetail: RootDetailComponent;
 
   editable: boolean = true;
 
   onSelect(node) {
-    this.nodeDetail.selectTarget(node);
+    this.rootDetail.selectTarget(node);
   }
 
   toggleEdit() {

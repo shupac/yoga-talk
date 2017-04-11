@@ -1,30 +1,3 @@
-<div>
-  <div>
-    <label class="detail-label">Sides</label>
-    <div myButtonBar [(value)]="pose.sides">
-      <span myRadioValue="unilateral">Left &amp; Right</span>
-      <span myRadioValue="bilateral" *ngIf="type!=='pose'">Bilateral</span>
-    </div>
-  </div>
-
-  <div>
-    <label class="detail-label">Duration</label>
-
-    <input
-      class="breaths"
-      type="text"
-      [(ngModel)]="pose.breaths"
-      (keydown.enter)="addPose()"
-      placeholder="Duration"
-      >
-
-    <div myButtonBar [(value)]="pose.timing">
-      <span myRadioValue="breaths">Breaths</span>
-      <span myRadioValue="duration">Seconds</span>
-    </div>
-  </div>
-</div>
-
-<div>
-  <button (click)="addPose()">Add Pose</button>
-</div>
+<p>
+  new-pose works!
+</p>

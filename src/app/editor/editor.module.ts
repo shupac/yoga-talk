@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../_shared/shared.module';
 
-import { NodeDetailComponent } from './node-detail/node-detail.component';
+import { RootDetailComponent } from './root-detail/root-detail.component';
+import { SeriesDetailComponent } from './series-detail/series-detail.component';
+import { PoseDetailComponent } from './pose-detail/pose-detail.component';
 import { NewPoseComponent } from './new-pose/new-pose.component';
-import { NewSeriesComponent } from './new-series/new-series.component';
 
 @NgModule({
   imports: [
@@ -14,12 +15,13 @@ import { NewSeriesComponent } from './new-series/new-series.component';
     SharedModule
   ],
   declarations: [
-    NodeDetailComponent,
+    RootDetailComponent,
+    SeriesDetailComponent,
+    PoseDetailComponent,
     NewPoseComponent,
-    NewSeriesComponent,
   ],
   exports: [
-    NodeDetailComponent
+    RootDetailComponent
   ]
 })
 export class EditorModule { }

@@ -125,14 +125,22 @@ export class SequenceService {
   }
 
   private stubPoses() {
-    this.addPose(new Pose({ name: 'baddha konasana', sides: 'bilateral'}), {type: 'root'});
-    this.addPose(new Pose({ name: 'seated twist', sides: 'unilateral'}), {type: 'root'});
-    this.addSeries(new Series({ name: 'Vignette 1' }), {type: 'root'});
-    this.addPose(new Pose({ name: 'warrior 2', sides: 'unilateral'}), {type: 'series', id: 0});
-    this.addPose(new Pose({ name: 'reverse warrior', sides: 'unilateral'}), {type: 'series', id: 0});
-    this.addSeries(new Series({ name: 'Vignette 2' }), {type: 'root'});
-    this.addPose(new Pose({ name: 'warrior 1', sides: 'unilateral'}), {type: 'series', id: 1});
-    this.addPose(new Pose({ name: 'archer', sides: 'unilateral'}), {type: 'series', id: 1});
-    this.addPose(new Pose({ name: 'savasana', sides: 'bilateral'}), {type: 'root'});
+    STUB_SEQUENCE.forEach(node => {
+      if (node.type === 'pose') {
+        this.addPose(new Pose({
+          name: node.name,
+          sides: node['sides'],
+          unilateralOnly: node['unilateralOnly'],
+          duration: node['duration'],
+          timing: node['timing']
+        }), node['parent']);
+      }
+
+      if (node.type === 'series') {
+        this.addSeries(new Series({
+          name: node.name
+        }), node['parent']);
+      }
+    });
   }
 }

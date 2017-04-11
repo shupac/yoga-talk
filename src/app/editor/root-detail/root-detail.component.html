@@ -1,0 +1,40 @@
+<section *ngIf="target">
+  <div *ngIf="target.type === 'root'">
+    <div class="header">
+      <h1>Sequence</h1>
+      <label class="detail-label">Name</label>
+      <input [(ngModel)]="target.name" />
+    </div>
+
+    <h2>Add Element</h2>
+
+    <div *ngIf="target.type === 'root'">
+      <div>
+        <label class="detail-label">Type</label>
+        <div myButtonBar [(value)]="newNodeType">
+          <span myRadioValue="pose">Pose</span>
+          <span myRadioValue="series">Series</span>
+        </div>
+      </div>
+
+      <app-pose-detail *ngIf="newNodeType === 'pose'"></app-pose-detail>
+
+      <app-series-detail *ngIf="newNodeType === 'series'">
+      </app-series-detail>
+
+      <button>Add {{newNodeType}}</button>
+    </div>
+
+  </div>
+
+  <app-series-detail
+    *ngIf="target.type === 'series'"
+    [target]="target">
+  </app-series-detail>
+
+  <app-pose-detail *ngIf="target.type === 'pose'"
+    [target]="target">
+  </app-pose-detail>
+
+</section>
+

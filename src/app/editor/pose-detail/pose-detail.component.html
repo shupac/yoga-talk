@@ -1,0 +1,35 @@
+<div>
+  <div>
+    <label class="detail-label">Name</label>
+    <input [(ngModel)]="pose.name">
+  </div>
+
+  <div>
+    <label class="detail-label">Sides</label>
+    <div myButtonBar [(value)]="pose.sides">
+      <span myRadioValue="unilateral">Left &amp; Right</span>
+      <span myRadioValue="bilateral" *ngIf="!unilateralOnly">Bilateral</span>
+    </div>
+  </div>
+
+  <div>
+    <label class="detail-label">Duration</label>
+
+    <input
+      class="breaths"
+      type="text"
+      [(ngModel)]="pose.duration"
+      (keydown.enter)="addPose()"
+      placeholder="Duration"
+      >
+
+    <div myButtonBar [(value)]="pose.timing">
+      <span myRadioValue="breaths">Breaths</span>
+      <span myRadioValue="minutes">Minutes</span>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="target">
+  <button (click)="action.emit({type: 'delete', pose: pose})">Delete Pose</button>
+</div>
