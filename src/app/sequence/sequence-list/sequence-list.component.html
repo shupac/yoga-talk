@@ -10,7 +10,7 @@
       class="node-container"
       dnd-sortable
       [sortableIndex]="i"
-      [dragEnabled]="!dragOperation && editable"
+      [dragEnabled]="sortRoot === 'root'"
       (onDragStart)="handleDragStart()"
       (onDragEnd)="handleDragEnd()"
       >
@@ -29,7 +29,7 @@
           <app-series
             [node]="node"
             [currentId]="currentPoseId"
-            [dragEnabled]="dragOperation && editable"
+            [dragEnabled]="sortRoot === 'series'"
             (selectPose)="editable && selectPose.emit($event)"
             (selectSeries)="editable && selectSeries.emit(node)"
             (sortStart)="handleDragStart()"
@@ -39,10 +39,6 @@
         </div>
       </div>
     </div>
-  </div>
-
-  <div *ngIf="editable">
-    <button (click)="dragOperation=!dragOperation">Reorder {{ dragOperation ? 'Sequence' : 'Series' }}</button>
   </div>
 </section>
 

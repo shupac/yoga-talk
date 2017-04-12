@@ -18,6 +18,15 @@
     </div>
   </div>
 
+  <div class="button-container">
+    <button
+      class="btn"
+      (click)="sort.emit(series)"
+      [class.btn-secondary]="sortRoot !== 'series'"
+      [class.btn-success]="sortRoot === 'series'"
+      >Reorder Poses</button>
+    <button class="btn btn-danger" (click)="delete.emit(series)">Delete Series</button>
+  </div>
 
   <h2>Add Element</h2>
   <div class="row">
@@ -40,7 +49,5 @@
 
   <button class="btn btn-primary">Add Pose</button>
 
-  <div class="delete-container">
-    <button class="btn btn-danger" (click)="delete.emit(series)">Delete Series</button>
-  </div>
+
 </div>

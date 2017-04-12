@@ -1,3 +1,7 @@
 input.breaths {
   width: 30px;
 }
+
+.button-container {
+  margin: 40px 0;
+}

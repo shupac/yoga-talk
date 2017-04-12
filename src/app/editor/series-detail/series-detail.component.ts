@@ -10,7 +10,10 @@ import { PoseDetailComponent } from '../pose-detail/pose-detail.component';
 export class SeriesDetailComponent {
   @Input() private target: Series;
   @Input() private new: boolean;
+  @Input() private sortRoot: string;
   @Output() private add: EventEmitter<Series> = new EventEmitter();
+  @Output() private sort: EventEmitter<Series> = new EventEmitter();
+  @Output() private delete: EventEmitter<Series> = new EventEmitter();
 
   @ViewChild(PoseDetailComponent)
   private poseDetailComponent: PoseDetailComponent;

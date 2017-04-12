@@ -1,15 +1,22 @@
 <section *ngIf="target">
   <div *ngIf="target.type === 'root'">
-    <div class="header">
-      <h1>Sequence</h1>
-      <div class="row">
-        <div class="col-2">
-          <label>Name</label>
-        </div>
-        <div class="col">
-          <input [(ngModel)]="target.name" />
-        </div>
+    <h1>Sequence</h1>
+    <div class="row">
+      <div class="col-2">
+        <label>Name</label>
       </div>
+      <div class="col">
+        <input [(ngModel)]="target.name" />
+      </div>
+    </div>
+
+    <div class="button-container">
+      <button
+        class="btn"
+        (click)="toggleSort(target)"
+        [class.btn-secondary]="sortRoot !== 'root'"
+        [class.btn-success]="sortRoot === 'root'"
+        >Reorder Poses</button>
     </div>
 
     <h2>Add Element</h2>
@@ -38,7 +45,11 @@
 
   <app-series-detail
     *ngIf="target.type === 'series'"
-    [target]="target">
+    [target]="target"
+    [sortRoot]="sortRoot"
+    (sort)="toggleSort($event)"
+    (delete)="deleteSeries($event)"
+    >
   </app-series-detail>
 
   <app-pose-detail *ngIf="target.type === 'pose'"

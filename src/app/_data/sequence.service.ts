@@ -12,6 +12,7 @@ export class SequenceService {
   }
   nodes = [];
   currentSpeechIndex: number = null;
+  sortRoot: string;
 
   constructor() {
     this.stubPoses();
@@ -40,7 +41,6 @@ export class SequenceService {
   }
 
   addPose(pose, target) {
-    console.log('service add pose', pose, target);
     pose.id = Pose.nextId;
     Pose.nextId++;
     if (target.type === 'root') this.nodes.push(pose);
@@ -69,6 +69,11 @@ export class SequenceService {
         return true;
       }
     })
+  }
+
+  toggleSort(type) {
+    if (this.sortRoot === type) this.sortRoot = null;
+    else this.sortRoot = type;
   }
 
   private findPose(id, nodes?) {

@@ -12,7 +12,6 @@ export class SequenceListComponent {
   @Output() private selectPose: EventEmitter<number> = new EventEmitter();
   @Output() private selectSeries: EventEmitter<number> = new EventEmitter();
 
-  dragOperation: boolean = false;
   properties;
 
   constructor(
@@ -30,6 +29,10 @@ export class SequenceListComponent {
 
   get currentPoseId() {
     return this.sequenceService.currentPoseId;
+  }
+
+  get sortRoot() {
+    return this.sequenceService.sortRoot;
   }
 
   handleDragStart() {

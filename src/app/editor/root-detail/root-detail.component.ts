@@ -31,6 +31,10 @@ export class RootDetailComponent {
       this.newNodeType = 'pose';
   }
 
+  get sortRoot() {
+    return this.service.sortRoot;
+  }
+
   selectTarget(target) {
     this.target = target;
   }
@@ -59,5 +63,9 @@ export class RootDetailComponent {
 
   deletePose() {
     this.service.deletePose(this.target);
+  }
+
+  toggleSort(target) {
+    this.service.toggleSort(target.type);
   }
 }
