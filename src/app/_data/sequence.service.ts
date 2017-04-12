@@ -4,18 +4,22 @@ import { Series } from './series.model';
 import { Settings } from '../settings';
 import STUB_SEQUENCE from '../stub-sequence';
 
+import { Firebase } from './firebase.service';
 @Injectable()
 export class SequenceService {
   properties = {
     name: 'Sequence',
     type: 'root'
   }
-  nodes = [];
+  nodes: any[] = [];
   currentSpeechIndex: number = null;
   sortRoot: string;
 
   constructor() {
-    // this.stubPoses();
+    this.stubPoses();
+    Firebase.ref().once('value')
+      .then(snapshot => console.log(snapshot.val()))
+      .catch(err => console.log(err))
   }
 
   get currentPoseId() {
@@ -152,7 +156,7 @@ export class SequenceService {
         if (node['unilateralOnly']) pose.unilateralOnly = node['unilateralOnly'];
         if (node['timing']) pose.timing = node['timing'];
         if (node['duration']) pose.duration = node['duration'];
-        this.addPose(pose, node['parent']);
+        this.addPose(pose, node['parent'], node.type);
       }
 
       if (node.type === 'series') {

@@ -1,22 +1,6 @@
-<div class="container">
-  <div class="row">
-    <div class="col-6">
-      <app-sequence-list
-        (selectSeries)="onSelect($event)"
-        (selectPose)="onSelect($event)"
-        [editable]="editable"
-        >
-      </app-sequence-list>
-      <button (click)="toggleEdit()">Edit Sequence</button>
-    </div>
+<header>
+  <button class="btn btn-link" routerLink="/login">Login</button>
+  <button class="btn btn-link" routerLink="/">Main</button>
+</header>
 
-    <div class="col-6" *ngIf="editable">
-      <!-- <app-settings></app-settings> -->
-      <app-root-detail></app-root-detail>
-    </div>
-
-    <div class="col-6" *ngIf="!editable">
-      <app-player></app-player>
-    </div>
-  </div>
-</div>
+<router-outlet></router-outlet>

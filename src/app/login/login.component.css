@@ -1,0 +1,12 @@
+:host {
+  display: block;
+  height: 80%;
+}
+
+.container {
+  text-align: center;
+
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
