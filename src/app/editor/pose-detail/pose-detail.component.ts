@@ -18,13 +18,10 @@ export class PoseDetailComponent {
       this.pose = this.target;
       this.unilateralOnly = this.target.unilateralOnly;
     }
+    if (this.unilateralOnly) this.setSides('unilateral');
   }
 
   setSides(sides) {
-    this.target.sides = sides;
-  }
-
-  getModel() {
-    return this.target;
+    this.pose.sides = sides;
   }
 }

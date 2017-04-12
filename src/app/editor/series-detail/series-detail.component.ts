@@ -24,8 +24,4 @@ export class SeriesDetailComponent {
   ngOnInit() {
     if (this.target) this.series = this.target;
   }
-
-  getModel() {
-    return this.target;
-  }
 }
