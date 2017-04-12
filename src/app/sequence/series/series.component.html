@@ -30,14 +30,14 @@
 </ol>
 
 <div *ngIf="node.firstTransitions && node.firstTransitions.length">
-  1st side transition:
+  Left side transition:
   <span *ngFor="let pose of node.firstTransitions">
     <app-pose [pose]="pose" [currentId]="currentId"></app-pose>
   </span>
 </div>
 
 <div *ngIf="node.secondTransitions && node.secondTransitions.length">
-  2nd side transition:
+  Right side transition:
   <span *ngFor="let pose of node.secondTransitions">
     <app-pose [pose]="pose" [currentId]="currentId"></app-pose>
   </span>

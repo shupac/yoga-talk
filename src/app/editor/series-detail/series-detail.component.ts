@@ -11,7 +11,7 @@ export class SeriesDetailComponent {
   @Input() private target: Series;
   @Input() private new: boolean;
   @Input() private sortRoot: string;
-  @Output() private add: EventEmitter<Series> = new EventEmitter();
+  @Output() private addPose: EventEmitter<any> = new EventEmitter();
   @Output() private sort: EventEmitter<Series> = new EventEmitter();
   @Output() private delete: EventEmitter<Series> = new EventEmitter();
 
@@ -23,5 +23,22 @@ export class SeriesDetailComponent {
 
   ngOnInit() {
     if (this.target) this.series = this.target;
+  }
+
+  getModel() {
+    return this.series;
+  }
+
+  createNewModel() {
+    this.series = new Series();
+  }
+
+  addNewPose() {
+    this.addPose.emit({
+      pose: this.poseDetailComponent.getModel(),
+      target: this.target,
+      type: this.newNodeType
+    });
+    this.poseDetailComponent.createNewModel();
   }
 }

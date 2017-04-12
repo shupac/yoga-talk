@@ -15,7 +15,7 @@ export class SequenceService {
   sortRoot: string;
 
   constructor() {
-    this.stubPoses();
+    // this.stubPoses();
   }
 
   get currentPoseId() {
@@ -40,14 +40,19 @@ export class SequenceService {
     if (target.type === 'series') return this.findSeries(target.id);
   }
 
-  addPose(pose, target) {
+  // addNode(node, target) {
+  //   if (node.type === 'pose') this.addPose(node, target);
+  //   if (node.type === 'series') this.addSeries(node);
+  // }
+
+  addPose(pose, target, type?) {
     pose.id = Pose.nextId;
     Pose.nextId++;
     if (target.type === 'root') this.nodes.push(pose);
-    else this.findSeries(target.id).addPose(pose);
+    else this.findSeries(target.id).addPose(pose, type);
   }
 
-  addSeries(series, targetId) {
+  addSeries(series) {
     series.id = Series.nextId;
     Series.nextId++;
     this.nodes.push(series);
@@ -145,7 +150,7 @@ export class SequenceService {
       if (node.type === 'series') {
         this.addSeries(new Series({
           name: node.name
-        }), node['parent']);
+        }));
       }
     });
   }

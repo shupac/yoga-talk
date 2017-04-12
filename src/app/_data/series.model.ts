@@ -15,8 +15,11 @@ export class Series {
     Object.assign(this, values)
   }
 
-  addPose(pose) {
-    this.nodes.push(pose);
+  addPose(pose, type) {
+    console.log(pose, type);
+    if (type === 'pose') this.nodes.push(pose);
+    if (type === 'transition1') this.firstTransitions.push(pose);
+    if (type === 'transition2') this.secondTransitions.push(pose);
   }
 
   getPoses() {

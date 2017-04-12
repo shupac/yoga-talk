@@ -18,10 +18,21 @@ export class PoseDetailComponent {
       this.pose = this.target;
       this.unilateralOnly = this.target.unilateralOnly;
     }
-    if (this.unilateralOnly) this.setSides('unilateral');
+    if (this.unilateralOnly) {
+      this.setSides('unilateral');
+      this.pose.unilateralOnly = true;
+    }
   }
 
   setSides(sides) {
     this.pose.sides = sides;
+  }
+
+  getModel() {
+    return this.pose;
+  }
+
+  createNewModel() {
+    this.pose = new Pose();
   }
 }

@@ -17,7 +17,6 @@ export class RootDetailComponent {
 
   target;
   newNodeType: string = 'pose';
-  newNodeName: string;
 
   constructor(private service: SequenceService) {}
 
@@ -39,22 +38,20 @@ export class RootDetailComponent {
     this.target = target;
   }
 
-  addNode() {
-    // if (this.newNodeType === 'pose') this.poseDetailComponent.addPose(this.name);
-    // if (this.newNodeType === 'series') this.seriesDetailComponent.addSeries(this.name);
+  addRootNode() {
+    if (this.newNodeType === 'pose') {
+      this.service.addPose(this.poseDetailComponent.getModel(), this.target);
+      this.poseDetailComponent.createNewModel();
+    }
+    if (this.newNodeType === 'series') {
+      this.service.addSeries(this.seriesDetailComponent.getModel());
+      this.seriesDetailComponent.createNewModel();
+    }
   }
 
-  onPoseAction({ type, pose }) {
-    console.log(type, pose);
-  }
-
-  addPose(pose) {
-    this.service.addPose(pose, this.target);
-  }
-
-  addSeries(series) {
-    let node = this.service.addSeries(series, this.target);
-    if (node.type === 'series') this.selectTarget(node);
+  addSeriesNode({ pose, target, type }) {
+    console.log('add series node', pose, target, type);
+    this.service.addPose(pose, target, type);
   }
 
   savePose() {
