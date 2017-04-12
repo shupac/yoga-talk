@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Pose } from '../../_data/pose.model';
+import { Router } from '@angular/router';
 import { Series } from '../../_data/series.model';
 
 @Component({
@@ -8,15 +8,13 @@ import { Series } from '../../_data/series.model';
   styleUrls: ['./series.component.css']
 })
 export class SeriesComponent {
-  @Input() private node: Pose;
+  @Input() private target: Series;
+  @Input() private dragEnabled: boolean = false;
   @Input() private currentId;
-  @Input() private dragEnabled: boolean;
-  @Output() private selectPose: EventEmitter<Pose> = new EventEmitter();
-  @Output() private selectSeries: EventEmitter<number> = new EventEmitter();
-  @Output() private sortStart: EventEmitter<any> = new EventEmitter();
-  @Output() private sortEnd: EventEmitter<any> = new EventEmitter();
 
-  edit: boolean = false;
+  constructor(private router: Router) {}
 
-  constructor() { }
+  editNode(node) {
+    this.router.navigate(['/edit', node.type, node.id])
+  }
 }

@@ -2,51 +2,49 @@
   <h4
     (mouseenter)="hover=true"
     (mouseleave)="hover=false"
-    (click)="selectSeries.emit()"
+    (click)="editNode(target)"
     >
-    {{ node.name }}
+    {{ target.name }}
   </h4>
 </div>
 
 <ol
   dnd-sortable-container
-  [sortableData]="node.nodes"
+  [sortableData]="target.nodes"
   [dropZones]="['series-dropZone']">
   <li
-    *ngFor="let pose of node.nodes, let i = index"
+    *ngFor="let pose of target.nodes, let i = index"
     dnd-sortable
     [effectCursor]="none"
     [sortableIndex]="i"
     [dragEnabled]="dragEnabled"
-    (onDragStart)="sortStart.emit()"
-    (onDragEnd)="sortEnd.emit()"
     >
     <app-pose
-      [pose]="pose"
+      [target]="pose"
       [currentId]="currentId"
-      (click)="selectPose.emit(pose)"
+      (click)="editNode(pose)"
       ></app-pose>
   </li>
 </ol>
 
-<div *ngIf="node.firstTransitions && node.firstTransitions.length">
+<div *ngIf="target.firstTransitions && target.firstTransitions.length">
   <strong>Left side transition:</strong>
-  <span *ngFor="let pose of node.firstTransitions">
+  <span *ngFor="let pose of target.firstTransitions">
     <app-pose
-      [pose]="pose"
+      [target]="pose"
       [currentId]="currentId"
-      (click)="selectPose.emit(pose)"
+      (click)="editNode(pose)"
       ></app-pose>
   </span>
 </div>
 
-<div *ngIf="node.secondTransitions && node.secondTransitions.length">
+<div *ngIf="target.secondTransitions && target.secondTransitions.length">
   <strong>Right side transition:</strong>
-  <span *ngFor="let pose of node.secondTransitions">
+  <span *ngFor="let pose of target.secondTransitions">
     <app-pose
-      [pose]="pose"
+      [target]="pose"
       [currentId]="currentId"
-      (click)="selectPose.emit(pose)"
+      (click)="editNode(pose)"
       ></app-pose>
   </span>
 </div>

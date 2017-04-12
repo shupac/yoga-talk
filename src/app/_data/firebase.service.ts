@@ -20,17 +20,21 @@ export const Firebase = app.database();
 @Injectable()
 export class FirebaseService {
 
-  isLoggedIn: boolean = false;
   redirectUrl: any;
+  userId: string;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+    // if (localStorage['previouslyLoggedIn'] === 'true') this.loginGoogle();
+  }
 
   loginGoogle() {
     firebase.auth().signInWithPopup(googleProvider).then(result => {
       console.log('login successful!');
+      let token = result.credential.accessToken;
       let user = result.user;
-      this.isLoggedIn = true;
+      this.userId = user.uid;
       if (this.redirectUrl) this.router.navigate([this.redirectUrl]);
+      localStorage.setItem('previouslyLoggedIn', 'true');
     }).catch(error => {
       console.log('login error', error);
     });

@@ -9,7 +9,6 @@ import { PoseDetailComponent } from '../pose-detail/pose-detail.component';
 })
 export class SeriesDetailComponent {
   @Input() private target: Series;
-  @Input() private new: boolean;
   @Input() private sortRoot: string;
   @Output() private addPose: EventEmitter<any> = new EventEmitter();
   @Output() private sort: EventEmitter<Series> = new EventEmitter();

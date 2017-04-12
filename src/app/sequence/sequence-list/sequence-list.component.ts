@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { SequenceService } from '../../_data/sequence.service';
-import { PlayerService } from '../../_data/player.service';
 
 @Component({
   selector: 'app-sequence-list',
@@ -8,38 +8,24 @@ import { PlayerService } from '../../_data/player.service';
   styleUrls: ['./sequence-list.component.css']
 })
 export class SequenceListComponent {
-  @Input() private editable: boolean;
-  @Output() private selectPose: EventEmitter<number> = new EventEmitter();
-  @Output() private selectSeries: EventEmitter<number> = new EventEmitter();
-
-  properties;
-
   constructor(
-    private sequenceService: SequenceService,
-    private playerService: PlayerService
+    private service: SequenceService,
+    private router: Router
   ) {}
 
-  get props() {
-    return this.sequenceService.properties;
-  }
-
-  get sequence() {
-    return this.sequenceService.displaySequence;
+  get target() {
+    return this.service.currentSequence;
   }
 
   get currentPoseId() {
-    return this.sequenceService.currentPoseId;
+    return this.service.currentPoseId;
   }
 
   get sortRoot() {
-    return this.sequenceService.sortRoot;
+    return this.service.sortRoot;
   }
 
-  handleDragStart() {
-    this.playerService.isSorting = true;
-  }
-
-  handleDragEnd() {
-    this.playerService.isSorting = false;
+  editNode(node) {
+    this.router.navigate(['/edit', node.type, node.id])
   }
 }

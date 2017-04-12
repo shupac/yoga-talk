@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../_shared/shared.module';
 
-import { RootDetailComponent } from './root-detail/root-detail.component';
+import { EditorComponent } from './editor.component';
+import { SequenceDetailComponent } from './sequence-detail/sequence-detail.component';
 import { SeriesDetailComponent } from './series-detail/series-detail.component';
 import { PoseDetailComponent } from './pose-detail/pose-detail.component';
 
@@ -14,12 +15,11 @@ import { PoseDetailComponent } from './pose-detail/pose-detail.component';
     SharedModule
   ],
   declarations: [
-    RootDetailComponent,
+    EditorComponent,
+    SequenceDetailComponent,
     SeriesDetailComponent,
-    PoseDetailComponent,
+    PoseDetailComponent
   ],
-  exports: [
-    RootDetailComponent
-  ]
+  exports: []
 })
 export class EditorModule { }

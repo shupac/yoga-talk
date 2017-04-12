@@ -1,0 +1,26 @@
+<section>
+  <app-sequence-detail
+    *ngIf="type === 'sequence'"
+    [target]="target"
+    >
+  </app-sequence-detail>
+
+  <app-series-detail
+    *ngIf="type === 'series'"
+    [target]="target"
+    [sortRoot]="sortRoot"
+    (addPose)="addSeriesNode($event)"
+    (sort)="toggleSort($event)"
+    (deleteSeries)="deleteSeries($event)"
+    >
+  </app-series-detail>
+
+  <app-pose-detail
+    *ngIf="type === 'pose'"
+    [target]="target"
+    (deletePose)="deletePose($event)"
+    >
+  </app-pose-detail>
+
+</section>
+

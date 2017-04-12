@@ -1,12 +1,12 @@
 <section>
-  <h2 (click)="editable && selectSeries.emit(props)">{{ props.name }}</h2>
+  <h2 (click)="editNode(target)">{{ target.name }}</h2>
 
   <div
     dnd-sortable-container
-    [sortableData]="sequence"
+    [sortableData]="target.nodes"
     [dropZones]="['sequence-dropZone']">
     <div
-      *ngFor="let node of sequence, let i = index"
+      *ngFor="let node of target.nodes, let i = index"
       class="node-container"
       dnd-sortable
       [sortableIndex]="i"
@@ -14,24 +14,21 @@
       (onDragStart)="handleDragStart()"
       (onDragEnd)="handleDragEnd()"
       >
-      <div [ngSwitch]="node.type">
+      <div [ngSwitch]="target.type">
 
         <div *ngSwitchCase="'pose'">
           <app-pose
-            [pose]="node"
+            [target]="node"
             [currentId]="currentPoseId"
-            (click)="editable && selectPose.emit(node)"
             >
           </app-pose>
         </div>
 
         <div *ngSwitchCase="'series'">
           <app-series
-            [node]="node"
+            [target]="node"
             [currentId]="currentPoseId"
             [dragEnabled]="sortRoot === 'series'"
-            (selectPose)="editable && selectPose.emit($event)"
-            (selectSeries)="editable && selectSeries.emit(node)"
             (sortStart)="handleDragStart()"
             (sortEnd)="handleDragEnd()"
             >
@@ -41,5 +38,3 @@
     </div>
   </div>
 </section>
-
-

@@ -8,6 +8,7 @@ import { DndModule } from 'ng2-dnd';
 import { EditorModule } from './editor/editor.module';
 import { SequenceModule } from './sequence/sequence.module';
 import { SharedModule } from './_shared/shared.module';
+import { MainRoutingModule } from './main/main-routing.module';
 
 import { AppComponent } from './app.component';
 import { PlayerComponent } from './player/player.component';
@@ -19,11 +20,8 @@ import { FirebaseService } from './_data/firebase.service';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 
-import { AuthGuard } from './auth-guard.service';
-
 const appRoutes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: '', component: MainComponent, canActivate: [AuthGuard] }
+  { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({
@@ -35,7 +33,8 @@ const appRoutes: Routes = [
     SequenceModule,
     SharedModule,
     DndModule.forRoot(),
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    MainRoutingModule
   ],
   declarations: [
     AppComponent,
@@ -47,8 +46,7 @@ const appRoutes: Routes = [
   providers: [
     SequenceService,
     PlayerService,
-    FirebaseService,
-    AuthGuard
+    FirebaseService
   ],
   bootstrap: [AppComponent]
 })

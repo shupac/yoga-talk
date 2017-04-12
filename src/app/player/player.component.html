@@ -18,7 +18,7 @@
 
       <div *ngSwitchCase="'pose'">
         <app-pose
-          [pose]="node"
+          [target]="node"
           [currentId]="currentPoseId"
           >
         </app-pose>
@@ -26,7 +26,7 @@
 
       <div *ngSwitchCase="'series'">
         <app-series
-          [node]="node"
+          [target]="node"
           [currentId]="currentPoseId"
           [dragEnabled]="dragOperation"
           (selectSeries)="selectSeries.emit($event)"
