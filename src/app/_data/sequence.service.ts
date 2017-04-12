@@ -76,6 +76,14 @@ export class SequenceService {
     })
   }
 
+  deleteSeries(series) {
+    this.nodes = this.nodes.filter(node => {
+      if (node.type === 'pose') return true;
+      if (node.type === 'series' && node.id !== series.id) return true;
+      return false;
+    });
+  }
+
   toggleSort(type) {
     if (this.sortRoot === type) this.sortRoot = null;
     else this.sortRoot = type;

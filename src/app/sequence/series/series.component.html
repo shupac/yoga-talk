@@ -30,15 +30,23 @@
 </ol>
 
 <div *ngIf="node.firstTransitions && node.firstTransitions.length">
-  Left side transition:
+  <strong>Left side transition:</strong>
   <span *ngFor="let pose of node.firstTransitions">
-    <app-pose [pose]="pose" [currentId]="currentId"></app-pose>
+    <app-pose
+      [pose]="pose"
+      [currentId]="currentId"
+      (click)="selectPose.emit(pose)"
+      ></app-pose>
   </span>
 </div>
 
 <div *ngIf="node.secondTransitions && node.secondTransitions.length">
-  Right side transition:
+  <strong>Right side transition:</strong>
   <span *ngFor="let pose of node.secondTransitions">
-    <app-pose [pose]="pose" [currentId]="currentId"></app-pose>
+    <app-pose
+      [pose]="pose"
+      [currentId]="currentId"
+      (click)="selectPose.emit(pose)"
+      ></app-pose>
   </span>
 </div>

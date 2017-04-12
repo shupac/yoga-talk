@@ -25,7 +25,7 @@
       [class.btn-secondary]="sortRoot !== 'series'"
       [class.btn-success]="sortRoot === 'series'"
       >Reorder Poses</button>
-    <button class="btn btn-danger" (click)="delete.emit(series)">Delete Series</button>
+    <button class="btn btn-danger" (click)="deleteSeries.emit(series)">Delete Series</button>
   </div>
 
   <h2>Add Element</h2>

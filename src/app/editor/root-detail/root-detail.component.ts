@@ -55,11 +55,15 @@ export class RootDetailComponent {
   }
 
   savePose() {
-    this.service.savePose(this.target);
+
   }
 
-  deletePose() {
-    this.service.deletePose(this.target);
+  deletePose(pose) {
+    this.service.deletePose(pose);
+  }
+
+  deleteSeries(series) {
+    this.service.deleteSeries(series);
   }
 
   toggleSort(target) {

@@ -46,5 +46,6 @@
 </div>
 
 <div class="delete-container" *ngIf="target">
-  <button class="btn btn-danger" (click)="action.emit({type: 'delete', pose: pose})">Delete Pose</button>
+  <button class="btn btn-danger"
+  (click)="deletePose.emit(pose)">Delete Pose</button>
 </div>

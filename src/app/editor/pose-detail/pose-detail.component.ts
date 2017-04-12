@@ -9,7 +9,7 @@ import { Pose } from '../../_data/pose.model';
 export class PoseDetailComponent {
   @Input() private target: Pose;
   @Input() private unilateralOnly: boolean = false;
-  @Output() private action: EventEmitter<Pose> = new EventEmitter();
+  @Output() private deletePose: EventEmitter<Pose> = new EventEmitter();
 
   pose: Pose = new Pose();
 

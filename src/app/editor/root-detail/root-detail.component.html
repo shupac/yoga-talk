@@ -51,12 +51,15 @@
     [sortRoot]="sortRoot"
     (addPose)="addSeriesNode($event)"
     (sort)="toggleSort($event)"
-    (delete)="deleteSeries($event)"
+    (deleteSeries)="deleteSeries($event)"
     >
   </app-series-detail>
 
-  <app-pose-detail *ngIf="target.type === 'pose'"
-    [target]="target">
+  <app-pose-detail
+    *ngIf="target.type === 'pose'"
+    [target]="target"
+    (deletePose)="deletePose($event)"
+    >
   </app-pose-detail>
 
 </section>

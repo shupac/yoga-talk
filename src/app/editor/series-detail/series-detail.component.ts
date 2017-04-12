@@ -13,7 +13,7 @@ export class SeriesDetailComponent {
   @Input() private sortRoot: string;
   @Output() private addPose: EventEmitter<any> = new EventEmitter();
   @Output() private sort: EventEmitter<Series> = new EventEmitter();
-  @Output() private delete: EventEmitter<Series> = new EventEmitter();
+  @Output() private deleteSeries: EventEmitter<any> = new EventEmitter();
 
   @ViewChild(PoseDetailComponent)
   private poseDetailComponent: PoseDetailComponent;
