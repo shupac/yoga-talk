@@ -6,7 +6,6 @@ import { SharedModule } from '../_shared/shared.module';
 import { RootDetailComponent } from './root-detail/root-detail.component';
 import { SeriesDetailComponent } from './series-detail/series-detail.component';
 import { PoseDetailComponent } from './pose-detail/pose-detail.component';
-import { NewPoseComponent } from './new-pose/new-pose.component';
 
 @NgModule({
   imports: [
@@ -18,7 +17,6 @@ import { NewPoseComponent } from './new-pose/new-pose.component';
     RootDetailComponent,
     SeriesDetailComponent,
     PoseDetailComponent,
-    NewPoseComponent,
   ],
   exports: [
     RootDetailComponent

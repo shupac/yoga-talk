@@ -50,12 +50,7 @@ export class RootDetailComponent {
   }
 
   addSeriesNode({ pose, target, type }) {
-    console.log('add series node', pose, target, type);
     this.service.addPose(pose, target, type);
-  }
-
-  savePose() {
-
   }
 
   deletePose(pose) {
