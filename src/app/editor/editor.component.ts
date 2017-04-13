@@ -28,4 +28,12 @@ export class EditorComponent {
   ngOnDestroy() {
     this.paramsSub.unsubscribe();
   }
+
+  get sortRoot() {
+    return this.service.sortRoot;
+  }
+
+  toggleSort(target) {
+    this.service.toggleSort(target.type);
+  }
 }

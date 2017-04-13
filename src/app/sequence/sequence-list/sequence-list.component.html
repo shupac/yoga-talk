@@ -10,9 +10,7 @@
       class="node-container"
       dnd-sortable
       [sortableIndex]="i"
-      [dragEnabled]="sortRoot === 'root'"
-      (onDragStart)="handleDragStart()"
-      (onDragEnd)="handleDragEnd()"
+      [dragEnabled]="sortRoot === 'sequence'"
       >
       <div [ngSwitch]="node.type">
 
@@ -29,8 +27,6 @@
             [target]="node"
             [currentId]="currentPoseId"
             [dragEnabled]="sortRoot === 'series'"
-            (sortStart)="handleDragStart()"
-            (sortEnd)="handleDragEnd()"
             >
           </app-series>
         </div>

@@ -21,11 +21,11 @@
   <div class="button-container">
     <button
       class="btn"
-      (click)="sort.emit(series)"
+      (click)="sort.emit(target)"
       [class.btn-secondary]="sortRoot !== 'series'"
       [class.btn-success]="sortRoot === 'series'"
       >Reorder Poses</button>
-    <button class="btn btn-danger" (click)="deleteSeries.emit(series)">Delete Series</button>
+    <button class="btn btn-danger" (click)="deleteSeries.emit(target)">Delete Series</button>
   </div>
 
   <h2>Add Element</h2>

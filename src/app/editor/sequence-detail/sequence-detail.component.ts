@@ -1,6 +1,7 @@
 import { Component, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SequenceService } from '../../_data/sequence.service';
+import { Sequence } from '../../_data/sequence.model';
 import { SeriesDetailComponent } from '../series-detail/series-detail.component';
 import { PoseDetailComponent } from '../pose-detail/pose-detail.component';
 import 'rxjs/add/operator/switchMap';
@@ -18,9 +19,10 @@ export class SequenceDetailComponent {
   private seriesDetailComponent: SeriesDetailComponent;
 
   @Input() private target;
+  @Input() private sortRoot: string;
   @Output() private addPose: EventEmitter<any> = new EventEmitter();
   @Output() private addSeries: EventEmitter<any> = new EventEmitter();
-  @Output() private sort: EventEmitter<any> = new EventEmitter();
+  @Output() private sort: EventEmitter<Sequence> = new EventEmitter();
   @Output() private deleteSquence: EventEmitter<any> = new EventEmitter();
 
   nodeName: string;
@@ -35,10 +37,6 @@ export class SequenceDetailComponent {
   ngOnInit() {
     this.target = this.service.currentSequence;
     this.nodeName = this.target.name;
-  }
-
-  get sortRoot() {
-    return this.service.sortRoot;
   }
 
   selectTarget(target) {
@@ -67,9 +65,5 @@ export class SequenceDetailComponent {
 
   deleteSeries(series) {
     this.target.deleteSeries(series);
-  }
-
-  toggleSort(target) {
-    this.service.toggleSort(target.type);
   }
 }

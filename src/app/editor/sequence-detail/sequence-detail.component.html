@@ -19,9 +19,9 @@
 <div class="button-container">
   <button
     class="btn"
-    (click)="toggleSort(target)"
-    [class.btn-secondary]="sortRoot !== 'root'"
-    [class.btn-success]="sortRoot === 'root'"
+    (click)="sort.emit(target)"
+    [class.btn-secondary]="sortRoot !== 'sequence'"
+    [class.btn-success]="sortRoot === 'sequence'"
     >Reorder Poses</button>
 </div>
 
