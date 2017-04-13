@@ -26,8 +26,7 @@ export class Sequence {
     if (type === 'series') return this.getSeries(id);
   }
 
-  addPose(pose, target) {
-    console.log('sequence model add pose', pose);
+  addPose(pose) {
     pose.id = Pose.nextId;
     Pose.nextId++;
     this.nodes.push(pose);
@@ -60,12 +59,12 @@ export class Sequence {
     return this.nodes.find(node => node.type === 'series' && node.id === id);
   }
 
-  private getPose(id, nodes?) {
-    nodes = nodes || this.nodes;
-    return nodes.find(node => {
-      if (node.type === 'pose' && node.id === id) return node;
-      if (node.type === 'series') return node.getPose(id);
-    });
+  private getPose(id) {
+    for (let i = 0; i < this.nodes.length; i++) {
+      let node = this.nodes[i];
+      if (node['type'] === 'pose' && node['id'] === id) return node;
+      if (node['type'] === 'series') return node.getPose(id);
+    }
   }
 
   private expandNode(node) {

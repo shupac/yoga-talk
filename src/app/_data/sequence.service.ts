@@ -14,14 +14,15 @@ export class SequenceService {
   sortRoot: string;
 
   constructor() {
-    // this.stubPoses();
     let sequence = new Sequence();
     this.currentSequence = sequence;
     this.addSequence(sequence);
 
-    Firebase.ref().once('value')
-      .then(snapshot => console.log(snapshot.val()))
-      .catch(err => console.log(err))
+    // Firebase.ref().once('value')
+    //   .then(snapshot => console.log(snapshot.val()))
+    //   .catch(err => console.log(err))
+    
+    this.stubPoses();
   }
 
   get currentPoseId() {
@@ -40,22 +41,13 @@ export class SequenceService {
   }
 
   setCurrentSequence(id) {
-    console.log('set sequence', id, this.sequences);
     this.currentSequence = this.findSequence(id);
-    console.log(this.currentSequence);
   }
 
   getNode(type, id) {
     if (type === 'sequence') return this.findSequence(id);
     else return this.currentSequence.getNode(type, id);
   }
-
-  // addNode(node, target) {
-  //   if (node.type === 'pose') this.addPose(node, target);
-  //   if (node.type === 'series') this.addSeries(node);
-  // }
-
-
 
   toggleSort(type) {
     if (this.sortRoot === type) this.sortRoot = null;
@@ -66,29 +58,30 @@ export class SequenceService {
     return this.sequences.find(sequence => sequence.id === id);
   }
 
+  private stubPoses() {
+    let SERIES = {};
+    STUB_SEQUENCE.forEach(node => {
+      if (node.type === 'pose') {
+        let pose = new Pose({
+          name: node.name,
+          sides: node['sides']
+        });
+        if (node['unilateralOnly']) pose.unilateralOnly = node['unilateralOnly'];
+        if (node['timing']) pose.timing = node['timing'];
+        if (node['duration']) pose.duration = node['duration'];
 
+        if (node.parent.type === 'sequence')
+          this.currentSequence.addPose(pose);
+        if (node.parent.type === 'series') {
+          SERIES[node.parent['id']].addPose(pose, node['pose'] || 'pose');
+        }
+      }
 
-
-
-
-  // private stubPoses() {
-  //   STUB_SEQUENCE.forEach(node => {
-  //     if (node.type === 'pose') {
-  //       let pose = new Pose({
-  //         name: node.name,
-  //         sides: node['sides']
-  //       });
-  //       if (node['unilateralOnly']) pose.unilateralOnly = node['unilateralOnly'];
-  //       if (node['timing']) pose.timing = node['timing'];
-  //       if (node['duration']) pose.duration = node['duration'];
-  //       this.addPose(pose, node['parent'], node.type);
-  //     }
-
-  //     if (node.type === 'series') {
-  //       this.addSeries(new Series({
-  //         name: node.name
-  //       }));
-  //     }
-  //   });
-  // }
+      if (node.type === 'series') {
+        let series = new Series({ name: node.name });
+        this.currentSequence.addSeries(series);
+        SERIES[series.id] = series;
+      }
+    });
+  }
 }

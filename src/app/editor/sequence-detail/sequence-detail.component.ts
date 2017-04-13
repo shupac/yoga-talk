@@ -45,7 +45,7 @@ export class SequenceDetailComponent {
 
   addRootNode() {
     if (this.newNodeType === 'pose') {
-      this.target.addPose(this.poseDetailComponent.getModel(), this.target);
+      this.target.addPose(this.poseDetailComponent.getModel());
       this.poseDetailComponent.createNewModel();
     }
     if (this.newNodeType === 'series') {

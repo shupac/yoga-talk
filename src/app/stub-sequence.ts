@@ -4,7 +4,7 @@ export default [
     name: 'baddha konasana',
     sides: 'bilateral',
     parent: {
-      type: 'root'
+      type: 'sequence'
     }
   },
   {
@@ -12,14 +12,14 @@ export default [
     name: 'seated twist',
     sides: 'unilateral',
     parent: {
-      type: 'root'
+      type: 'sequence'
     }
   },
   {
     type: 'series',
     name: 'Vignette 1' ,
     parent: {
-      type: 'root'
+      type: 'sequence'
     }
   },
   {
@@ -43,10 +43,32 @@ export default [
     }
   },
   {
+    type: 'pose',
+    pose: 'transition1',
+    name: 'half salutation',
+    sides: 'unilateral',
+    unilateralOnly: true,
+    parent: {
+      type: 'series',
+      id: 0
+    }
+  },
+  {
+    type: 'pose',
+    pose: 'transition2',
+    name: 'turbo dog',
+    sides: 'unilateral',
+    unilateralOnly: true,
+    parent: {
+      type: 'series',
+      id: 0
+    }
+  },
+  {
     type: 'series',
     name: 'Vignette 2' ,
     parent: {
-      type: 'root'
+      type: 'sequence'
     }
   },
   {
@@ -76,7 +98,7 @@ export default [
     duration: 5,
     timing: 'minutes',
     parent: {
-      type: 'root'
+      type: 'sequence'
     }
   },
 ]

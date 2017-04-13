@@ -16,7 +16,6 @@ export class Series {
   }
 
   addPose(pose, type) {
-    console.log('add series pose', pose);
     pose.id = Pose.nextId;
     Pose.nextId++;
     if (type === 'pose') this.poses.push(pose);
@@ -25,7 +24,6 @@ export class Series {
   }
 
   deletePose(pose) {
-    console.log('series delete pose', pose);
     this.poses = this.poses.filter(node => node.id !== pose.id);
     this.firstTransitions = this.firstTransitions.filter(node => node.id !== pose.id);
     this.secondTransitions = this.secondTransitions.filter(node => node.id !== pose.id);
@@ -43,7 +41,7 @@ export class Series {
       .concat(this.poses);
   }
 
-  private getPose(id) {
+  getPose(id): Pose {
     let node = this.poses.find(node => node.id === id);
     if (node) return node;
     node = this.firstTransitions.find(node => node.id === id);

@@ -21,7 +21,8 @@ export class EditorComponent {
     this.paramsSub = this.route.params
       .subscribe(params => {
         this.type = params['type'] || 'sequence';
-        this.target = this.service.getNode(params['type'], +params['id']);
+        if (!params['id']) this.target = this.service.currentSequence;
+        else this.target = this.service.getNode(params['type'], +params['id']);
       });
   }
 

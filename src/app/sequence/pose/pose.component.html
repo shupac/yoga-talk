@@ -1,6 +1,7 @@
 <div
   class="pose-item"
   [class.playing]="target.id===currentId"
+  (click)="editNode(target)"
   >
   <span>{{ target.name }}</span>
 </div>
