@@ -26,7 +26,8 @@ export class Sequence {
     if (type === 'series') return this.getSeries(id);
   }
 
-  addPose(pose, target, type?) {
+  addPose(pose, target) {
+    console.log('sequence model add pose', pose);
     pose.id = Pose.nextId;
     Pose.nextId++;
     this.nodes.push(pose);

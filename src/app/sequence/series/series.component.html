@@ -10,10 +10,10 @@
 
 <ol
   dnd-sortable-container
-  [sortableData]="target.nodes"
+  [sortableData]="target.poses"
   [dropZones]="['series-dropZone']">
   <li
-    *ngFor="let pose of target.nodes, let i = index"
+    *ngFor="let pose of target.poses, let i = index"
     dnd-sortable
     [effectCursor]="none"
     [sortableIndex]="i"

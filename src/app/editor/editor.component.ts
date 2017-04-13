@@ -9,6 +9,8 @@ import { SequenceService } from '../_data/sequence.service';
 })
 export class EditorComponent {
   type: string;
+  target;
+  paramsSub;
 
   constructor(
     private service: SequenceService,
@@ -16,7 +18,14 @@ export class EditorComponent {
   ) {}
 
   ngOnInit() {
-    this.route.params
-      .subscribe(params => this.type = params['type']);
+    this.paramsSub = this.route.params
+      .subscribe(params => {
+        this.type = params['type'] || 'sequence';
+        this.target = this.service.getNode(params['type'], +params['id']);
+      });
+  }
+
+  ngOnDestroy() {
+    this.paramsSub.unsubscribe();
   }
 }

@@ -6,12 +6,16 @@ import { EditorComponent } from '../editor/editor.component';
 
 const mainPaths: Routes = [
   {
-    path: '',
+    path: 'sequence/:id',
     component: MainComponent,
     canActivate: [AuthGuard],
     children: [
       {
         path: 'edit/:type/:id',
+        component: EditorComponent,
+      },
+      {
+        path: 'edit',
         component: EditorComponent,
       }
     ]

@@ -33,18 +33,8 @@ export class SequenceDetailComponent {
   ) {}
 
   ngOnInit() {
-    console.log('sequence detail');
-    this.route.params
-      .subscribe(params => {
-        this.target = this.service.getNode(params['type'], +params['id']);
-        this.nodeName = this.target.name;
-      });
-  }
-
-  ngDoCheck() {
-    if (!this.poseDetailComponent) return;
-    if (this.target.type === 'sequence' && (this.newNodeType !== 'pose' && this.newNodeType !== 'series'))
-      this.newNodeType = 'pose';
+    this.target = this.service.currentSequence;
+    this.nodeName = this.target.name;
   }
 
   get sortRoot() {

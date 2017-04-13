@@ -33,11 +33,8 @@ export class SeriesDetailComponent {
   }
 
   addNewPose() {
-    this.addPose.emit({
-      pose: this.poseDetailComponent.getModel(),
-      target: this.target,
-      type: this.newNodeType
-    });
+    let pose = this.poseDetailComponent.getModel();
+    this.target.addPose(pose, this.newNodeType);
     this.poseDetailComponent.createNewModel();
   }
 }

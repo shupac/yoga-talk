@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { SequenceService } from '../../_data/sequence.service';
 
 @Component({
@@ -10,7 +10,8 @@ import { SequenceService } from '../../_data/sequence.service';
 export class SequenceListComponent {
   constructor(
     private service: SequenceService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   get target() {
@@ -26,6 +27,6 @@ export class SequenceListComponent {
   }
 
   editNode(node) {
-    this.router.navigate(['/edit', node.type, node.id])
+    this.router.navigate(['edit'], { relativeTo: this.route });
   }
 }

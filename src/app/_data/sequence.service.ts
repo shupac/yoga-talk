@@ -39,8 +39,13 @@ export class SequenceService {
     this.sequences.push(sequence);
   }
 
+  setCurrentSequence(id) {
+    console.log('set sequence', id, this.sequences);
+    this.currentSequence = this.findSequence(id);
+    console.log(this.currentSequence);
+  }
+
   getNode(type, id) {
-    console.log('get node', type, id);
     if (type === 'sequence') return this.findSequence(id);
     else return this.currentSequence.getNode(type, id);
   }

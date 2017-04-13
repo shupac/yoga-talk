@@ -16,6 +16,7 @@ export class Series {
   }
 
   addPose(pose, type) {
+    console.log('add series pose', pose);
     pose.id = Pose.nextId;
     Pose.nextId++;
     if (type === 'pose') this.poses.push(pose);
