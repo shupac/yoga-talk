@@ -23,6 +23,7 @@ export class EditorComponent {
         this.type = params['type'] || 'sequence';
         if (!params['id']) this.target = this.service.currentSequence;
         else this.target = this.service.getNode(params['type'], +params['id']);
+        this.toggleSort({type: null});
       });
   }
 
@@ -36,5 +37,13 @@ export class EditorComponent {
 
   toggleSort(target) {
     this.service.toggleSort(target.type);
+  }
+
+  deletePose(pose) {
+    this.service.currentSequence.deletePose(pose);
+  }
+
+  deleteSeries(series) {
+    this.service.currentSequence.deleteSeries(series);
   }
 }

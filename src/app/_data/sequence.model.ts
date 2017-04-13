@@ -40,9 +40,11 @@ export class Sequence {
   }
 
   deletePose(pose) {
-    console.log('sequence delete pose', pose);
     this.nodes = this.nodes.filter(node => {
-      if (node.type === 'series') return true;
+      if (node.type === 'series') {
+        node.deletePose(pose);
+        return true;
+      }
       if (node.type === 'pose' && node.id !== pose.id) return true;
     });
   }
@@ -60,11 +62,13 @@ export class Sequence {
   }
 
   private getPose(id) {
+    let pose;
     for (let i = 0; i < this.nodes.length; i++) {
       let node = this.nodes[i];
       if (node['type'] === 'pose' && node['id'] === id) return node;
-      if (node['type'] === 'series') return node.getPose(id);
+      if (node['type'] === 'series') pose = node.getPose(id);
     }
+    return pose;
   }
 
   private expandNode(node) {

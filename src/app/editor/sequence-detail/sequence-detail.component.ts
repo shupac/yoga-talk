@@ -58,12 +58,4 @@ export class SequenceDetailComponent {
     this.target.name = this.nodeName;
     this.nameChanged = false;
   }
-
-  deletePose(pose) {
-    this.target.deletePose(pose);
-  }
-
-  deleteSeries(series) {
-    this.target.deleteSeries(series);
-  }
 }
