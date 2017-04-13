@@ -62,13 +62,14 @@ export class Sequence {
   }
 
   private getPose(id) {
-    let pose;
     for (let i = 0; i < this.nodes.length; i++) {
       let node = this.nodes[i];
       if (node['type'] === 'pose' && node['id'] === id) return node;
-      if (node['type'] === 'series') pose = node.getPose(id);
+      if (node['type'] === 'series') {
+        let pose = node.getPose(id);
+        if (pose) return pose;
+      }
     }
-    return pose;
   }
 
   private expandNode(node) {

@@ -41,13 +41,12 @@ export class Series {
       .concat(this.poses);
   }
 
-  getPose(id): Pose {
+  getPose(id) {
     let node = this.poses.find(node => node.id === id);
     if (node) return node;
     node = this.firstTransitions.find(node => node.id === id);
     if (node) return node;
     node = this.secondTransitions.find(node => node.id === id);
     if (node) return node;
-    return null;
   }
 }
