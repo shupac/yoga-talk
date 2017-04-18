@@ -1,12 +1,11 @@
-import { Output, EventEmitter } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 import { Pose } from './pose.model';
 import { Series } from './series.model';
 import { Settings } from '../settings';
 
 export class Sequence {
-  @Output() modelChange: EventEmitter<boolean> = new EventEmitter();
-
   static nextId = 0;
+  static onCreate = new EventEmitter();
   type = 'sequence';
   id: number;
   name: string = 'Sequence';
@@ -17,14 +16,9 @@ export class Sequence {
     values: Object = {}
   ) {
     Object.assign(this, values)
-  }
-
-  ngOnChanges() {
-    console.log(this.name);
-    if (this.name !== this.nameCache) {
-      console.log('name change');
-      this.modelChange.emit();
-    }
+    this.id = Sequence.nextId;
+    Sequence.nextId++;
+    Sequence.onCreate.emit();
   }
 
   get speechSequence() {

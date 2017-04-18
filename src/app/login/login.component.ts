@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FirebaseService } from '../_data/firebase.service';
+import { AppService } from '../_data/app.service';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +8,7 @@ import { FirebaseService } from '../_data/firebase.service';
 })
 export class LoginComponent {
 
-  constructor(private service: FirebaseService) { }
+  constructor(private service: AppService) { }
 
   loginGoogle() {
     this.service.loginGoogle();

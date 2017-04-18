@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { DndModule } from 'ng2-dnd';
-import { EditorModule } from '../editor/editor.module';
 
 import { PoseComponent } from './pose/pose.component';
 import { SeriesComponent } from './series/series.component';
@@ -16,7 +15,7 @@ import { PlayerComponent } from '../player/player.component';
     FormsModule,
     DndModule,
     RouterModule,
-    EditorModule
+    // SequenceRouting
   ],
   declarations: [
     PoseComponent,
@@ -25,6 +24,7 @@ import { PlayerComponent } from '../player/player.component';
     PlayerComponent
   ],
   exports: [
+    SequenceComponent
     // PoseComponent,
     // SeriesComponent
   ]

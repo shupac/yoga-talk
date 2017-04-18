@@ -21,6 +21,7 @@ export class EditorComponent {
   ngOnInit() {
     this.paramsSub = this.route.params
       .subscribe(params => {
+        console.log(params);
         this.type = params['type'] || 'sequence';
         if (!params['id']) this.target = this.service.currentSequence;
         else this.target = this.service.getNode(params['type'], +params['id']);

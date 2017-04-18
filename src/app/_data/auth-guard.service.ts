@@ -3,12 +3,14 @@ import {
   CanActivate, Router,
   ActivatedRouteSnapshot,
   RouterStateSnapshot } from '@angular/router';
-import { FirebaseService } from './firebase.service';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
+  redirectUrl: any;
+
   constructor(
-    private firebaseService: FirebaseService,
+    private firebaseService: AuthService,
     private router: Router
   ) {}
 
@@ -22,9 +24,14 @@ export class AuthGuard implements CanActivate {
   checkLogin(url: string): boolean {
     if (this.firebaseService.userId) { return true; }
 
-    this.firebaseService.redirectUrl = url;
+    this.redirectUrl = url;
 
     this.router.navigate(['/login']);
     return false;
+  }
+
+  redirect() {
+    if (this.redirectUrl === '/') this.redirectUrl = '';
+    this.router.navigate(this.redirectUrl || ['']);
   }
 }

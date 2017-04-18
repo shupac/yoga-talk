@@ -5,34 +5,32 @@ import { Pose } from './pose.model';
 import { Settings } from '../settings';
 import STUB_SEQUENCE from '../stub-sequence';
 
-import { Firebase, FirebaseService } from './firebase.service';
 
 @Injectable()
 export class SequenceService {
+  fbRef: any;
   sequences: Sequence[];
   currentSequence: Sequence;
   currentSpeechIndex: number = null;
   sortRoot: string;
 
-  constructor(
-    private fbService: FirebaseService
-  ) {
+  constructor() {
     // this.stubPoses();
   }
 
-  ngDoCheck() {
-    this.currentSequence.modelChange.subscribe(changed => console.log(changed));
-  }
-
-  getSequences() {
-    return Firebase.userRef().child('sequences').once('value')
+  getSequences(): Promise<Sequence[]> {
+    console.log('sequence service: get sequence');
+    return new Promise((resolve, reject) => {
+      this.fbRef.once('value')
       .then(snapshot => {
         let sequences = snapshot.val();
+        console.log(sequences);
         if (!sequences) sequences = [];
         this.sequences = sequences;
-        return sequences;
+        resolve(sequences);
       })
-      .catch(err => console.log(err))
+      .catch(err => reject(err));
+    });
   }
 
   get currentPoseId() {
@@ -46,9 +44,10 @@ export class SequenceService {
 
   addSequence() {
     let sequence = new Sequence();
-    sequence.id = Sequence.nextId;
-    Sequence.nextId++;
-    this.sequences.push(sequence);
+    this.fbRef.child(sequence.id + '').set(sequence).then(() => {
+      this.sequences.push(sequence);
+      console.log(this.sequences);
+    });
   }
 
   setCurrentSequence(id) {

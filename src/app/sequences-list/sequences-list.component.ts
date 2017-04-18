@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Sequence } from '../_data/sequence.model';
 import { SequenceService } from '../_data/sequence.service';
 
@@ -12,18 +12,36 @@ import 'rxjs/add/operator/switchMap';
 })
 export class SequencesListComponent {
 
-    sequences: Sequence[];
+    paramsSub;
+    // sequences: Sequence[];
 
     constructor(
       private service: SequenceService,
+      private router: Router,
       private route: ActivatedRoute
     ) {}
 
     ngOnInit() {
-      this.service.getSequences().then(sequences => this.sequences = sequences);
+      // this.service.getSequences().then(sequences => this.sequences = sequences);
+      this.paramsSub = this.route.params.subscribe(params => {
+        console.log(params);
+      });
+    }
+
+    ngOnDestroy () {
+      this.paramsSub.unsubscribe();
+    }
+
+    get sequences() {
+      console.log('get sequences');
+      return this.service.sequences;
     }
 
     addSequence() {
       this.service.addSequence();
+    }
+
+    selectSequence(sequence) {
+      this.service.currentSequence = sequence;
     }
   }

@@ -1,18 +1,17 @@
-<div class="container">
-  <div class="row">
-    <div class="col-2">
-      <div *ngFor="let sequence of sequences">
-        <div [routerLink]="'/sequence/' + sequence.id">
-          {{ sequence.name }}
-        </div>
+<div class="row">
+  <div class="col-2">
+    <div *ngFor="let sequence of sequences">
+      <div (click)="selectSequence(sequence)">
+        {{ sequence.name }}
       </div>
-      <button (click)="addSequence()">
-        Add sequence
-      </button>
     </div>
+    <button (click)="addSequence()">
+      Add sequence
+    </button>
+  </div>
 
-    <div class="col">
-      <router-outlet></router-outlet>
-    </div>
+  <div class="col">
+    <app-sequence></app-sequence>
+    <button routerLink="edit">Edit</button>
   </div>
 </div>

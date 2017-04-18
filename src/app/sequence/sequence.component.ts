@@ -9,24 +9,9 @@ import { SequenceService } from '../_data/sequence.service';
 })
 export class SequenceComponent {
 
-  paramsSub;
-
   constructor(
     private service: SequenceService,
-    private router: Router,
-    private route: ActivatedRoute
   ) {}
-
-  ngOnInit() {
-    this.paramsSub = this.route.params
-      .subscribe(params => {
-        this.service.setCurrentSequence(+params['id']);
-      });
-  }
-
-  ngOnDestroy() {
-    this.paramsSub.unsubscribe();
-  }
 
   get target() {
     return this.service.currentSequence;

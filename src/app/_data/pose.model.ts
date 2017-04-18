@@ -1,7 +1,9 @@
+import { EventEmitter } from '@angular/core';
 import { Settings } from '../settings';
 
 export class Pose {
   static nextId = 0;
+  static onCreate = new EventEmitter();
   type = 'pose';
   id: number;
   name: string;
@@ -14,6 +16,9 @@ export class Pose {
   constructor(
     values: Object = {}
   ) {
-    Object.assign(this, values)
+    Object.assign(this, values);
+    this.id = Pose.nextId;
+    Pose.nextId++;
+    Pose.onCreate.emit();
   }
 }

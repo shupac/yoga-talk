@@ -1,28 +1,32 @@
-<section *ngIf="target">
-  <app-sequence-detail
-    *ngIf="type === 'sequence'"
-    [target]="target"
-    [sortRoot]="sortRoot"
-    (sort)="toggleSort($event)"
-    >
-  </app-sequence-detail>
+<h2>Editor</h2>
+<div class="row">
+  <div class="col">
+    <app-sequence></app-sequence>
+  </div>
+  <div class="col" *ngIf="target">
+    <app-sequence-detail
+      *ngIf="type === 'sequence'"
+      [target]="target"
+      [sortRoot]="sortRoot"
+      (sort)="toggleSort($event)"
+      >
+    </app-sequence-detail>
 
-  <app-series-detail
-    *ngIf="type === 'series'"
-    [target]="target"
-    [sortRoot]="sortRoot"
-    (sort)="toggleSort($event)"
-    (addPose)="addSeriesNode($event)"
-    (deleteSeries)="deleteSeries($event)"
-    >
-  </app-series-detail>
+    <app-series-detail
+      *ngIf="type === 'series'"
+      [target]="target"
+      [sortRoot]="sortRoot"
+      (sort)="toggleSort($event)"
+      (addPose)="addSeriesNode($event)"
+      (deleteSeries)="deleteSeries($event)"
+      >
+    </app-series-detail>
 
-  <app-pose-detail
-    *ngIf="type === 'pose'"
-    [target]="target"
-    (deletePose)="deletePose($event)"
-    >
-  </app-pose-detail>
-
-</section>
-
+    <app-pose-detail
+      *ngIf="type === 'pose'"
+      [target]="target"
+      (deletePose)="deletePose($event)"
+      >
+    </app-pose-detail>
+  </div>
+</div>

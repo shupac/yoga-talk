@@ -1,44 +1,36 @@
-<div class="row">
-  <div class="col-5">
-    <div *ngIf="target">
-      <h2 routerLink="edit">{{ target.name }}</h2>
+<div *ngIf="target">
+  <h2>{{ target.name }}</h2>
 
-      <div
-        dnd-sortable-container
-        [sortableData]="target.nodes"
-        [dropZones]="['sequence-dropZone']">
-        <div
-          *ngFor="let node of target.nodes, let i = index"
-          class="node-container"
-          dnd-sortable
-          [sortableIndex]="i"
-          [dragEnabled]="sortRoot === 'sequence'"
-          >
-          <div [ngSwitch]="node.type">
+  <div
+    dnd-sortable-container
+    [sortableData]="target.nodes"
+    [dropZones]="['sequence-dropZone']">
+    <div
+      *ngFor="let node of target.nodes, let i = index"
+      class="node-container"
+      dnd-sortable
+      [sortableIndex]="i"
+      [dragEnabled]="sortRoot === 'sequence'"
+      >
+      <div [ngSwitch]="node.type">
 
-            <div *ngSwitchCase="'pose'">
-              <app-pose
-                [target]="node"
-                [currentId]="currentPoseId"
-                >
-              </app-pose>
-            </div>
+        <div *ngSwitchCase="'pose'">
+          <app-pose
+            [target]="node"
+            [currentId]="currentPoseId"
+            >
+          </app-pose>
+        </div>
 
-            <div *ngSwitchCase="'series'">
-              <app-series
-                [target]="node"
-                [currentId]="currentPoseId"
-                [dragEnabled]="sortRoot === 'series'"
-                >
-              </app-series>
-            </div>
-          </div>
+        <div *ngSwitchCase="'series'">
+          <app-series
+            [target]="node"
+            [currentId]="currentPoseId"
+            [dragEnabled]="sortRoot === 'series'"
+            >
+          </app-series>
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="col">
-    <router-outlet></router-outlet>
   </div>
 </div>
