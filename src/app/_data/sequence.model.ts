@@ -1,18 +1,30 @@
+import { Output, EventEmitter } from '@angular/core';
 import { Pose } from './pose.model';
 import { Series } from './series.model';
 import { Settings } from '../settings';
 
 export class Sequence {
+  @Output() modelChange: EventEmitter<boolean> = new EventEmitter();
+
   static nextId = 0;
   type = 'sequence';
   id: number;
   name: string = 'Sequence';
+  nameCache: string = 'Sequence';
   nodes: any[] = [];
 
   constructor(
     values: Object = {}
   ) {
     Object.assign(this, values)
+  }
+
+  ngOnChanges() {
+    console.log(this.name);
+    if (this.name !== this.nameCache) {
+      console.log('name change');
+      this.modelChange.emit();
+    }
   }
 
   get speechSequence() {
@@ -47,6 +59,7 @@ export class Sequence {
       }
       if (node.type === 'pose' && node.id !== pose.id) return true;
     });
+    this.saveToDB();
   }
 
   deleteSeries(series) {
@@ -111,5 +124,9 @@ export class Sequence {
       expanded = expanded.concat(this.expandNode(node));
     });
     return expanded;
+  }
+
+  private saveToDB() {
+    console.log('save to DB');
   }
 }

@@ -17,7 +17,7 @@
       <label class="detail-label">Sides</label>
     </div>
     <div class="col">
-      <div myButtonBar [(value)]="pose.sides">
+      <div myButtonBar [(value)]="pose.sides" (valueChange)="saveChanges()">
         <span myRadioValue="unilateral">Left &amp; Right</span>
         <span myRadioValue="bilateral" *ngIf="!unilateralOnly">Bilateral</span>
       </div>

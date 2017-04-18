@@ -35,4 +35,8 @@ export class PoseDetailComponent {
   createNewModel() {
     this.pose = new Pose();
   }
+
+  saveChanges() {
+    console.log('save model changes');
+  }
 }

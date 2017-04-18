@@ -20,9 +20,15 @@ export class MainComponent {
       .subscribe(params => {
         this.service.setCurrentSequence(+params['id']);
       });
+
+    this.service.getSequences();
   }
 
   ngOnDestroy() {
     this.paramsSub.unsubscribe();
+  }
+
+  addSequence() {
+    this.service.addSequence();
   }
 }

@@ -19,6 +19,7 @@ import { PlayerService } from './_data/player.service';
 import { FirebaseService } from './_data/firebase.service';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
+import { SequencesListComponent } from './sequences-list/sequences-list.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent }
@@ -41,7 +42,8 @@ const appRoutes: Routes = [
     PlayerComponent,
     SettingsComponent,
     LoginComponent,
-    MainComponent
+    MainComponent,
+    SequencesListComponent
   ],
   providers: [
     SequenceService,

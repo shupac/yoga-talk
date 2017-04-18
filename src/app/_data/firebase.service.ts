@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 import * as firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
@@ -15,7 +16,9 @@ const firebaseConfig = {
 const app = firebase.initializeApp(firebaseConfig);
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-export const Firebase = app.database();
+export const Firebase = {
+  userRef: () => app.database().ref()
+};
 
 @Injectable()
 export class FirebaseService {
@@ -24,7 +27,7 @@ export class FirebaseService {
   userId: string;
 
   constructor(private router: Router) {
-    // if (localStorage['previouslyLoggedIn'] === 'true') this.loginGoogle();
+    if (localStorage['previouslyLoggedIn'] === 'true') this.loginGoogle();
   }
 
   loginGoogle() {
@@ -33,10 +36,22 @@ export class FirebaseService {
       let token = result.credential.accessToken;
       let user = result.user;
       this.userId = user.uid;
+
+      this.setRef(user.uid);
+      this.updateLastLogin(user.uid);
+
       if (this.redirectUrl) this.router.navigate([this.redirectUrl]);
       localStorage.setItem('previouslyLoggedIn', 'true');
     }).catch(error => {
       console.log('login error', error);
     });
+  }
+
+  private setRef(uid) {
+    Firebase.userRef = () => app.database().ref('users').child(uid);
+  }
+
+  private updateLastLogin(uid) {
+    Firebase.userRef().child('lastLogin').set(moment().format());
   }
 }

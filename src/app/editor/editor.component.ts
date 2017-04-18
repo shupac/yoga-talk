@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { SequenceService } from '../_data/sequence.service';
 
 @Component({
@@ -14,6 +14,7 @@ export class EditorComponent {
 
   constructor(
     private service: SequenceService,
+    private router: Router,
     private route: ActivatedRoute
   ) {}
 
@@ -41,6 +42,7 @@ export class EditorComponent {
 
   deletePose(pose) {
     this.service.currentSequence.deletePose(pose);
+    this.router.navigate(['../../'], { relativeTo: this.route });
   }
 
   deleteSeries(series) {

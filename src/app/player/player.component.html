@@ -14,26 +14,8 @@
     *ngFor="let node of sequence, let i = index"
     class="node-container"
     >
-    <div [ngSwitch]="node.type">
-
-      <div *ngSwitchCase="'pose'">
-        <app-pose
-          [target]="node"
-          [currentId]="currentPoseId"
-          >
-        </app-pose>
-      </div>
-
-      <div *ngSwitchCase="'series'">
-        <app-series
-          [target]="node"
-          [currentId]="currentPoseId"
-          [dragEnabled]="dragOperation"
-          (selectSeries)="selectSeries.emit($event)"
-          (editSeries)="dragOperation=!dragOperation"
-          >
-        </app-series>
-      </div>
+    <div>
+      {{ node.name }}
     </div>
   </div>
 </section>

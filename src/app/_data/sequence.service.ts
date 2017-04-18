@@ -5,24 +5,36 @@ import { Pose } from './pose.model';
 import { Settings } from '../settings';
 import STUB_SEQUENCE from '../stub-sequence';
 
-import { Firebase } from './firebase.service';
+import { Firebase, FirebaseService } from './firebase.service';
+
 @Injectable()
 export class SequenceService {
-  sequences: Sequence[] = [];
+  sequences: Promise<Sequence[]>;
   currentSequence: Sequence;
   currentSpeechIndex: number = null;
   sortRoot: string;
 
-  constructor() {
-    let sequence = new Sequence();
-    this.currentSequence = sequence;
-    this.addSequence(sequence);
+  constructor(
+    private fbService: FirebaseService
+  ) {
+    // this.stubPoses();
+  }
 
-    // Firebase.ref().once('value')
-    //   .then(snapshot => console.log(snapshot.val()))
-    //   .catch(err => console.log(err))
-    
-    this.stubPoses();
+  ngDoCheck() {
+    this.currentSequence.modelChange.subscribe(changed => console.log(changed));
+  }
+
+  getSequences() {
+    console.log(this.fbService.userId);
+    this.sequences = new Promise((resolve, reject) => {
+      Firebase.userRef().child('sequences').once('value')
+      .then(snapshot => {
+        let sequences = snapshot.val();
+        if (!sequences) sequences = [];
+        resolve(sequences);
+      })
+      .catch(err => reject(err))
+    });
   }
 
   get currentPoseId() {
@@ -34,14 +46,17 @@ export class SequenceService {
     return this.currentSequence.speechSequence;
   }
 
-  addSequence(sequence) {
+  addSequence() {
+    let sequence = new Sequence();
     sequence.id = Sequence.nextId;
     Sequence.nextId++;
-    this.sequences.push(sequence);
+    this.sequences.then(sequences => {
+      console.log(sequences);
+    });
   }
 
   setCurrentSequence(id) {
-    this.currentSequence = this.findSequence(id);
+    this.findSequence(id).then(sequence => this.currentSequence = sequence);
   }
 
   getNode(type, id) {
@@ -54,11 +69,15 @@ export class SequenceService {
     else this.sortRoot = type;
   }
 
-  private findSequence(id): Sequence {
-    return this.sequences.find(sequence => sequence.id === id);
+  private findSequence(id) {
+    return this.sequences.then(sequences => sequences.find(sequence => sequence.id === id));
   }
 
   private stubPoses() {
+    let sequence = new Sequence();
+    this.currentSequence = sequence;
+    // this.addSequence(sequence);
+
     let SERIES = {};
     STUB_SEQUENCE.forEach(node => {
       if (node.type === 'pose') {

@@ -25,9 +25,7 @@ export class SequenceDetailComponent {
   @Output() private sort: EventEmitter<Sequence> = new EventEmitter();
   @Output() private deleteSquence: EventEmitter<any> = new EventEmitter();
 
-  nodeName: string;
   newNodeType: string = 'pose';
-  nameChanged: boolean = false;
 
   constructor(
     private service: SequenceService,
@@ -36,7 +34,6 @@ export class SequenceDetailComponent {
 
   ngOnInit() {
     this.target = this.service.currentSequence;
-    this.nodeName = this.target.name;
   }
 
   selectTarget(target) {
@@ -54,8 +51,7 @@ export class SequenceDetailComponent {
     }
   }
 
-  updateName() {
-    this.target.name = this.nodeName;
-    this.nameChanged = false;
+  showSave() {
+    console.log('on changes');
   }
 }

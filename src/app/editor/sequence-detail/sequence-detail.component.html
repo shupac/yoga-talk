@@ -4,15 +4,7 @@
     <label>Name</label>
   </div>
   <div class="col">
-    <input
-      [(ngModel)]="nodeName"
-      (keydown)="nameChanged = true"
-      >
-    <button
-      class="btn btn-sm btn-success"
-      (click)="updateName()"
-      *ngIf="nameChanged"
-      >Save</button>
+    <input [(ngModel)]="target.name" (ngModelChange)="showSave()">
   </div>
 </div>
 

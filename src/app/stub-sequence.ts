@@ -46,8 +46,8 @@ export default [
     type: 'pose',
     pose: 'transition1',
     name: 'half salutation',
-    sides: 'unilateral',
-    unilateralOnly: true,
+    sides: 'bilateral',
+    unilateralOnly: false,
     parent: {
       type: 'series',
       id: 0
@@ -57,8 +57,8 @@ export default [
     type: 'pose',
     pose: 'transition2',
     name: 'turbo dog',
-    sides: 'unilateral',
-    unilateralOnly: true,
+    sides: 'bilateral',
+    unilateralOnly: false,
     parent: {
       type: 'series',
       id: 0

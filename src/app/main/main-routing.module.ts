@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../_data/auth-guard.service';
 import { MainComponent } from './main.component';
 import { EditorComponent } from '../editor/editor.component';
+import { PlayerComponent } from '../player/player.component';
 
 const mainPaths: Routes = [
   {
@@ -17,6 +18,14 @@ const mainPaths: Routes = [
       {
         path: 'edit',
         component: EditorComponent,
+      },
+      {
+        path: 'play/:type/:id',
+        component: PlayerComponent,
+      },
+      {
+        path: 'play',
+        component: PlayerComponent,
       }
     ]
   }
