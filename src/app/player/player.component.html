@@ -1,3 +1,4 @@
+<h2>Player</h2>
 <section>
   <select [(ngModel)]="selectedVoice">
     <option
@@ -10,12 +11,14 @@
     <button (click)="stopSequence()" *ngIf="playing">Stop</button>
   </div>
 
-  <div
-    *ngFor="let node of sequence, let i = index"
-    class="node-container"
-    >
-    <div>
-      {{ node.name }}
+  <div *ngIf="sequence">
+    <div
+      *ngFor="let node of sequence, let i = index"
+      class="node-container"
+      >
+      <div>
+        {{ node.name }}
+      </div>
     </div>
   </div>
 </section>

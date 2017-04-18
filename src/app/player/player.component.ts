@@ -18,7 +18,6 @@ export class PlayerComponent {
   voiceData;
   playing = false;
   cueTimeout;
-  sequenceCache = [];
 
   constructor(
     private sequenceService: SequenceService,
@@ -33,13 +32,7 @@ export class PlayerComponent {
   }
 
   get sequence() {
-    if (this.playerService.isSorting) {
-      return this.sequenceCache;
-    }
-    else {
-      this.sequenceCache = this.sequenceService.speechSequence;
-      return this.sequenceService.speechSequence;
-    }
+    return this.sequenceService.speechSequence;
   }
 
   startSequence(index?: number) {

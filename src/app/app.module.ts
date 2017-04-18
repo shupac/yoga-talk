@@ -5,21 +5,16 @@ import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { DndModule } from 'ng2-dnd';
 
-import { EditorModule } from './editor/editor.module';
-import { SequenceModule } from './sequence/sequence.module';
 import { SharedModule } from './_shared/shared.module';
-import { MainRoutingModule } from './main/main-routing.module';
+import { SequencesListModule } from './sequences-list/sequences-list.module';
 
 import { AppComponent } from './app.component';
-import { PlayerComponent } from './player/player.component';
 import { SettingsComponent } from './settings/settings.component';
 
 import { SequenceService } from './_data/sequence.service';
 import { PlayerService } from './_data/player.service';
 import { FirebaseService } from './_data/firebase.service';
 import { LoginComponent } from './login/login.component';
-import { MainComponent } from './main/main.component';
-import { SequencesListComponent } from './sequences-list/sequences-list.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent }
@@ -30,20 +25,15 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
-    EditorModule,
-    SequenceModule,
     SharedModule,
+    SequencesListModule,
     DndModule.forRoot(),
     RouterModule.forRoot(appRoutes),
-    MainRoutingModule
   ],
   declarations: [
     AppComponent,
-    PlayerComponent,
     SettingsComponent,
     LoginComponent,
-    MainComponent,
-    SequencesListComponent
   ],
   providers: [
     SequenceService,

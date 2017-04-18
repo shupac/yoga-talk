@@ -1,18 +1,32 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { SequenceService } from '../../_data/sequence.service';
+import { SequenceService } from '../_data/sequence.service';
 
 @Component({
-  selector: 'app-sequence-list',
-  templateUrl: './sequence-list.component.html',
-  styleUrls: ['./sequence-list.component.css']
+  selector: 'app-sequence',
+  templateUrl: './sequence.component.html',
+  styleUrls: ['./sequence.component.css']
 })
-export class SequenceListComponent {
+export class SequenceComponent {
+
+  paramsSub;
+
   constructor(
     private service: SequenceService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
+
+  ngOnInit() {
+    this.paramsSub = this.route.params
+      .subscribe(params => {
+        this.service.setCurrentSequence(+params['id']);
+      });
+  }
+
+  ngOnDestroy() {
+    this.paramsSub.unsubscribe();
+  }
 
   get target() {
     return this.service.currentSequence;
@@ -24,9 +38,5 @@ export class SequenceListComponent {
 
   get sortRoot() {
     return this.service.sortRoot;
-  }
-
-  editNode(node) {
-    this.router.navigate(['edit'], { relativeTo: this.route });
   }
 }

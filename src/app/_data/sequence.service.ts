@@ -9,7 +9,7 @@ import { Firebase, FirebaseService } from './firebase.service';
 
 @Injectable()
 export class SequenceService {
-  sequences: Promise<Sequence[]>;
+  sequences: Sequence[];
   currentSequence: Sequence;
   currentSpeechIndex: number = null;
   sortRoot: string;
@@ -25,16 +25,14 @@ export class SequenceService {
   }
 
   getSequences() {
-    console.log(this.fbService.userId);
-    this.sequences = new Promise((resolve, reject) => {
-      Firebase.userRef().child('sequences').once('value')
+    return Firebase.userRef().child('sequences').once('value')
       .then(snapshot => {
         let sequences = snapshot.val();
         if (!sequences) sequences = [];
-        resolve(sequences);
+        this.sequences = sequences;
+        return sequences;
       })
-      .catch(err => reject(err))
-    });
+      .catch(err => console.log(err))
   }
 
   get currentPoseId() {
@@ -50,13 +48,11 @@ export class SequenceService {
     let sequence = new Sequence();
     sequence.id = Sequence.nextId;
     Sequence.nextId++;
-    this.sequences.then(sequences => {
-      console.log(sequences);
-    });
+    this.sequences.push(sequence);
   }
 
   setCurrentSequence(id) {
-    this.findSequence(id).then(sequence => this.currentSequence = sequence);
+    this.currentSequence = this.findSequence(id);
   }
 
   getNode(type, id) {
@@ -70,7 +66,7 @@ export class SequenceService {
   }
 
   private findSequence(id) {
-    return this.sequences.then(sequences => sequences.find(sequence => sequence.id === id));
+    return this.sequences.find(sequence => sequence.id === id);
   }
 
   private stubPoses() {

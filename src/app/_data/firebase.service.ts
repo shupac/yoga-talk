@@ -27,7 +27,9 @@ export class FirebaseService {
   userId: string;
 
   constructor(private router: Router) {
-    if (localStorage['previouslyLoggedIn'] === 'true') this.loginGoogle();
+    this.userId = localStorage['uid'];
+    this.setRef(this.userId);
+    // if (localStorage['previouslyLoggedIn'] === 'true') this.loginGoogle();
   }
 
   loginGoogle() {
@@ -48,6 +50,7 @@ export class FirebaseService {
   }
 
   private setRef(uid) {
+    localStorage.setItem('uid', uid);
     Firebase.userRef = () => app.database().ref('users').child(uid);
   }
 
