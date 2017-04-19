@@ -9,7 +9,6 @@ import { SequenceService } from '../_data/sequence.service';
 })
 export class EditorComponent {
   type: string;
-  sequence;
   paramsSub;
 
   constructor(
@@ -21,13 +20,19 @@ export class EditorComponent {
   ngOnInit() {
     this.paramsSub = this.route.params
       .subscribe(params => {
-        this.sequence = this.service.getSequence(+params['sid']);
+        this.service.setCurrentSequence(+params['sid']);
+        this.service.currentEditNode = this.service.currentSequence;
+        // this.sequence = this.service.getSequence(+params['sid']);
         this.toggleSort({type: null});
       });
   }
 
   ngOnDestroy() {
     this.paramsSub.unsubscribe();
+  }
+
+  get sequence() {
+    return this.service.currentSequence;
   }
 
   get target() {
@@ -43,11 +48,17 @@ export class EditorComponent {
   }
 
   deletePose(pose) {
-    this.service.currentSequence.deletePose(pose);
-    this.router.navigate(['../../'], { relativeTo: this.route });
+    this.service.deletePose(pose.id);
+    this.service.currentEditNode = this.service.currentSequence;
   }
 
   deleteSeries(series) {
-    this.service.currentSequence.deleteSeries(series);
+    this.service.deleteSeries(series.id);
+    this.service.currentEditNode = this.service.currentSequence;
+  }
+
+  deleteSequence(sequence) {
+    this.service.deleteSequence(sequence.id);
+    this.router.navigate(['']);
   }
 }

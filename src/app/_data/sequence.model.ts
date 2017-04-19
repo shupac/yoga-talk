@@ -17,27 +17,8 @@ export class Sequence {
 
   get speechSequence() {
     let sequence = [];
-    this.nodes.forEach(node => sequence = sequence.concat(this.expandNode(node)));
+    // this.nodes.forEach(node => sequence = sequence.concat(this.expandNode(node)));
     return sequence;
-  }
-
-  deletePose(pose) {
-    this.nodes = this.nodes.filter(node => {
-      if (node.type === 'series') {
-        node.deletePose(pose);
-        return true;
-      }
-      if (node.type === 'pose' && node.id !== pose.id) return true;
-    });
-    this.saveToDB();
-  }
-
-  deleteSeries(series) {
-    this.nodes = this.nodes.filter(node => {
-      if (node.type === 'pose') return true;
-      if (node.type === 'series' && node.id !== series.id) return true;
-      return false;
-    });
   }
 
   private expandNode(node) {

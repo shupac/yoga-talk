@@ -10,29 +10,29 @@ export class ModelsService {
   constructor() {}
 
   getIndices() {
-    console.log('models service: get indices',);
     return new Promise((resolve, reject) => {
       this.fbRef.once('value').then(snapshot => {
         let indices = snapshot.val();
-        Sequence.nextId = indices.sequence || 0;
-        Series.nextId = indices.series || 0;
-        Pose.nextId = indices.pose || 0;
+        if (indices) {
+          Sequence.nextId = indices.sequence || 0;
+          Series.nextId = indices.series || 0;
+          Pose.nextId = indices.pose || 0;
+        }
         resolve();
       })
       .catch(err => reject(err));
     });
   }
 
-  updateSequence() {
+  updateSequenceIndex() {
     this.fbRef.child('sequence').set(Sequence.nextId);
   }
 
-  updateSeries() {
+  updateSeriesIndex() {
     this.fbRef.child('series').set(Series.nextId);
   }
 
-  updatePose() {
-    console.log('pose id', Pose.nextId);
+  updatePoseIndex() {
     this.fbRef.child('pose').set(Pose.nextId);
   }
 }

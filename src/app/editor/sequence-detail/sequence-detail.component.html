@@ -1,4 +1,4 @@
-<h1>Sequence</h1>
+<h1>Edit Sequence</h1>
 <div class="row">
   <div class="col-2">
     <label>Name</label>
@@ -15,6 +15,7 @@
     [class.btn-secondary]="sortRoot !== 'sequence'"
     [class.btn-success]="sortRoot === 'sequence'"
     >Reorder Poses</button>
+    <button class="btn btn-danger" (click)="deleteSequence.emit(target)">Delete Sequence</button>
 </div>
 
 <h2>Add Element</h2>

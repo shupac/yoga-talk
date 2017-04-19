@@ -1,4 +1,4 @@
-<h2>Editor</h2>
+<button class="btn btn-link" routerLink="../">Back to Sequences</button>
 <div class="row">
   <div class="col">
     <app-sequence
@@ -11,6 +11,7 @@
       [target]="target"
       [sortRoot]="sortRoot"
       (sort)="toggleSort($event)"
+      (deleteSequence)="deleteSequence($event)"
       >
     </app-sequence-detail>
 

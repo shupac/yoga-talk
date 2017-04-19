@@ -12,8 +12,6 @@ import 'rxjs/add/operator/switchMap';
 })
 export class SequencesListComponent {
   paramsSub;
-  target: Sequence;
-  // sequences: Sequence[];
 
   constructor(
     private service: SequenceService,
@@ -23,13 +21,16 @@ export class SequencesListComponent {
 
   ngOnInit() {
     this.paramsSub = this.route.params.subscribe(params => {
-      this.target = this.service.getSequence(+params['id']);
-      if (this.target) console.log(this.target.id);
+      this.service.setCurrentSequence(+params['id']);
     });
   }
 
   ngOnDestroy () {
     this.paramsSub.unsubscribe();
+  }
+
+  get target() {
+    return this.service.currentSequence;
   }
 
   get sequences() {

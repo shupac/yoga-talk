@@ -19,7 +19,9 @@ export class SequenceService {
   currentSpeechIndex: number = null;
   sortRoot: string;
 
-  constructor() {
+  constructor(
+    private modelsService: ModelsService
+  ) {
     // this.stubPoses();
     this.zone = new NgZone({enableLongStackTrace: false});
   }
@@ -29,9 +31,7 @@ export class SequenceService {
       this.fbRef.once('value')
       .then(snapshot => {
         let sequences = snapshot.val();
-        for (let key in sequences) {
-          this.sequences.push(sequences[key])
-        }
+        if (sequences) this.sequences = sequences;
         resolve(this.sequences);
       })
       .catch(err => reject(err));
@@ -47,11 +47,18 @@ export class SequenceService {
     return this.currentSequence.speechSequence;
   }
 
+  setCurrentSequence(id) {
+    this.zone.run(() => {
+      this.currentSequence = this.sequences.find(sequence => sequence.id === id);
+    });
+  }
+
   addSequence() {
     let sequence = new Sequence();
     sequence.id = Sequence.nextId;
     sequence.name += sequence.id;
     Sequence.nextId++;
+    this.modelsService.updateSequenceIndex();
     this.fbRef.child(sequence.id + '').set(sequence).then(() => {
       this.zone.run(() => {
         this.sequences.push(sequence);
@@ -63,34 +70,64 @@ export class SequenceService {
     if (node.type === 'pose') {
       node.id = Pose.nextId;
       Pose.nextId++;
+      this.modelsService.updatePoseIndex();
     }
     if (node.type === 'series') {
       node.id = Series.nextId;
       Series.nextId++;
+      this.modelsService.updateSeriesIndex();
     }
     if (!sequence.nodes) sequence.nodes = [];
     sequence.nodes.push(node);
+    this.saveCurrentSequence();
     return node;
   }
 
   addToSeries(pose, series, type) {
     pose.id = Pose.nextId;
     Pose.nextId++;
+    this.modelsService.updatePoseIndex();
     if (type === 'pose') series.poses.push(pose);
     if (type === 'transition1') series.firstTransitions.push(pose);
     if (type === 'transition2') series.secondTransitions.push(pose);
+    this.saveCurrentSequence();
+  }
+
+  deleteSequence(id) {
+    this.sequences = this.sequences.filter(s => s.id !== id);
+    this.fbRef.set(this.sequences);
+  }
+
+  deleteSeries(id) {
+    this.currentSequence.nodes = this.currentSequence.nodes.filter(node => {
+      if (node.type === 'pose') return true;
+      if (node.type === 'series' && node.id !== id) return true;
+      return false;
+    });
+    this.saveCurrentSequence();
+  }
+
+  deletePose(id) {
+    this.currentSequence.nodes = this.currentSequence.nodes.filter(node => {
+      if (node.type === 'pose' && node.id !== id) return true;
+      if (node.type === 'series') {
+        if (node.poses) node.poses = node.poses.filter(node => node.id !== id);
+        if (node.firstTransitions) node.firstTransitions = node.firstTransitions.filter(node => node.id !== id);
+        if (node.secondTransitions) node.secondTransitions = node.secondTransitions.filter(node => node.id !== id);
+        return true;
+      }
+    });
+    this.saveCurrentSequence();
+  }
+
+  saveCurrentSequence() {
+    this.fbRef.child(this.currentSequence.id).set(this.currentSequence);
   }
 
   toggleSort(type) {
     if (this.sortRoot === type) this.sortRoot = null;
     else this.sortRoot = type;
   }
-
-  getSequence(id) {
-    this.zone.run(() => {});
-    return this.sequences.find(sequence => sequence.id === id);
-  }
-
   // private stubPoses() {
   //   let sequence = new Sequence();
   //   this.currentSequence = sequence;

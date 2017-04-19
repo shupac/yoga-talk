@@ -15,11 +15,6 @@ export class Series {
     Object.assign(this, values);
   }
 
-  deletePose(pose) {
-    this.poses = this.poses.filter(node => node.id !== pose.id);
-    this.firstTransitions = this.firstTransitions.filter(node => node.id !== pose.id);
-    this.secondTransitions = this.secondTransitions.filter(node => node.id !== pose.id);
-  }
 
   getPoses() {
     return this.poses;

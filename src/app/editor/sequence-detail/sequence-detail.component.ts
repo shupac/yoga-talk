@@ -21,7 +21,7 @@ export class SequenceDetailComponent {
   @Output() private addPose: EventEmitter<any> = new EventEmitter();
   @Output() private addSeries: EventEmitter<any> = new EventEmitter();
   @Output() private sort: EventEmitter<Sequence> = new EventEmitter();
-  @Output() private deleteSquence: EventEmitter<any> = new EventEmitter();
+  @Output() private deleteSequence: EventEmitter<any> = new EventEmitter();
 
   newNodeType: string = 'pose';
 
