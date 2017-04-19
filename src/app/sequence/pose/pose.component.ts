@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { SequenceService } from '../../_data/sequence.service';
 import { Pose } from '../../_data/pose.model';
 
 @Component({
@@ -11,12 +11,9 @@ export class PoseComponent {
   @Input() private target: Pose;
   @Input() private currentId;
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private service: SequenceService) {}
 
   editNode(node) {
-    this.router.navigate(['edit', node.type, node.id], { relativeTo: this.route });
+    this.service.currentEditNode = node;
   }
 }

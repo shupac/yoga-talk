@@ -1,11 +1,13 @@
 <h2>Editor</h2>
 <div class="row">
   <div class="col">
-    <app-sequence></app-sequence>
+    <app-sequence
+      [target]="sequence"
+      ></app-sequence>
   </div>
   <div class="col" *ngIf="target">
     <app-sequence-detail
-      *ngIf="type === 'sequence'"
+      *ngIf="target.type === 'sequence'"
       [target]="target"
       [sortRoot]="sortRoot"
       (sort)="toggleSort($event)"
@@ -13,7 +15,7 @@
     </app-sequence-detail>
 
     <app-series-detail
-      *ngIf="type === 'series'"
+      *ngIf="target.type === 'series'"
       [target]="target"
       [sortRoot]="sortRoot"
       (sort)="toggleSort($event)"
@@ -23,7 +25,7 @@
     </app-series-detail>
 
     <app-pose-detail
-      *ngIf="type === 'pose'"
+      *ngIf="target.type === 'pose'"
       [target]="target"
       (deletePose)="deletePose($event)"
       >

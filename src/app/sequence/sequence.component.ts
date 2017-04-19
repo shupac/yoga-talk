@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 import { SequenceService } from '../_data/sequence.service';
+import { Sequence } from '../_data/sequence.model';
 
 @Component({
   selector: 'app-sequence',
@@ -8,14 +8,9 @@ import { SequenceService } from '../_data/sequence.service';
   styleUrls: ['./sequence.component.css']
 })
 export class SequenceComponent {
+  @Input() private target: Sequence;
 
-  constructor(
-    private service: SequenceService,
-  ) {}
-
-  get target() {
-    return this.service.currentSequence;
-  }
+  constructor(private service: SequenceService) {}
 
   get currentPoseId() {
     return this.service.currentPoseId;
@@ -23,5 +18,9 @@ export class SequenceComponent {
 
   get sortRoot() {
     return this.service.sortRoot;
+  }
+
+  editNode(node) {
+    this.service.currentEditNode = node;
   }
 }

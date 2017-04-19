@@ -1,5 +1,5 @@
 <div *ngIf="target">
-  <h2>{{ target.name }}</h2>
+  <h2 (click)="editNode(target)">{{ target.name }}</h2>
 
   <div
     dnd-sortable-container

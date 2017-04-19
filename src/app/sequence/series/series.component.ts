@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { SequenceService } from '../../_data/sequence.service';
 import { Series } from '../../_data/series.model';
 
 @Component({
@@ -12,12 +12,9 @@ export class SeriesComponent {
   @Input() private dragEnabled: boolean = false;
   @Input() private currentId;
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private service: SequenceService) {}
 
   editNode(node) {
-    this.router.navigate(['edit', node.type, node.id], { relativeTo: this.route });
+    this.service.currentEditNode = node;
   }
 }

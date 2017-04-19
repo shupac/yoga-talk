@@ -1,48 +1,24 @@
-import { EventEmitter } from '@angular/core';
 import { Pose } from './pose.model';
 import { Series } from './series.model';
 import { Settings } from '../settings';
 
 export class Sequence {
   static nextId = 0;
-  static onCreate = new EventEmitter();
   type = 'sequence';
   id: number;
   name: string = 'Sequence';
-  nameCache: string = 'Sequence';
   nodes: any[] = [];
 
   constructor(
     values: Object = {}
   ) {
-    Object.assign(this, values)
-    this.id = Sequence.nextId;
-    Sequence.nextId++;
-    Sequence.onCreate.emit();
+    Object.assign(this, values);
   }
 
   get speechSequence() {
     let sequence = [];
     this.nodes.forEach(node => sequence = sequence.concat(this.expandNode(node)));
     return sequence;
-  }
-
-  getNode(type, id) {
-    if (type === 'pose') return this.getPose(id);
-    if (type === 'series') return this.getSeries(id);
-  }
-
-  addPose(pose) {
-    pose.id = Pose.nextId;
-    Pose.nextId++;
-    this.nodes.push(pose);
-  }
-
-  addSeries(series) {
-    series.id = Series.nextId;
-    Series.nextId++;
-    this.nodes.push(series);
-    return series;
   }
 
   deletePose(pose) {
@@ -62,21 +38,6 @@ export class Sequence {
       if (node.type === 'series' && node.id !== series.id) return true;
       return false;
     });
-  }
-
-  private getSeries(id): Series {
-    return this.nodes.find(node => node.type === 'series' && node.id === id);
-  }
-
-  private getPose(id) {
-    for (let i = 0; i < this.nodes.length; i++) {
-      let node = this.nodes[i];
-      if (node['type'] === 'pose' && node['id'] === id) return node;
-      if (node['type'] === 'series') {
-        let pose = node.getPose(id);
-        if (pose) return pose;
-      }
-    }
   }
 
   private expandNode(node) {

@@ -12,7 +12,6 @@ export class AuthService {
 
   }
 
-
   loginGoogle() {
     console.log('google login');
     let googleProvider = new firebase.auth.GoogleAuthProvider();

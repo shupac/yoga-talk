@@ -5,25 +5,15 @@ import { EditorComponent } from './editor.component';
 
 const paths: Routes = [
   {
-    path: 'edit',
+    path: 'sequence/:sid/edit',
     component: EditorComponent,
     canActivate: [AuthGuard]
-  }
-    // children: [
-    //   {
-    //     path: 'edit/:type/:id',
-    //     component: EditorComponent
-    //   },
-    //   {
-    //     path: 'edit',
-    //     component: EditorComponent
-    //   },
-    //   {
-    //     path: '',
-    //     component: PlayerComponent,
-    //   },
-    // ]
-
+  },
+  // {
+  //   path: 'sequence/:sid/edit/:type/:id',
+  //   component: EditorComponent,
+  //   canActivate: [AuthGuard]
+  // }
 ];
 
 @NgModule({

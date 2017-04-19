@@ -9,7 +9,7 @@ import { SequenceService } from '../_data/sequence.service';
 })
 export class EditorComponent {
   type: string;
-  target;
+  sequence;
   paramsSub;
 
   constructor(
@@ -21,16 +21,17 @@ export class EditorComponent {
   ngOnInit() {
     this.paramsSub = this.route.params
       .subscribe(params => {
-        console.log(params);
-        this.type = params['type'] || 'sequence';
-        if (!params['id']) this.target = this.service.currentSequence;
-        else this.target = this.service.getNode(params['type'], +params['id']);
+        this.sequence = this.service.getSequence(+params['sid']);
         this.toggleSort({type: null});
       });
   }
 
   ngOnDestroy() {
     this.paramsSub.unsubscribe();
+  }
+
+  get target() {
+    return this.service.currentEditNode;
   }
 
   get sortRoot() {

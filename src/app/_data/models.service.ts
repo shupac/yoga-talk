@@ -7,23 +7,16 @@ import { Pose } from './pose.model';
 export class ModelsService {
   fbRef: any;
 
-  constructor() {
-    Sequence.onCreate.subscribe(() => this.updateSequence());
-    Series.onCreate.subscribe(() => this.updateSeries());
-    Pose.onCreate.subscribe(() => this.updatePose());
-  }
+  constructor() {}
 
   getIndices() {
     console.log('models service: get indices',);
     return new Promise((resolve, reject) => {
       this.fbRef.once('value').then(snapshot => {
         let indices = snapshot.val();
-        if (indices) {
-          console.log(indices);
-          Sequence.nextId = indices.sequence;
-          Series.nextId = indices.series;
-          Pose.nextId = indices.pose;
-        }
+        Sequence.nextId = indices.sequence || 0;
+        Series.nextId = indices.series || 0;
+        Pose.nextId = indices.pose || 0;
         resolve();
       })
       .catch(err => reject(err));
@@ -39,6 +32,7 @@ export class ModelsService {
   }
 
   updatePose() {
+    console.log('pose id', Pose.nextId);
     this.fbRef.child('pose').set(Pose.nextId);
   }
 }

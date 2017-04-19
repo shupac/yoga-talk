@@ -1,10 +1,8 @@
 import { Component, ViewChild, Input, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { SequenceService } from '../../_data/sequence.service';
 import { Sequence } from '../../_data/sequence.model';
 import { SeriesDetailComponent } from '../series-detail/series-detail.component';
 import { PoseDetailComponent } from '../pose-detail/pose-detail.component';
-import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-sequence-detail',
@@ -29,26 +27,19 @@ export class SequenceDetailComponent {
 
   constructor(
     private service: SequenceService,
-    private route: ActivatedRoute
   ) {}
 
-  ngOnInit() {
-    this.target = this.service.currentSequence;
-  }
-
-  selectTarget(target) {
-    this.target = target;
-  }
-
   addRootNode() {
+    let node;
     if (this.newNodeType === 'pose') {
-      this.target.addPose(this.poseDetailComponent.getModel());
+      node = this.poseDetailComponent.getModel();
       this.poseDetailComponent.createNewModel();
     }
     if (this.newNodeType === 'series') {
-      this.target.addSeries(this.seriesDetailComponent.getModel());
+      node = this.seriesDetailComponent.getModel();
       this.seriesDetailComponent.createNewModel();
     }
+    this.service.addToSequence(node, this.target);
   }
 
   showSave() {

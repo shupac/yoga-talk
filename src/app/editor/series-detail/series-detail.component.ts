@@ -1,4 +1,5 @@
 import { Component, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { SequenceService } from '../../_data/sequence.service';
 import { Series } from '../../_data/series.model';
 import { PoseDetailComponent } from '../pose-detail/pose-detail.component';
 
@@ -20,6 +21,10 @@ export class SeriesDetailComponent {
   newNodeType: string = 'pose';
   series: Series = new Series();
 
+  constructor(
+    private service: SequenceService,
+  ) {}
+
   ngOnInit() {
     if (this.target) this.series = this.target;
   }
@@ -34,7 +39,7 @@ export class SeriesDetailComponent {
 
   addNewPose() {
     let pose = this.poseDetailComponent.getModel();
-    this.target.addPose(pose, this.newNodeType);
     this.poseDetailComponent.createNewModel();
+    this.service.addToSeries(pose, this.target, this.newNodeType);
   }
 }

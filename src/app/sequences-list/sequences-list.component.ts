@@ -11,37 +11,32 @@ import 'rxjs/add/operator/switchMap';
   styleUrls: ['./sequences-list.component.css']
 })
 export class SequencesListComponent {
+  paramsSub;
+  target: Sequence;
+  // sequences: Sequence[];
 
-    paramsSub;
-    // sequences: Sequence[];
+  constructor(
+    private service: SequenceService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
-    constructor(
-      private service: SequenceService,
-      private router: Router,
-      private route: ActivatedRoute
-    ) {}
-
-    ngOnInit() {
-      // this.service.getSequences().then(sequences => this.sequences = sequences);
-      this.paramsSub = this.route.params.subscribe(params => {
-        console.log(params);
-      });
-    }
-
-    ngOnDestroy () {
-      this.paramsSub.unsubscribe();
-    }
-
-    get sequences() {
-      console.log('get sequences');
-      return this.service.sequences;
-    }
-
-    addSequence() {
-      this.service.addSequence();
-    }
-
-    selectSequence(sequence) {
-      this.service.currentSequence = sequence;
-    }
+  ngOnInit() {
+    this.paramsSub = this.route.params.subscribe(params => {
+      this.target = this.service.getSequence(+params['id']);
+      if (this.target) console.log(this.target.id);
+    });
   }
+
+  ngOnDestroy () {
+    this.paramsSub.unsubscribe();
+  }
+
+  get sequences() {
+    return this.service.sequences;
+  }
+
+  addSequence() {
+    this.service.addSequence();
+  }
+}

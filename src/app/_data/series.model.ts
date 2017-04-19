@@ -1,9 +1,7 @@
-import { EventEmitter } from '@angular/core';
 import { Pose } from './pose.model';
 
 export class Series {
   static nextId = 0;
-  static onCreate = new EventEmitter();
   type = 'series';
   id: number;
   name: string;
@@ -15,17 +13,6 @@ export class Series {
     values: Object = {}
   ) {
     Object.assign(this, values);
-    this.id = Series.nextId;
-    Series.nextId++;
-    Series.onCreate.emit();
-  }
-
-  addPose(pose, type) {
-    pose.id = Pose.nextId;
-    Pose.nextId++;
-    if (type === 'pose') this.poses.push(pose);
-    if (type === 'transition1') this.firstTransitions.push(pose);
-    if (type === 'transition2') this.secondTransitions.push(pose);
   }
 
   deletePose(pose) {
