@@ -6,7 +6,7 @@ export class Sequence {
   static nextId = 0;
   type = 'sequence';
   id: number;
-  name: string = 'Sequence';
+  name: string = 'New Sequence';
   nodes: any[] = [];
 
   constructor(

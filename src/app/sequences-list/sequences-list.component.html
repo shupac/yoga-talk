@@ -5,13 +5,17 @@
         {{ sequence.name }}
       </div>
     </div>
-    <button (click)="addSequence()">
+    <button
+      class="btn btn-primary"
+      (click)="addSequence()">
       Add sequence
     </button>
   </div>
 
   <div class="col">
-    <app-sequence [target]="target"></app-sequence>
-    <button routerLink="edit">Edit</button>
+    <div *ngIf="target">
+      <app-sequence [target]="target"></app-sequence>
+      <button class="btn btn-primary" routerLink="edit">Edit Sequence</button>
+    </div>
   </div>
 </div>

@@ -49,8 +49,13 @@ export class SequenceService {
 
   setCurrentSequence(id) {
     this.zone.run(() => {
-      this.currentSequence = this.sequences.find(sequence => sequence.id === id);
+      this.currentSequence = this.getSequence(id);
     });
+  }
+
+  getSequence(id) {
+    this.zone.run(() => {});
+    return this.sequences.find(sequence => sequence.id === id);
   }
 
   addSequence() {
@@ -59,11 +64,10 @@ export class SequenceService {
     sequence.name += sequence.id;
     Sequence.nextId++;
     this.modelsService.updateSequenceIndex();
-    this.fbRef.child(sequence.id + '').set(sequence).then(() => {
-      this.zone.run(() => {
-        this.sequences.push(sequence);
-      });
+    this.zone.run(() => {
+      this.sequences.push(sequence);
     });
+    this.saveSequences();
   }
 
   addToSequence(node, sequence) {
@@ -95,7 +99,7 @@ export class SequenceService {
 
   deleteSequence(id) {
     this.sequences = this.sequences.filter(s => s.id !== id);
-    this.fbRef.set(this.sequences);
+    this.saveSequences();
   }
 
   deleteSeries(id) {
@@ -118,6 +122,10 @@ export class SequenceService {
       }
     });
     this.saveCurrentSequence();
+  }
+
+  saveSequences() {
+    this.fbRef.set(this.sequences);
   }
 
   saveCurrentSequence() {
