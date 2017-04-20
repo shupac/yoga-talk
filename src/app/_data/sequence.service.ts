@@ -88,12 +88,22 @@ export class SequenceService {
   }
 
   addToSeries(pose, series, type) {
+    console.log(pose, series, type);
     pose.id = Pose.nextId;
     Pose.nextId++;
     this.modelsService.updatePoseIndex();
-    if (type === 'pose') series.poses.push(pose);
-    if (type === 'transition1') series.firstTransitions.push(pose);
-    if (type === 'transition2') series.secondTransitions.push(pose);
+    if (type === 'pose') {
+      if (series.poses) series.poses.push(pose);
+      else series.poses = [pose];
+    }
+    if (type === 'transition1') {
+      if (series.firstTransitions) series.firstTransitions.push(pose);
+      else series.firstTransitions = [pose];
+    }
+    if (type === 'transition2') {
+      if (series.secondTransitions) series.secondTransitions.push(pose);
+      else series.secondTransitions = [pose];
+    }
     this.saveCurrentSequence();
   }
 
