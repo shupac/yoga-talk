@@ -40,6 +40,10 @@ button:focus {
   margin: 12px 0;
 }
 
+.alternate {
+  /*background-color: rgba(0,0,0,0.05);*/
+}
+
 .dnd-drag-start {
     -moz-transform:scale(0.8);
     -webkit-transform:scale(0.8);

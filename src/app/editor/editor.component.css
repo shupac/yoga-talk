@@ -6,20 +6,24 @@
 .main {
   height: calc(100% - 62px) !important;
   margin: 0;
-}
-
-.panel {
-  width: 550px;
-}
-
-.editor {
   padding-left: 24px;
-  height: 100%;
+}
+
+.left-panel {
+  width: 520px;
+}
+
+.right-panel {
+  width: 540px;
+  margin-left: 24px;
 }
 
 .sequence {
-  padding: 24px;
-  background-color: #eee;
+  border-bottom: 1px solid #ccc;
+}
+
+.editor {
+  height: 100%;
 }
 
 footer {
@@ -28,10 +32,27 @@ footer {
   left: 0;
   right: 0;
   background-color: white;
+  padding-left: 24px;
 }
 
 footer .col {
   padding: 0;
+}
+
+.left-buttons {
+  margin: 0;
+}
+
+.left-buttons button {
+  width: 100%;
+}
+
+.left-buttons .col:first-child {
+  margin-right: 6px;
+}
+
+.left-buttons .col:last-child {
+  margin-left: 6px;
 }
 
 .crumbs button {

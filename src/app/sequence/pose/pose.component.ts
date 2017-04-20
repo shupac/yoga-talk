@@ -12,4 +12,5 @@ import { Pose } from '../../_data/pose.model';
 })
 export class PoseComponent extends DisplayItemComponent {
   @Input() private target: Pose;
+  @Input() private showDetails: boolean = false;
 }

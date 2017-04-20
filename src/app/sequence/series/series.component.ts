@@ -13,4 +13,5 @@ import { Series } from '../../_data/series.model';
 export class SeriesComponent extends DisplayItemComponent {
   @Input() private target: Series;
   @Input() private dragEnabled: boolean = false;
+  @Input() private showDetails: boolean = false;
 }

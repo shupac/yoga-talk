@@ -1,12 +1,13 @@
 <div class="row main">
-  <div class="sequence panel">
+  <div class="sequence left-panel">
     <app-sequence
       [target]="sequence"
       [editable]="true"
+      [showDetails]="showDetails"
       ></app-sequence>
   </div>
 
-  <div class="editor panel" *ngIf="target">
+  <div class="editor right-panel" *ngIf="target">
     <app-sequence-detail
       *ngIf="target.type === 'sequence'"
       [target]="target"
@@ -44,14 +45,23 @@
 
 <footer>
   <div class="row">
-    <div class="panel">
-      <button
-        class="btn btn-outline-primary"
-        routerLink="preview"
-        style="width: 100%"
-        >Preview Sequence</button>
+    <div class="left-panel">
+      <div class="row left-buttons">
+        <div class="col">
+          <button
+            class="btn btn-outline-primary"
+            (click)="toggleDetails()"
+            >Toggle Details</button>
+        </div>
+        <div class="col">
+          <button
+            class="btn btn-primary"
+            routerLink="preview"
+            >Preview Sequence</button>
+        </div>
+      </div>
     </div>
-    <div class="panel" style="text-align: right;">
+    <div class="right-panel" style="text-align: right;">
       <button class="btn btn-success" (click)="saveSequence()">Save Sequence</button>
       <button class="btn btn-secondary" (click)="finish()">Done</button>
     </div>

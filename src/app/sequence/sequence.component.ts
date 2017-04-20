@@ -13,6 +13,7 @@ import { Sequence } from '../_data/sequence.model';
 })
 export class SequenceComponent extends DisplayItemComponent {
   @Input() private target: Sequence;
+  @Input() private showDetails: boolean;
 
   get sortRoot() {
     return this.service.sortRoot;

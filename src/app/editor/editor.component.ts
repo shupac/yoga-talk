@@ -10,6 +10,7 @@ import { SequenceService } from '../_data/sequence.service';
 export class EditorComponent {
   type: string;
   paramsSub;
+  showDetails: boolean = false;
 
   constructor(
     private service: SequenceService,
@@ -44,6 +45,10 @@ export class EditorComponent {
 
   toggleSort(target) {
     this.service.toggleSort(target.type);
+  }
+
+  toggleDetails() {
+    this.showDetails = !this.showDetails;
   }
 
   saveSequence() {

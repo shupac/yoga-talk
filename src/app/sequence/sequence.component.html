@@ -17,10 +17,12 @@
       [dragEnabled]="sortRoot === 'sequence'"
       [myEditable]="editable"
       [target]="node"
+      [class.alternate]="node.type === 'pose' && i % 2"
       >
       <app-pose
         *ngIf="node.type === 'pose'"
         [target]="node"
+        [showDetails]="showDetails"
         >
       </app-pose>
 
@@ -29,6 +31,7 @@
         [target]="node"
         [dragEnabled]="sortRoot === 'series'"
         [editable]="editable"
+        [showDetails]="showDetails"
         >
       </app-series>
     </div>

@@ -17,7 +17,10 @@
     [myEditable]="editable"
     [target]="pose"
     >
-    <app-pose [target]="pose"></app-pose>
+    <app-pose
+      [target]="pose"
+      [showDetails]="showDetails"
+      ></app-pose>
   </div>
 </div>
 
@@ -29,7 +32,10 @@
       [target]="pose"
       >
       <strong>Left trans:</strong>
-      <app-pose [target]="pose"></app-pose>
+      <app-pose
+        [target]="pose"
+        [showDetails]="showDetails"
+        ></app-pose>
     </div>
   </div>
 
@@ -40,7 +46,10 @@
       [target]="pose"
       >
       <strong>Right trans:</strong>
-      <app-pose [target]="pose"></app-pose>
+      <app-pose
+        [target]="pose"
+        [showDetails]="showDetails"
+        ></app-pose>
     </div>
   </div>
 </div>

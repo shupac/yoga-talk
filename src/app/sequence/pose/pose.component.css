@@ -3,6 +3,10 @@
   line-height: 30px;
 }
 
-button {
-  float: right;
+.bold {
+  font-weight: bold;
+}
+
+.pose-detail {
+  padding-left: 24px;
 }
