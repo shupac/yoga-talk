@@ -3,13 +3,18 @@
   height: 100%;
 }
 
-.row, .editor {
-  height: 100%;
+.main {
+  height: calc(100% - 62px) !important;
+  margin: 0;
+}
+
+.panel {
+  width: 550px;
 }
 
 .editor {
-  padding: 0 24px;
-  width: 500px;
+  padding-left: 24px;
+  height: 100%;
 }
 
 .sequence {
@@ -17,11 +22,18 @@
   background-color: #eee;
 }
 
-button {
-  width: 100%;
-  margin-bottom: 12px;
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
 }
 
-.button-container {
-  margin-top: 36px;
+footer .col {
+  padding: 0;
+}
+
+.crumbs button {
+  width: 100%;
 }

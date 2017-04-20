@@ -8,7 +8,7 @@ import { Pose } from '../../_data/pose.model';
 })
 export class PoseDetailComponent {
   @Input() private target: Pose;
-  @Input() private unilateralOnly: boolean = false;
+  @Input() private seriesPose: boolean = false;
   @Output() private deletePose: EventEmitter<Pose> = new EventEmitter();
 
   pose: Pose = new Pose();
@@ -16,16 +16,13 @@ export class PoseDetailComponent {
   ngDoCheck() {
     if (this.target) {
       this.pose = this.target;
-      this.unilateralOnly = this.target.unilateralOnly;
+      this.seriesPose = this.target.seriesPose;
     }
-    if (this.unilateralOnly) {
-      this.setSides('unilateral');
-      this.pose.unilateralOnly = true;
+    if (this.seriesPose) {
+      this.pose.repeat = 'both';
+      this.pose.seriesPose = true;
     }
-  }
-
-  setSides(sides) {
-    this.pose.sides = sides;
+    else this.pose.seriesPose = false;
   }
 
   getModel() {

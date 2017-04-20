@@ -3,45 +3,39 @@
     (mouseenter)="hover=true"
     (mouseleave)="hover=false"
     (click)="editNode(target)"
+    [class.active]="selectedNode && selectedNode.type === target.type && selectedNode.id === target.id"
     >
     {{ target.name }}
   </h4>
 </div>
 
-<ol
+<div
   dnd-sortable-container
   [sortableData]="target.poses"
   [dropZones]="['series-dropZone']">
-  <li
+  <div
     *ngFor="let pose of target.poses, let i = index"
     dnd-sortable
     [effectCursor]="none"
     [sortableIndex]="i"
     [dragEnabled]="dragEnabled"
     >
-    <app-pose
-      [target]="pose"
-      [currentId]="currentId"
-      ></app-pose>
-  </li>
-</ol>
-
-<div *ngIf="target.firstTransitions && target.firstTransitions.length">
-  <strong>Left side transition:</strong>
-  <span *ngFor="let pose of target.firstTransitions">
-    <app-pose
-      [target]="pose"
-      [currentId]="currentId"
-      ></app-pose>
-  </span>
+    <app-pose [target]="pose"></app-pose>
+  </div>
 </div>
 
-<div *ngIf="target.secondTransitions && target.secondTransitions.length">
-  <strong>Right side transition:</strong>
-  <span *ngFor="let pose of target.secondTransitions">
-    <app-pose
-      [target]="pose"
-      [currentId]="currentId"
-      ></app-pose>
-  </span>
+<div class="transitions">
+  <div *ngIf="target.firstTransitions && target.firstTransitions.length">
+    <div *ngFor="let pose of target.firstTransitions">
+      <strong (click)="editNode(pose)">Left trans:</strong>
+      <app-pose [target]="pose"></app-pose>
+    </div>
+  </div>
+
+  <div *ngIf="target.secondTransitions && target.secondTransitions.length">
+    <div *ngFor="let pose of target.secondTransitions">
+      <strong (click)="editNode(pose)">Right trans:</strong>
+      <app-pose [target]="pose"></app-pose>
+    </div>
+  </div>
 </div>

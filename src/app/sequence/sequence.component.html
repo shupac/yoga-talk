@@ -1,5 +1,8 @@
 <div *ngIf="target">
-  <h2 (click)="editNode(target)">{{ target.name }}</h2>
+  <h2
+    (click)="editNode(target)"
+    [class.active]="selectedNode && selectedNode.type === target.type && selectedNode.id === target.id"
+    >{{ target.name }}</h2>
 
   <div
     dnd-sortable-container
@@ -17,7 +20,6 @@
         <div *ngSwitchCase="'pose'">
           <app-pose
             [target]="node"
-            [currentId]="currentPoseId"
             >
           </app-pose>
         </div>
@@ -25,7 +27,6 @@
         <div *ngSwitchCase="'series'">
           <app-series
             [target]="node"
-            [currentId]="currentPoseId"
             [dragEnabled]="sortRoot === 'series'"
             >
           </app-series>

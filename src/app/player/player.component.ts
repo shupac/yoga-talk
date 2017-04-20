@@ -62,7 +62,7 @@ export class PlayerComponent {
     this.speak(pose.name);
     if (Settings.breathCount) this.speak(pose.breaths + ' breaths');
 
-    let duration = pose.duration || pose.breaths * Settings.secPerBreath;
+    let duration = pose.duration || pose.breaths * Settings.defaultSpeed;
     this.cueTimeout = setTimeout(() => {
       this.sequenceService.currentSpeechIndex++;
       this.speakAndCueNext(sequence);

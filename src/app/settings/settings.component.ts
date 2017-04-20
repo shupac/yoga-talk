@@ -8,13 +8,13 @@ import { Settings } from '../settings';
 })
 export class SettingsComponent {
   defaultBreaths: number = Settings.defaultBreaths;
-  secPerBreath: number = Settings.secPerBreath;
+  defaultSpeed: number = Settings.defaultSpeed;
 
   updateBreaths() {
     Settings.defaultBreaths = +this.defaultBreaths;
   }
 
   updateDuration() {
-    Settings.secPerBreath = +this.secPerBreath;
+    Settings.defaultSpeed = +this.defaultSpeed;
   }
 }

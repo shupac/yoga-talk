@@ -1,6 +1,6 @@
 .pose-item {
-  height: 25px;
-  line-height: 25px;
+  height: 30px;
+  line-height: 30px;
 }
 
 .pose-item:hover {
@@ -9,9 +9,4 @@
 
 button {
   float: right;
-}
-
-.playing {
-  font-weight: bolder;
-  background-color: #ddd;
 }

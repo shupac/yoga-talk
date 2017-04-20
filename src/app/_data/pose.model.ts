@@ -7,11 +7,12 @@ export class Pose {
   type = 'pose';
   id: number;
   name: string;
-  sides: string = 'unilateral';
+  repeat: string = 'once';
+  seriesPose: boolean = false;
+  speed: number = Settings.defaultSpeed;
   timing: string = 'breaths';
   duration: number = Settings.defaultBreaths;
   pronunciation: string;
-  unilateralOnly: boolean = false;
 
   constructor(
     values: Object = {}

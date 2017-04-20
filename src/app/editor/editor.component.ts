@@ -47,6 +47,10 @@ export class EditorComponent {
     this.service.toggleSort(target.type);
   }
 
+  saveSequence() {
+    this.service.saveCurrentSequence();
+  }
+
   deletePose(pose) {
     this.service.deletePose(pose.id);
     this.service.currentEditNode = this.service.currentSequence;
@@ -60,5 +64,9 @@ export class EditorComponent {
   deleteSequence(sequence) {
     this.service.deleteSequence(sequence.id);
     this.router.navigate(['']);
+  }
+
+  resetEditNode() {
+    this.service.currentEditNode = this.service.currentSequence;
   }
 }

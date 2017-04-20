@@ -1,7 +1,7 @@
-<div
+<span
   class="pose-item"
-  [class.playing]="target.id===currentId"
   (click)="editNode(target)"
+  [class.active]="selectedNode && selectedNode.type === target.type && selectedNode.id === target.id"
   >
-  <span>{{ target.name }}</span>
-</div>
+  <span>{{ target.name }} - {{ target.duration }} {{ target.timing }}</span>
+</span>

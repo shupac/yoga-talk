@@ -1,5 +1,11 @@
-<div class="row">
-  <div class="editor" *ngIf="target">
+<div class="row main">
+  <div class="sequence panel">
+    <app-sequence
+      [target]="sequence"
+      ></app-sequence>
+  </div>
+
+  <div class="editor panel" *ngIf="target">
     <app-sequence-detail
       *ngIf="target.type === 'sequence'"
       [target]="target"
@@ -26,15 +32,27 @@
       >
     </app-pose-detail>
 
-    <div class="button-container">
-      <button class="btn btn-success">Save Sequence</button>
-      <button class="btn btn-secondary" routerLink="../">Cancel</button>
+    <div class="row crumbs" *ngIf="target.type !== 'sequence'">
+      <button
+        class="btn btn-outline-success"
+        (click)="resetEditNode()"
+        >Back to Sequence</button>
     </div>
-
-  </div>
-  <div class="col sequence">
-    <app-sequence
-      [target]="sequence"
-      ></app-sequence>
   </div>
 </div>
+
+<footer>
+  <div class="row">
+    <div class="panel">
+      <button
+        class="btn btn-outline-primary"
+        routerLink="preview"
+        style="width: 100%"
+        >Preview Sequence</button>
+    </div>
+    <div class="panel" style="text-align: right;">
+      <button class="btn btn-success" (click)="saveSequence()">Save Sequence</button>
+      <button class="btn btn-secondary" routerLink="../">Done</button>
+    </div>
+  </div>
+</footer>

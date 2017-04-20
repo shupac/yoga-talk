@@ -14,18 +14,6 @@
 
   <div class="row">
     <div>
-      <label class="detail-label">Sides</label>
-    </div>
-    <div class="col">
-      <div myButtonBar [(value)]="pose.sides" (valueChange)="saveChanges()">
-        <span myRadioValue="unilateral">Left &amp; Right</span>
-        <span myRadioValue="bilateral" *ngIf="!unilateralOnly">Bilateral</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div>
       <label class="detail-label">Duration</label>
     </div>
     <div class="col">
@@ -39,10 +27,46 @@
 
       <div myButtonBar [(value)]="pose.timing">
         <span myRadioValue="breaths">Breaths</span>
+        <span myRadioValue="rounds">Rounds</span>
         <span myRadioValue="minutes">Minutes</span>
       </div>
     </div>
   </div>
+
+  <div class="row" *ngIf="pose.timing !== 'minutes'">
+    <div>
+      <label class="detail-label">Speed</label>
+    </div>
+    <div class="col">
+      <input
+        class="breaths"
+        type="text"
+        [(ngModel)]="pose.speed"
+        placeholder="Duration"
+        >
+      seconds per {{ pose.timing.substring(0, pose.timing.length - 1) }}
+      {{ pose.timing === 'rounds' ? ' (abs: 30, suns: 60)' : '' }}
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <label class="detail-label">Repeat</label>
+    </div>
+    <div class="col">
+      <div myButtonBar [(value)]="pose.repeat" (valueChange)="saveChanges()">
+        <span
+          myRadioValue="once"
+          *ngIf="!pose.seriesPose"
+          >Once</span>
+        <span
+          myRadioValue="both"
+          *ngIf="pose.timing !== 'rounds'"
+          >Both Sides</span>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <div class="button-container" *ngIf="target">

@@ -89,7 +89,6 @@ export class SequenceService {
   }
 
   addToSeries(pose, series, type) {
-    console.log(pose, series, type);
     pose.id = Pose.nextId;
     Pose.nextId++;
     this.modelsService.updatePoseIndex();
@@ -140,6 +139,10 @@ export class SequenceService {
   }
 
   saveCurrentSequence() {
+    this.sequences = this.sequences.map(sequence => {
+      if (sequence.id !== this.currentSequence.id) return sequence;
+      else return this.currentSequence;
+    });
     this.fbRef.child(this.currentSequence.id).set(this.currentSequence);
   }
 

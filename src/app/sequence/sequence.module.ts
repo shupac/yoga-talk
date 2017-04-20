@@ -8,6 +8,7 @@ import { PoseComponent } from './pose/pose.component';
 import { SeriesComponent } from './series/series.component';
 import { SequenceComponent } from './sequence.component';
 import { PlayerComponent } from '../player/player.component';
+// import { DisplayItemComponent } from './display-item/display-item.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { PlayerComponent } from '../player/player.component';
     PoseComponent,
     SeriesComponent,
     SequenceComponent,
-    PlayerComponent
+    PlayerComponent,
+    // DisplayItemComponent
   ],
   exports: [
     SequenceComponent
