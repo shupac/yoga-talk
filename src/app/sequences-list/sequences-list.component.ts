@@ -39,6 +39,7 @@ export class SequencesListComponent {
   }
 
   addSequence() {
-    this.service.addSequence();
+    let sequence = this.service.addSequence();
+    this.router.navigate([`/sequence/${sequence.id}/edit`]);
   }
 }

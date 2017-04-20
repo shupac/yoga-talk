@@ -6,9 +6,10 @@ export class AuthService {
 
   fbApp: any;
   userId: string;
+  userName: string;
 
   constructor() {
-    // this.enableTest();
+    this.enableTest();
 
   }
 
@@ -20,6 +21,7 @@ export class AuthService {
       let token = result.credential.accessToken;
       let user = result.user;
       this.userId = user.uid;
+      this.userName = user.displayName.split(' ')[0];
 
       localStorage.setItem('uid', user.uid);
 
@@ -30,10 +32,19 @@ export class AuthService {
     });
   }
 
+  logout() {
+    this.userId = null;
+    this.userName = null;
+    localStorage.removeItem('uid');
+    localStorage.removeItem('previouslyLoggedIn');
+    return this.fbApp.auth().signOut();
+  }
+
   private enableTest() {
     console.log('enable testing');
     this.loginGoogle = () => {
       this.userId = localStorage['uid'];
+      this.userName = 'Test';
       console.log('google login --test', this.userId);
       return Promise.resolve(this.userId);
     }

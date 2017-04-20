@@ -1,7 +1,20 @@
 header {
   text-align: right;
+  height: 48px;
 }
 
-.container {
+header span {
+  vertical-align: middle;
+}
+
+.main {
+  position: absolute;
+  top: 48px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.main .container {
   height: 100%;
 }

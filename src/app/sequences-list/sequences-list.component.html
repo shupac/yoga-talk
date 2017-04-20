@@ -1,21 +1,24 @@
-<div class="row">
-  <div class="col-2">
-    <div *ngFor="let sequence of sequences">
-      <div [routerLink]="'/sequence/' + sequence.id">
-        {{ sequence.name }}
-      </div>
-    </div>
-    <button
-      class="btn btn-primary"
+<div class="list-wrapper">
+  <div class="list-group">
+    <div
+      class="btn-outline-primary list-group-item"
       (click)="addSequence()">
-      Add Sequence
-    </button>
-  </div>
-
-  <div class="col">
-    <div *ngIf="target">
-      <app-sequence [target]="target"></app-sequence>
-      <button class="btn btn-primary" routerLink="edit">Edit Sequence</button>
+      Create Sequence
     </div>
+    <div
+      *ngFor="let sequence of sequences | reverse"
+      class="list-group-item"
+      [class.active]="target && target.id === sequence.id"
+      [routerLink]="'/sequence/' + sequence.id"
+      >
+      {{ sequence.name }}
+    </div>
+  </div>
+</div>
+
+<div class="sequence">
+  <div *ngIf="target">
+    <app-sequence [target]="target"></app-sequence>
+    <button class="btn btn-primary" routerLink="edit">Edit Sequence</button>
   </div>
 </div>

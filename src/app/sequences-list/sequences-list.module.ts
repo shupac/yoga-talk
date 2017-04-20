@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { SequencesListComponent } from './sequences-list.component';
 import { SequencesListRouting } from './sequences-list-routing.module';
 import { SequenceModule } from '../sequence/sequence.module';
+import { SharedModule } from '../_shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     SequencesListRouting,
-    SequenceModule
+    SequenceModule,
+    SharedModule
   ],
   declarations: [
     SequencesListComponent

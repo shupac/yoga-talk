@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
 import { ButtonBarDirective, RadioButtonDirective } from './button-bar.directive';
+import { ReversePipe } from './reverse.pipe';
 
 @NgModule({
   declarations: [
     ButtonBarDirective,
-    RadioButtonDirective
+    RadioButtonDirective,
+    ReversePipe
   ],
   exports: [
     ButtonBarDirective,
-    RadioButtonDirective
+    RadioButtonDirective,
+    ReversePipe
   ]
 })
 export class SharedModule {}

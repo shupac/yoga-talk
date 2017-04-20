@@ -1,8 +1,17 @@
-<div class="container">
-  <header>
-    <button class="btn btn-link" routerLink="/login">Login</button>
-    <button class="btn btn-link" routerLink="/">Main</button>
-  </header>
+<header>
+  <div class="container">
+    <!-- <button class="btn btn-link"routerLink="/login"*ngIf="!userName">Login</button> -->
+    <span *ngIf="userName">Welcome, {{ userName }}!</span>
+    <button
+      class="btn btn-link"
+      *ngIf="userName"
+      (click)="logout()"
+      >Logout</button>
+  </div>
+</header>
 
-  <router-outlet></router-outlet>
+<div class="main">
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
 </div>

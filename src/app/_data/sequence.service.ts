@@ -68,6 +68,7 @@ export class SequenceService {
       this.sequences.push(sequence);
     });
     this.saveSequences();
+    return sequence;
   }
 
   addToSequence(node, sequence) {

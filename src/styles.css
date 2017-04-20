@@ -22,6 +22,10 @@ label {
   vertical-align: text-top;
 }
 
+button:focus {
+  outline: 0 !important;
+}
+
 .row {
   margin: 12px 0;
 }
