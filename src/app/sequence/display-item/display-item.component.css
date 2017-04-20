@@ -1,4 +1,7 @@
 .active {
   color: #0275d8;
-  font-weight: bold;
+}
+
+.editable-item:hover {
+  background-color: rgba(0,0,0,0.1);
 }

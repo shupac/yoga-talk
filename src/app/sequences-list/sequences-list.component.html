@@ -16,9 +16,11 @@
   </div>
 </div>
 
-<div class="sequence">
-  <div *ngIf="target">
-    <app-sequence [target]="target"></app-sequence>
+<div class="sequence-container" *ngIf="target">
+  <div class="button-container">
     <button class="btn btn-primary" routerLink="edit">Edit Sequence</button>
+  </div>
+  <div class="sequence-wrapper">
+    <app-sequence [target]="target"></app-sequence>
   </div>
 </div>

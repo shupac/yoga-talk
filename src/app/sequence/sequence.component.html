@@ -1,7 +1,8 @@
 <div *ngIf="target">
   <h2
-    (click)="editNode($event, target)"
-    [class.active]="selectedNode && selectedNode.type === target.type && selectedNode.id === target.id"
+    [myEditable]="editable"
+    [target]="target"
+    style="cursor: pointer;"
     >{{ target.name }}</h2>
 
   <div
@@ -14,12 +15,12 @@
       dnd-sortable
       [sortableIndex]="i"
       [dragEnabled]="sortRoot === 'sequence'"
-      (click)="editNode($event, node)"
+      [myEditable]="editable"
+      [target]="node"
       >
       <app-pose
         *ngIf="node.type === 'pose'"
         [target]="node"
-        [editable]="editable"
         >
       </app-pose>
 

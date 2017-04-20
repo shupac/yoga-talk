@@ -3,10 +3,6 @@
   line-height: 30px;
 }
 
-.pose-item:hover {
-  background-color: #eee;
-}
-
 button {
   float: right;
 }

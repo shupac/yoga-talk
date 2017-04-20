@@ -8,7 +8,8 @@ import { PoseComponent } from './pose/pose.component';
 import { SeriesComponent } from './series/series.component';
 import { SequenceComponent } from './sequence.component';
 import { PlayerComponent } from '../player/player.component';
-// import { DisplayItemComponent } from './display-item/display-item.component';
+
+import { EditableDirective } from './editable.directive';
 
 @NgModule({
   imports: [
@@ -16,19 +17,16 @@ import { PlayerComponent } from '../player/player.component';
     FormsModule,
     DndModule,
     RouterModule,
-    // SequenceRouting
   ],
   declarations: [
     PoseComponent,
     SeriesComponent,
     SequenceComponent,
     PlayerComponent,
-    // DisplayItemComponent
+    EditableDirective
   ],
   exports: [
     SequenceComponent
-    // PoseComponent,
-    // SeriesComponent
   ]
 })
 export class SequenceModule {}

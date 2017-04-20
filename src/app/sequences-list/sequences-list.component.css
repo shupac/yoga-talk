@@ -7,14 +7,16 @@
 
 .list-wrapper {
   float: left;
-  width: 250px;
+  width: 350px;
   height: 100%;
   overflow-y: auto;
+  padding-left: 48px;
 }
 
-.sequence {
+.sequence-container {
   float: left;
   margin-left: 48px;
+  height: 100%;
 }
 
 
@@ -24,3 +26,11 @@
   color: white;
 }
 
+.button-container {
+  margin-bottom: 12px;
+}
+
+.sequence-wrapper {
+  height: calc(100% - 50px);
+  overflow: auto;
+}
