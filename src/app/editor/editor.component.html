@@ -1,11 +1,5 @@
-<button class="btn btn-link" routerLink="../">Back to Sequences</button>
 <div class="row">
-  <div class="col">
-    <app-sequence
-      [target]="sequence"
-      ></app-sequence>
-  </div>
-  <div class="col" *ngIf="target">
+  <div class="editor" *ngIf="target">
     <app-sequence-detail
       *ngIf="target.type === 'sequence'"
       [target]="target"
@@ -31,5 +25,16 @@
       (deletePose)="deletePose($event)"
       >
     </app-pose-detail>
+
+    <div class="button-container">
+      <button class="btn btn-success">Save Sequence</button>
+      <button class="btn btn-secondary" routerLink="../">Cancel</button>
+    </div>
+
+  </div>
+  <div class="col sequence">
+    <app-sequence
+      [target]="sequence"
+      ></app-sequence>
   </div>
 </div>

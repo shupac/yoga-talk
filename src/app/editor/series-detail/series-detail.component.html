@@ -8,48 +8,56 @@
 </div>
 
 <div *ngIf="target">
-  <h1>Edit Series</h1>
-  <div class="row">
-    <div class="col-2">
-      <label class="detail-label">Name</label>
-    </div>
-    <div class="col">
-      <input [(ngModel)]="target.name" placeholder="Series name" />
-    </div>
-  </div>
-
-  <div class="button-container">
-    <button
-      class="btn"
-      (click)="sort.emit(target)"
-      [class.btn-secondary]="sortRoot !== 'series'"
-      [class.btn-success]="sortRoot === 'series'"
-      >Reorder Poses</button>
-    <button class="btn btn-danger" (click)="deleteSeries.emit(target)">Delete Series</button>
-  </div>
-
-  <h2>Add Element</h2>
-  <div class="row">
-    <div class="col-2">
-      <label class="detail-label">Type</label>
-    </div>
-    <div class="col">
-      <div myButtonBar [(value)]="newNodeType">
-        <span myRadioValue="pose">Pose</span>
-        <span myRadioValue="transition1">Left Transition</span>
-        <span myRadioValue="transition2">Right Transition</span>
+  <div class="wrapper">
+    <h1>Edit Series</h1>
+    <div class="row name">
+      <div class="col-2">
+        <label class="detail-label">Name</label>
+      </div>
+      <div class="col">
+        <input [(ngModel)]="target.name" placeholder="Series name" />
       </div>
     </div>
   </div>
 
-  <app-pose-detail
-    [unilateralOnly]="newNodeType === 'pose'"
-    (add)="onPoseAction($event)"
-    ></app-pose-detail>
+  <div class="wrapper">
+    <h2>Add Pose</h2>
+    <div class="row">
+      <div class="col-2">
+        <label class="detail-label">Type</label>
+      </div>
+      <div class="col">
+        <div myButtonBar [(value)]="newNodeType">
+          <span myRadioValue="pose">Pose</span>
+          <span myRadioValue="transition1">L Trans</span>
+          <span myRadioValue="transition2">R Trans</span>
+        </div>
+      </div>
+    </div>
 
-  <button
-    (click)="addNewPose()"
-    class="btn btn-primary">Add Pose</button>
+    <app-pose-detail
+      [unilateralOnly]="newNodeType === 'pose'"
+      (add)="onPoseAction($event)"
+      ></app-pose-detail>
 
+    <button
+      (click)="addNewPose()"
+      class="btn btn-primary">Add Pose</button>
+  </div>
 
+  <div class="button-container">
+    <div class="row">
+      <div class="col">
+        <button
+          class="btn"
+          (click)="sort.emit(target)"
+          [class.btn-outline-primary]="sortRoot !== 'series'"
+          [class.btn-success]="sortRoot === 'series'"
+          >Reorder Poses</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-outline-danger" (click)="deleteSeries.emit(target)">Delete Series</button>
+      </div>
+    </div>
+  </div>
 </div>

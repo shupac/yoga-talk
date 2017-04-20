@@ -1,41 +1,51 @@
-<h1>Edit Sequence</h1>
-<div class="row">
-  <div class="col-2">
-    <label>Name</label>
-  </div>
-  <div class="col">
-    <input [(ngModel)]="target.name" (ngModelChange)="showSave()">
-  </div>
-</div>
-
-<div class="button-container">
-  <button
-    class="btn"
-    (click)="sort.emit(target)"
-    [class.btn-secondary]="sortRoot !== 'sequence'"
-    [class.btn-success]="sortRoot === 'sequence'"
-    >Reorder Poses</button>
-    <button class="btn btn-danger" (click)="deleteSequence.emit(target)">Delete Sequence</button>
-</div>
-
-<h2>Add Element</h2>
-<div class="row">
-  <div class="col-2">
-    <label class="detail-label">Type</label>
-  </div>
-  <div class="col">
-    <div myButtonBar [(value)]="newNodeType">
-      <span myRadioValue="pose">Pose</span>
-      <span myRadioValue="series">Series</span>
+<div class="wrapper">
+  <h1>Edit Sequence</h1>
+  <div class="row name">
+    <div class="col-2">
+      <label>Name</label>
+    </div>
+    <div class="col">
+      <input [(ngModel)]="target.name" (ngModelChange)="showSave()">
     </div>
   </div>
 </div>
 
-<app-pose-detail *ngIf="newNodeType === 'pose'"></app-pose-detail>
+<div class="wrapper">
+  <h2>Add Element</h2>
+  <div class="row">
+    <div class="col-2">
+      <label class="detail-label">Type</label>
+    </div>
+    <div class="col">
+      <div myButtonBar [(value)]="newNodeType">
+        <span myRadioValue="pose">Pose</span>
+        <span myRadioValue="series">Series</span>
+      </div>
+    </div>
+  </div>
 
-<app-series-detail *ngIf="newNodeType === 'series'">
-</app-series-detail>
+  <app-pose-detail *ngIf="newNodeType === 'pose'"></app-pose-detail>
 
-<button
-  (click)="addRootNode()"
-  class="btn btn-primary">Add {{ newNodeType[0].toUpperCase()+newNodeType.slice(1) }}</button>
+  <app-series-detail *ngIf="newNodeType === 'series'">
+  </app-series-detail>
+
+  <button
+    (click)="addRootNode()"
+    class="btn btn-primary">Add {{ newNodeType[0].toUpperCase()+newNodeType.slice(1) }}</button>
+</div>
+
+<div class="button-container">
+  <div class="row">
+    <div class="col">
+      <button
+        class="btn"
+        (click)="sort.emit(target)"
+        [class.btn-outline-primary]="sortRoot !== 'sequence'"
+        [class.btn-success]="sortRoot === 'sequence'"
+        >Reorder Poses</button>
+    </div>
+    <div class="col">
+      <button class="btn btn-outline-danger" (click)="deleteSequence.emit(target)">Delete Sequence</button>
+    </div>
+  </div>
+</div>

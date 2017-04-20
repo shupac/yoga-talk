@@ -4,6 +4,10 @@ import { Settings } from '../settings';
 
 export class Sequence {
   static nextId = 0;
+  static clone = (sequence) => {
+    let clone = new Sequence({ name: sequence.name });
+    clone.id = sequence.id;
+  }
   type = 'sequence';
   id: number;
   name: string = 'New Sequence';

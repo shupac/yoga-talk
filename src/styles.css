@@ -18,8 +18,12 @@ input:focus::-webkit-input-placeholder {
   color: transparent;
 }
 
+label {
+  vertical-align: text-top;
+}
+
 .row {
-  margin: 16px 0;
+  margin: 12px 0;
 }
 
 .dnd-drag-start {

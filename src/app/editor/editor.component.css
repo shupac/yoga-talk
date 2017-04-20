@@ -1,0 +1,27 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.row, .editor {
+  height: 100%;
+}
+
+.editor {
+  padding: 0 24px;
+  width: 500px;
+}
+
+.sequence {
+  padding: 24px;
+  background-color: #eee;
+}
+
+button {
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.button-container {
+  margin-top: 36px;
+}

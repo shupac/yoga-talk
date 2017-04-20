@@ -1,8 +1,8 @@
-<div *ngIf="target">
-  <h1>Edit Pose</h1>
-</div>
+<div [class.wrapper]="target">
+  <div *ngIf="target">
+    <h1>Edit Pose</h1>
+  </div>
 
-<div>
   <div class="row">
     <div class="col-2">
       <label class="detail-label">Name</label>
@@ -45,7 +45,6 @@
   </div>
 </div>
 
-<div class="delete-container" *ngIf="target">
-  <button class="btn btn-danger"
-  (click)="deletePose.emit(pose)">Delete Pose</button>
+<div class="button-container" *ngIf="target">
+  <button class="btn btn-outline-danger" (click)="deletePose.emit(pose)">Delete Pose</button>
 </div>

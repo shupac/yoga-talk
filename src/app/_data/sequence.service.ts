@@ -49,7 +49,7 @@ export class SequenceService {
 
   setCurrentSequence(id) {
     this.zone.run(() => {
-      this.currentSequence = this.getSequence(id);
+      this.currentSequence = this.cloneSequence(this.getSequence(id));
     });
   }
 
@@ -166,4 +166,10 @@ export class SequenceService {
   //     }
   //   });
   // }
+
+  private cloneSequence(sequence) {
+    return JSON.parse(JSON.stringify(sequence)); // REWRITE?
+  }
+
+
 }
