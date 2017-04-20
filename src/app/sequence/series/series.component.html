@@ -2,7 +2,7 @@
   <h4
     (mouseenter)="hover=true"
     (mouseleave)="hover=false"
-    (click)="editNode(target)"
+    (click)="editNode($event, target)"
     [class.active]="selectedNode && selectedNode.type === target.type && selectedNode.id === target.id"
     >
     {{ target.name }}
@@ -19,23 +19,37 @@
     [effectCursor]="none"
     [sortableIndex]="i"
     [dragEnabled]="dragEnabled"
+    (click)="editNode($event, pose)"
     >
-    <app-pose [target]="pose"></app-pose>
+    <app-pose
+      [target]="pose"
+      [editable]="editable"
+      ></app-pose>
   </div>
 </div>
 
 <div class="transitions">
   <div *ngIf="target.firstTransitions && target.firstTransitions.length">
-    <div *ngFor="let pose of target.firstTransitions">
-      <strong (click)="editNode(pose)">Left trans:</strong>
-      <app-pose [target]="pose"></app-pose>
+    <div
+      *ngFor="let pose of target.firstTransitions"
+      (click)="editNode($event, pose)"
+      >
+      <strong>Left trans:</strong>
+      <app-pose
+        [target]="pose"
+        [editable]="editable"></app-pose>
     </div>
   </div>
 
   <div *ngIf="target.secondTransitions && target.secondTransitions.length">
-    <div *ngFor="let pose of target.secondTransitions">
-      <strong (click)="editNode(pose)">Right trans:</strong>
-      <app-pose [target]="pose"></app-pose>
+    <div
+      *ngFor="let pose of target.secondTransitions"
+      (click)="editNode($event, pose)"
+      >
+      <strong>Right trans:</strong>
+      <app-pose
+        [target]="pose"
+        [editable]="editable"></app-pose>
     </div>
   </div>
 </div>

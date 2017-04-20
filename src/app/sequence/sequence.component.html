@@ -1,6 +1,6 @@
 <div *ngIf="target">
   <h2
-    (click)="editNode(target)"
+    (click)="editNode($event, target)"
     [class.active]="selectedNode && selectedNode.type === target.type && selectedNode.id === target.id"
     >{{ target.name }}</h2>
 
@@ -14,24 +14,22 @@
       dnd-sortable
       [sortableIndex]="i"
       [dragEnabled]="sortRoot === 'sequence'"
+      (click)="editNode($event, node)"
       >
-      <div [ngSwitch]="node.type">
+      <app-pose
+        *ngIf="node.type === 'pose'"
+        [target]="node"
+        [editable]="editable"
+        >
+      </app-pose>
 
-        <div *ngSwitchCase="'pose'">
-          <app-pose
-            [target]="node"
-            >
-          </app-pose>
-        </div>
-
-        <div *ngSwitchCase="'series'">
-          <app-series
-            [target]="node"
-            [dragEnabled]="sortRoot === 'series'"
-            >
-          </app-series>
-        </div>
-      </div>
+      <app-series
+        *ngIf="node.type === 'series'"
+        [target]="node"
+        [dragEnabled]="sortRoot === 'series'"
+        [editable]="editable"
+        >
+      </app-series>
     </div>
   </div>
 </div>

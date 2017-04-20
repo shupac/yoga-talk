@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { SequenceService } from '../../_data/sequence.service';
 
 @Component({
@@ -7,6 +7,7 @@ import { SequenceService } from '../../_data/sequence.service';
   styleUrls: ['./display-item.component.css']
 })
 export class DisplayItemComponent {
+  @Input() public editable: boolean = false;
 
   constructor(public service: SequenceService) {}
   
@@ -14,7 +15,8 @@ export class DisplayItemComponent {
     return this.service.currentEditNode;
   }
 
-  editNode(node) {
-    this.service.currentEditNode = node;
+  editNode($event, node) {
+    $event.stopPropagation();
+    if (this.editable) this.service.currentEditNode = node;
   }
 }

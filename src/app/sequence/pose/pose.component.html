@@ -1,6 +1,5 @@
 <span
   class="pose-item"
-  (click)="editNode(target)"
   [class.active]="selectedNode && selectedNode.type === target.type && selectedNode.id === target.id"
   >
   <span>{{ target.name }} - {{ target.duration }} {{ target.timing }}</span>

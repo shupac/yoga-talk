@@ -22,7 +22,6 @@ export class EditorComponent {
       .subscribe(params => {
         this.service.setCurrentSequence(+params['sid']);
         this.service.currentEditNode = this.service.currentSequence;
-        // this.sequence = this.service.getSequence(+params['sid']);
         this.toggleSort({type: null});
       });
   }
@@ -68,5 +67,10 @@ export class EditorComponent {
 
   resetEditNode() {
     this.service.currentEditNode = this.service.currentSequence;
+  }
+
+  finish() {
+    this.service.currentEditNode = null;
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 }

@@ -2,6 +2,7 @@
   <div class="sequence panel">
     <app-sequence
       [target]="sequence"
+      [editable]="true"
       ></app-sequence>
   </div>
 
@@ -52,7 +53,7 @@
     </div>
     <div class="panel" style="text-align: right;">
       <button class="btn btn-success" (click)="saveSequence()">Save Sequence</button>
-      <button class="btn btn-secondary" routerLink="../">Done</button>
+      <button class="btn btn-secondary" (click)="finish()">Done</button>
     </div>
   </div>
 </footer>
