@@ -3,56 +3,45 @@
   height: 100%;
 }
 
-.main {
-  height: calc(100% - 62px) !important;
-  margin: 0;
-  padding-left: 24px;
-}
-
-.left-panel {
-  width: 520px;
-}
-
-.right-panel {
-  width: 540px;
-  margin-left: 24px;
-}
-
-.sequence {
-  border-bottom: 1px solid #ccc;
-}
-
-.editor {
+.main-container {
   height: 100%;
+  margin: 0;
 }
 
-footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: white;
-  padding-left: 24px;
+.content {
+  height: calc(100% - 62px) !important;
 }
 
-footer .col {
+.sequence .content {
+  border-top: 1px solid rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.footer .col {
   padding: 0;
 }
 
-.left-buttons {
-  margin: 0;
-}
-
-.left-buttons button {
+.footer .col button {
   width: 100%;
 }
 
-.left-buttons .col:first-child {
+.footer.right-side {
+  float: right;
+  padding: 12px 0;
+}
+
+.footer.left-side .col:first-child,
+.footer.right-side button:first-child {
   margin-right: 6px;
 }
 
-.left-buttons .col:last-child {
+.footer.left-side .col:last-child,
+.footer.right-side button:last-child {
   margin-left: 6px;
+}
+
+.footer.right-side {
+  display: flex;
 }
 
 .crumbs button {

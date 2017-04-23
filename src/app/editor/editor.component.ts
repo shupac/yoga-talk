@@ -78,4 +78,8 @@ export class EditorComponent {
     this.service.currentEditNode = null;
     this.router.navigate(['../'], { relativeTo: this.route });
   }
+
+  showPreview() {
+    this.router.navigate([{ outlets: { player: 'preview' } }]);
+  }
 }

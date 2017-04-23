@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <h1>Edit Sequence</h1>
+  <h3>Edit Sequence</h3>
   <div class="row name">
     <div>
       <label>Name</label>
@@ -11,7 +11,7 @@
 </div>
 
 <div class="wrapper">
-  <h2>Add Element</h2>
+  <h4>Add Element</h4>
   <div class="row">
     <div>
       <label class="detail-label">Type</label>
@@ -31,21 +31,21 @@
 
   <button
     (click)="addRootNode()"
-    class="btn btn-primary">Add {{ newNodeType[0].toUpperCase()+newNodeType.slice(1) }}</button>
+    class="btn btn-sm btn-primary">Add {{ newNodeType[0].toUpperCase()+newNodeType.slice(1) }}</button>
 </div>
 
 <div class="button-container">
   <div class="row">
     <div class="col">
       <button
-        class="btn"
+        class="btn btn-sm"
         (click)="sort.emit(target)"
         [class.btn-outline-primary]="sortRoot !== 'sequence'"
         [class.btn-success]="sortRoot === 'sequence'"
         >Reorder Poses</button>
     </div>
     <div class="col">
-      <button class="btn btn-outline-danger" (click)="deleteSequence.emit(target)">Delete Sequence</button>
+      <button class="btn btn-sm btn-outline-danger" (click)="deleteSequence.emit(target)">Delete Sequence</button>
     </div>
   </div>
 </div>

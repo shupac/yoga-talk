@@ -8,6 +8,7 @@ import { DndModule } from 'ng2-dnd';
 import { SharedModule } from './_shared/shared.module';
 import { EditorModule } from './editor/editor.module';
 import { SequencesListModule } from './sequences-list/sequences-list.module';
+import { PlayerModule } from './player/player.module';
 
 import { AppComponent } from './app.component';
 import { SettingsComponent } from './settings/settings.component';
@@ -33,6 +34,7 @@ const appRoutes: Routes = [
     SharedModule,
     EditorModule,
     SequencesListModule,
+    PlayerModule,
     DndModule.forRoot(),
     RouterModule.forRoot(appRoutes),
   ],

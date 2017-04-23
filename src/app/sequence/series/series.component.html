@@ -1,7 +1,7 @@
 <div>
-  <h4 [myEditable]="editable" [target]="target">
+  <div class="title" [myEditable]="editable" [target]="target">
     {{ target.name }}
-  </h4>
+  </div>
 </div>
 
 <div
@@ -31,7 +31,7 @@
       [myEditable]="editable"
       [target]="pose"
       >
-      <strong>Left trans:</strong>
+      <span class="trans-label">Left trans:</span>
       <app-pose
         [target]="pose"
         [showDetails]="showDetails"
@@ -45,7 +45,7 @@
       [myEditable]="editable"
       [target]="pose"
       >
-      <strong>Right trans:</strong>
+      <span class="trans-label">Right trans:</span>
       <app-pose
         [target]="pose"
         [showDetails]="showDetails"

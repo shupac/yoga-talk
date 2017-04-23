@@ -5,6 +5,9 @@
   overflow: auto;
 }
 
-h2 {
-  padding: 6px 0;
+.title {
+  height: 36px;
+  line-height: 36px;
+  font-size: 20px;
+  font-weight: bold;
 }

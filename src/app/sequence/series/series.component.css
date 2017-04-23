@@ -1,14 +1,14 @@
 :host {
   display: block;
-  margin: 10px 0;
+  margin-top: 16px;
 }
 
-h4 {
-  margin: 0;
-  padding: 6px 0;
+.title {
+  height: 30px;
+  line-height: 30px;
+  font-weight: bold;
 }
 
-ol {
-  margin: 0;
-  padding-left: 30px;
+.trans-label {
+  font-style: italic;
 }

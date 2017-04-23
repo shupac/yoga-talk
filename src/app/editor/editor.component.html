@@ -1,69 +1,66 @@
-<div class="row main">
-  <div class="sequence left-panel">
-    <app-sequence
-      [target]="sequence"
-      [editable]="true"
-      [showDetails]="showDetails"
-      ></app-sequence>
-  </div>
-
-  <div class="editor right-panel" *ngIf="target">
-    <app-sequence-detail
-      *ngIf="target.type === 'sequence'"
-      [target]="target"
-      [sortRoot]="sortRoot"
-      (sort)="toggleSort($event)"
-      (deleteSequence)="deleteSequence($event)"
-      >
-    </app-sequence-detail>
-
-    <app-series-detail
-      *ngIf="target.type === 'series'"
-      [target]="target"
-      [sortRoot]="sortRoot"
-      (sort)="toggleSort($event)"
-      (addPose)="addSeriesNode($event)"
-      (deleteSeries)="deleteSeries($event)"
-      >
-    </app-series-detail>
-
-    <app-pose-detail
-      *ngIf="target.type === 'pose'"
-      [target]="target"
-      (deletePose)="deletePose($event)"
-      >
-    </app-pose-detail>
-
-    <div class="row crumbs" *ngIf="target.type !== 'sequence'">
-      <button
-        class="btn btn-outline-success"
-        (click)="resetEditNode()"
-        >Back to Sequence</button>
+<div class="main-container row">
+  <div class="sequence col">
+    <div class="content">
+      <app-sequence
+        [target]="sequence"
+        [editable]="true"
+        [showDetails]="showDetails"
+        ></app-sequence>
     </div>
-  </div>
-</div>
-
-<footer>
-  <div class="row">
-    <div class="left-panel">
-      <div class="row left-buttons">
-        <div class="col">
-          <button
-            class="btn btn-outline-primary"
-            (click)="toggleDetails()"
-            >Toggle Details</button>
-        </div>
-        <div class="col">
-          <button
-            class="btn btn-primary"
-            routerLink="preview"
-            >Preview Sequence</button>
-        </div>
+    <div class="footer row left-side">
+      <div class="col">
+        <button
+          class="btn btn-outline-primary"
+          (click)="toggleDetails()"
+          >Toggle Details</button>
+      </div>
+      <div class="col">
+        <button
+          class="btn btn-primary"
+          routerLink="../preview"
+          >Preview Sequence</button>
       </div>
     </div>
-    <div class="right-panel" style="text-align: right;">
+  </div>
+
+  <div class="editor col" *ngIf="target">
+    <div class="content">
+      <app-sequence-detail
+        *ngIf="target.type === 'sequence'"
+        [target]="target"
+        [sortRoot]="sortRoot"
+        (sort)="toggleSort($event)"
+        (deleteSequence)="deleteSequence($event)"
+        >
+      </app-sequence-detail>
+
+      <app-series-detail
+        *ngIf="target.type === 'series'"
+        [target]="target"
+        [sortRoot]="sortRoot"
+        (sort)="toggleSort($event)"
+        (addPose)="addSeriesNode($event)"
+        (deleteSeries)="deleteSeries($event)"
+        >
+      </app-series-detail>
+
+      <app-pose-detail
+        *ngIf="target.type === 'pose'"
+        [target]="target"
+        (deletePose)="deletePose($event)"
+        >
+      </app-pose-detail>
+
+      <div class="row crumbs" *ngIf="target.type !== 'sequence'">
+        <button
+          class="btn btn-sm btn-outline-success"
+          (click)="resetEditNode()"
+          >Back to Sequence</button>
+      </div>
+    </div>
+    <div class="footer right-side">
       <button class="btn btn-success" (click)="saveSequence()">Save Sequence</button>
       <button class="btn btn-secondary" (click)="finish()">Done</button>
     </div>
   </div>
-</footer>
+</div>

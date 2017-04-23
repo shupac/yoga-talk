@@ -9,7 +9,7 @@
 
 <div *ngIf="target">
   <div class="wrapper">
-    <h1>Edit Series</h1>
+    <h3>Edit Series</h3>
     <div class="row name">
       <div>
         <label class="detail-label">Name</label>
@@ -21,7 +21,7 @@
   </div>
 
   <div class="wrapper">
-    <h2>Add Pose</h2>
+    <h4>Add Pose</h4>
     <div class="row">
       <div>
         <label class="detail-label">Type</label>
@@ -42,21 +42,21 @@
 
     <button
       (click)="addNewPose()"
-      class="btn btn-primary">Add Pose</button>
+      class="btn btn-sm btn-primary">Add Pose</button>
   </div>
 
   <div class="button-container">
     <div class="row">
       <div class="col">
         <button
-          class="btn"
+          class="btn btn-sm"
           (click)="sort.emit(target)"
           [class.btn-outline-primary]="sortRoot !== 'series'"
           [class.btn-success]="sortRoot === 'series'"
           >Reorder Poses</button>
       </div>
       <div class="col">
-        <button class="btn btn-outline-danger" (click)="deleteSeries.emit(target)">Delete Series</button>
+        <button class="btn btn-sm btn-outline-danger" (click)="deleteSeries.emit(target)">Delete Series</button>
       </div>
     </div>
   </div>

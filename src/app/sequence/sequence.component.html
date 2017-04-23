@@ -1,10 +1,10 @@
 <div *ngIf="target">
-  <h2
+  <div
+    class="title"
     [myEditable]="editable"
     [target]="target"
     style="cursor: pointer;"
-    >{{ target.name }}</h2>
-
+    >{{ target.name }}</div>
   <div
     dnd-sortable-container
     [sortableData]="target.nodes"
