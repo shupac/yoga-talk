@@ -22,6 +22,7 @@ export class SequencesListComponent {
 
   ngOnInit() {
     this.paramsSub = this.route.params.subscribe(params => {
+      if (!params['id']) this.router.navigate(['sequence', this.service.newestSequenceId]);
       this.target = this.service.getSequence(+params['id']);
     });
   }

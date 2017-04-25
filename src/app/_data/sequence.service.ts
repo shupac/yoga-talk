@@ -24,6 +24,11 @@ export class SequenceService {
     this.zone = new NgZone({enableLongStackTrace: false});
   }
 
+  get newestSequenceId() {
+    if (!this.sequences) return null;
+    return this.sequences[this.sequences.length - 1].id;
+  }
+
   getSequences(): Promise<Sequence[]> {
     return new Promise((resolve, reject) => {
       this.fbRef.once('value')
