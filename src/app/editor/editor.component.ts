@@ -76,6 +76,7 @@ export class EditorComponent {
 
   finish() {
     this.service.currentEditNode = null;
+    this.saveSequence();
     this.router.navigate(['../'], { relativeTo: this.route });
   }
 

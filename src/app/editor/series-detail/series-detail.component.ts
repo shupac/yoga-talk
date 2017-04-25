@@ -40,6 +40,7 @@ export class SeriesDetailComponent {
 
   addNewPose() {
     let pose = this.poseDetailComponent.getModel();
+    if (!pose.name) return;
     this.poseDetailComponent.createNewModel();
     this.service.addToSeries(pose, this.target, this.newNodeType);
   }

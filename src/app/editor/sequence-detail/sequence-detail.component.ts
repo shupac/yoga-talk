@@ -40,6 +40,7 @@ export class SequenceDetailComponent {
       node = this.seriesDetailComponent.getModel();
       this.seriesDetailComponent.createNewModel();
     }
+    if (!node.name) return;
     this.service.addToSequence(node, this.target);
   }
 

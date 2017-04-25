@@ -123,8 +123,9 @@ export class SequenceService {
     this.saveCurrentSequence();
   }
 
-  saveSequences() {
-    this.fbRef.set(this.sequences);
+  saveSequences(sequences?) {
+    sequences = sequences || this.sequences;
+    return this.fbRef.set(sequences);
   }
 
   saveCurrentSequence() {

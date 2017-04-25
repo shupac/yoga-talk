@@ -121,11 +121,11 @@ export class PlayerComponent {
   private speak(text: string) {
     // text = Lexicon[text] || text;
     Lexicon2.forEach(word => {
-      text = text.replace(word.name, word.sound);
+      text = text.toLowerCase().replace(word.name, word.sound);
     });
     let message = new Utterance(text);
     message.voice = this.voiceData;
-    message.rate = 0.85;
+    message.rate = 0.9;
     message.onend = this.cueNextNode.bind(this);
     this.currentMessage = message;
     Synth.speak(message);

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Sequence } from './sequence.model';
 import { Series } from './series.model';
 import { Pose } from './pose.model';
+import { Settings } from '../settings';
 
 @Injectable()
 export class ModelsService {
@@ -14,9 +15,9 @@ export class ModelsService {
       this.fbRef.once('value').then(snapshot => {
         let indices = snapshot.val();
         if (indices) {
-          Sequence.nextId = indices.sequence || 0;
-          Series.nextId = indices.series || 0;
-          Pose.nextId = indices.pose || 0;
+          Sequence.nextId = indices.sequence || Settings.defaultIndex;
+          Series.nextId = indices.series || Settings.defaultIndex;
+          Pose.nextId = indices.pose || Settings.defaultIndex;
         }
         resolve();
       })
@@ -24,15 +25,22 @@ export class ModelsService {
     });
   }
 
-  updateSequenceIndex() {
-    this.fbRef.child('sequence').set(Sequence.nextId);
+  updateSequenceIndex(index?) {
+    index = index || Sequence.nextId;
+    return this.fbRef.child('sequence').set(Sequence.nextId);
   }
 
-  updateSeriesIndex() {
-    this.fbRef.child('series').set(Series.nextId);
+  updateSeriesIndex(index?) {
+    index = index || Series.nextId;
+    return this.fbRef.child('series').set(Series.nextId);
   }
 
-  updatePoseIndex() {
-    this.fbRef.child('pose').set(Pose.nextId);
+  updatePoseIndex(index?) {
+    index = index || Pose.nextId;
+    return this.fbRef.child('pose').set(Pose.nextId);
+  }
+
+  updateIndices(indices) {
+    return this.fbRef.set(indices).catch(err => console.log(err));
   }
 }

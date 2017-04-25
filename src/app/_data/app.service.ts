@@ -45,6 +45,7 @@ export class AppService {
         this.sequenceService.fbRef = this.userRef.child('sequences');
         this.modelsService.fbRef = this.userRef.child('indices');
       })
+      .then(() => this.checkIfNew())
       .then(() => this.initApp())
       .then(() => this.authGuard.redirect());
   }
@@ -59,5 +60,27 @@ export class AppService {
 
   private updateLastLogin() {
     this.userRef.child('lastLogin').set(moment().format());
+  }
+
+  private checkIfNew() {
+    return this.userRef.child('indices').once('value').then(snapshot => {
+      return snapshot.exists();
+    })
+    .then(exists => {
+      if (exists) return true;
+      else return this.getDefaultUser().then(this.updateNewUser.bind(this));
+    });
+  }
+
+  private getDefaultUser() {
+    return this.dbRef.child('defaultUser').once('value').then(snapshot => snapshot.val());
+  }
+
+  private updateNewUser(defaultData) {
+    console.log(defaultData.sequences, defaultData.indices);
+    return Promise.all([
+      this.sequenceService.saveSequences(defaultData.sequences),
+      this.modelsService.updateIndices(defaultData.indices)
+    ]);
   }
 }
