@@ -7,7 +7,10 @@ import { PoseDetailComponent } from '../pose-detail/pose-detail.component';
 @Component({
   selector: 'app-sequence-detail',
   templateUrl: './sequence-detail.component.html',
-  styleUrls: ['./sequence-detail.component.css']
+  styleUrls: [
+    './sequence-detail.component.css',
+    '../shared.style.css'
+  ]
 })
 export class SequenceDetailComponent {
   @ViewChild(PoseDetailComponent)

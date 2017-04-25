@@ -4,7 +4,10 @@ import { Pose } from '../../_data/pose.model';
 @Component({
   selector: 'app-pose-detail',
   templateUrl: './pose-detail.component.html',
-  styleUrls: ['./pose-detail.component.css']
+  styleUrls: [
+    './pose-detail.component.css',
+    '../shared.style.css'
+  ]
 })
 export class PoseDetailComponent {
   @Input() private target: Pose;

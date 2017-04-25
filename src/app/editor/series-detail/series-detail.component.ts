@@ -6,7 +6,10 @@ import { PoseDetailComponent } from '../pose-detail/pose-detail.component';
 @Component({
   selector: 'app-series-detail',
   templateUrl: './series-detail.component.html',
-  styleUrls: ['./series-detail.component.css']
+  styleUrls: [
+    './series-detail.component.css',
+    '../shared.style.css'
+  ]
 })
 export class SeriesDetailComponent {
   @Input() private target: Series;

@@ -80,7 +80,6 @@ export class PlayerComponent {
     this.voiceData = this.availableVoices
       .find(voice => voice.name === this.selectedVoice);
     this.playerService.currentIndex = index || 0;
-    console.log(this.playerService.currentIndex);
     this.playing = true;
     this.speakCurrentNode();
   }
