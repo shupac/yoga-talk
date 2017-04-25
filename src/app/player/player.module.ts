@@ -5,11 +5,10 @@ import { SequenceModule } from '../sequence/sequence.module';
 import { SharedModule } from '../_shared/shared.module';
 
 import { PlayerComponent } from './player.component';
-import { PreviewComponent } from './preview/preview.component';
+import { LexiconComponent } from './lexicon/lexicon.component';
 
 import { PlayerRouting } from './player-routing.module';
 import { PlayerItemComponent } from './player-item/player-item.component';
-import { LexiconComponent } from './lexicon/lexicon.component';
 
 @NgModule({
   imports: [
@@ -21,7 +20,6 @@ import { LexiconComponent } from './lexicon/lexicon.component';
   ],
   declarations: [
     PlayerComponent,
-    PreviewComponent,
     PlayerItemComponent,
     LexiconComponent
   ],

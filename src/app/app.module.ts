@@ -11,14 +11,12 @@ import { SequencesListModule } from './sequences-list/sequences-list.module';
 import { PlayerModule } from './player/player.module';
 
 import { AppComponent } from './app.component';
-import { SettingsComponent } from './settings/settings.component';
 
 import { AppService } from './_data/app.service';
 import { SequenceService } from './_data/sequence.service';
 import { PlayerService } from './_data/player.service';
 import { AuthService } from './_data/auth.service';
 import { ModelsService } from './_data/models.service';
-// import { AuthGuard } from './_data/auth-guard.service';
 
 import { LoginComponent } from './login/login.component';
 
@@ -40,8 +38,7 @@ const appRoutes: Routes = [
   ],
   declarations: [
     AppComponent,
-    SettingsComponent,
-    LoginComponent,
+    LoginComponent
   ],
   providers: [
     AppService,

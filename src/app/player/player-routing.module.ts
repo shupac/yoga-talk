@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PreviewComponent } from './preview/preview.component';
 import { PlayerComponent } from './player.component';
 import { LexiconComponent } from './lexicon/lexicon.component';
 
