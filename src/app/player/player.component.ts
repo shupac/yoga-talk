@@ -148,7 +148,7 @@ export class PlayerComponent {
         this.playerService.currentIndex++;
         this.speakCurrentNode();
       });
-    }, duration * 1000);
+    }, (duration + Settings.pause) * 1000);
 
   }
 }

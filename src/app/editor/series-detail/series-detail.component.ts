@@ -14,7 +14,7 @@ import { PoseDetailComponent } from '../pose-detail/pose-detail.component';
 export class SeriesDetailComponent {
   @Input() private target: Series;
   @Input() private sortRoot: string;
-  @Output() private addPose: EventEmitter<any> = new EventEmitter();
+  @Output() private add: EventEmitter<any> = new EventEmitter();
   @Output() private sort: EventEmitter<Series> = new EventEmitter();
   @Output() private deleteSeries: EventEmitter<any> = new EventEmitter();
 
@@ -46,5 +46,6 @@ export class SeriesDetailComponent {
     if (!pose.name) return;
     this.poseDetailComponent.createNewModel();
     this.service.addToSeries(pose, this.target, this.newNodeType);
+    this.add.emit();
   }
 }

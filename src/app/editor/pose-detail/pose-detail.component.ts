@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Pose } from '../../_data/pose.model';
+import { Settings } from '../../settings';
 
 @Component({
   selector: 'app-pose-detail',
@@ -41,5 +42,13 @@ export class PoseDetailComponent {
 
   saveChanges() {
     console.log('save model changes');
+  }
+
+  setDefault(setting) {
+    if (setting === 'speed')
+      Settings.defaultSpeed = this.pose.speed;
+    if (setting === 'duration')
+      Settings.defaultDuration = this.pose.duration;
+    alert(`default ${setting} set to ${this.pose[setting]}`);
   }
 }

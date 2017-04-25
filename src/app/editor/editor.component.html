@@ -5,6 +5,7 @@
         [target]="sequence"
         [editable]="true"
         [showDetails]="showDetails"
+        (add)="showAddNew()"
         ></app-sequence>
     </div>
     <div class="footer row left-side">
@@ -29,8 +30,10 @@
         *ngIf="target.type === 'sequence'"
         [target]="target"
         [sortRoot]="sortRoot"
+        [showAdd]="showAdd"
         (sort)="toggleSort($event)"
         (deleteSequence)="deleteSequence($event)"
+        (add)="onAddNewElement()"
         >
       </app-sequence-detail>
 
@@ -46,8 +49,8 @@
         [target]="target"
         [sortRoot]="sortRoot"
         (sort)="toggleSort($event)"
-        (addPose)="addSeriesNode($event)"
         (deleteSeries)="deleteSeries($event)"
+        (add)="onAddNewElement()"
         >
       </app-series-detail>
 

@@ -8,12 +8,7 @@ const paths: Routes = [
     path: 'sequence/:sid/edit',
     component: EditorComponent,
     canActivate: [AuthGuard]
-  },
-  // {
-  //   path: 'sequence/:sid/edit/:type/:id',
-  //   component: EditorComponent,
-  //   canActivate: [AuthGuard]
-  // }
+  }
 ];
 
 @NgModule({

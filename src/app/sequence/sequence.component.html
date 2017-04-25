@@ -35,5 +35,12 @@
         >
       </app-series>
     </div>
+    <div
+      *ngIf="editable"
+      class="row btn btn-primary btn-sm"
+      style="width: 100%;"
+      (click)="add.emit()">
+      Add Element
+    </div>
   </div>
 </div>

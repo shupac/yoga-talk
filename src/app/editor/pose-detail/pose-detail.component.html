@@ -30,6 +30,7 @@
         <span myRadioValue="rounds">Rounds</span>
         <span myRadioValue="minutes">Minutes</span>
       </div>
+      <span class="btn-link" (click)="setDefault('duration')">set default</span>
     </div>
   </div>
 
@@ -46,6 +47,7 @@
         >
       seconds per {{ pose.timing.substring(0, pose.timing.length - 1) }}
       {{ pose.timing === 'rounds' ? ' (abs: 30, suns: 60)' : '' }}
+      <span class="btn-link" (click)="setDefault('speed')">set default</span>
     </div>
   </div>
 

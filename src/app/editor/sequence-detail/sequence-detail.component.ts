@@ -21,13 +21,12 @@ export class SequenceDetailComponent {
 
   @Input() private target;
   @Input() private sortRoot: string;
-  @Output() private addPose: EventEmitter<any> = new EventEmitter();
-  @Output() private addSeries: EventEmitter<any> = new EventEmitter();
+  @Input() private showAdd: boolean = false;
+  @Output() private add: EventEmitter<any> = new EventEmitter();
   @Output() private sort: EventEmitter<Sequence> = new EventEmitter();
   @Output() private deleteSequence: EventEmitter<any> = new EventEmitter();
 
   newNodeType: string = 'pose';
-  showAdd: boolean = false;
 
   constructor(
     private service: SequenceService,
@@ -45,6 +44,7 @@ export class SequenceDetailComponent {
     }
     if (!node.name) return;
     this.service.addToSequence(node, this.target);
+    this.add.emit();
   }
 
   showSave() {

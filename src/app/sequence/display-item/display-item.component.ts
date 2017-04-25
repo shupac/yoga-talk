@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ElementRef } from '@angular/core';
 import { SequenceService } from '../../_data/sequence.service';
 
 @Component({
@@ -8,5 +8,8 @@ import { SequenceService } from '../../_data/sequence.service';
 export class DisplayItemComponent {
   @Input() public editable: boolean = false;
 
-  constructor(public service: SequenceService) {}
+  constructor(
+    public service: SequenceService,
+    public elRef: ElementRef
+  ) {}
 }

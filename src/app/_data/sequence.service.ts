@@ -79,6 +79,7 @@ export class SequenceService {
     if (!sequence.nodes) sequence.nodes = [];
     sequence.nodes.push(node);
     this.saveCurrentSequence();
+    this.currentEditNode = node;
     return node;
   }
 

@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SequenceService } from '../_data/sequence.service';
+import { SequenceDetailComponent } from './sequence-detail/sequence-detail.component';
+import { SequenceComponent } from '../sequence/sequence.component';
 
 @Component({
   selector: 'app-editor',
@@ -8,14 +10,21 @@ import { SequenceService } from '../_data/sequence.service';
   styleUrls: ['./editor.component.css']
 })
 export class EditorComponent {
+  @ViewChild(SequenceDetailComponent)
+  private sequenceDetail: SequenceDetailComponent;
+
+  @ViewChild(SequenceComponent)
+  private sequenceList: SequenceComponent;
+
   type: string;
   paramsSub: any;
   showDetails: boolean = false;
+  showAdd: boolean = false;
 
   constructor(
     private service: SequenceService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit() {
@@ -29,6 +38,10 @@ export class EditorComponent {
 
   ngOnDestroy() {
     this.paramsSub.unsubscribe();
+  }
+
+  ngDoCheck() {
+    if (this.target !== this.sequence) this.showAdd = false;
   }
 
   get sequence() {
@@ -82,5 +95,16 @@ export class EditorComponent {
 
   showPreview() {
     this.router.navigate([{ outlets: { player: 'preview' } }]);
+  }
+
+  showAddNew() {
+    this.service.currentEditNode = this.service.currentSequence;
+    this.showAdd = true;
+  }
+
+  onAddNewElement() {
+    setTimeout(() => {
+      this.sequenceList.scrollToBottom();
+    }, 100);
   }
 }

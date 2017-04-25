@@ -14,8 +14,14 @@ import { Sequence } from '../_data/sequence.model';
 export class SequenceComponent extends DisplayItemComponent {
   @Input() private target: Sequence;
   @Input() private showDetails: boolean;
+  @Output() private add: EventEmitter<any> = new EventEmitter();
 
   get sortRoot() {
     return this.service.sortRoot;
+  }
+
+  scrollToBottom() {
+    let el = this.elRef.nativeElement;
+    el.scrollTop = el.scrollHeight;
   }
 }

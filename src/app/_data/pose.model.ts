@@ -9,7 +9,7 @@ export class Pose {
   seriesPose: boolean = false;
   speed: number = Settings.defaultSpeed;
   timing: string = 'breaths'; // breaths, rounds, minutes
-  duration: number = Settings.defaultBreaths;
+  duration: number = Settings.defaultDuration;
   pronunciation: string;
 
   constructor(
