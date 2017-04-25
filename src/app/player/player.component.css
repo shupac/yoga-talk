@@ -3,6 +3,11 @@
   height: 100%;
 }
 
+h1 {
+  font-weight: bold;
+  font-size: larger;
+}
+
 .container {
   max-width: 600px;
 }
@@ -29,5 +34,10 @@ label {
 }
 
 button {
-  width: 30%;
+  width: 100%;
+}
+
+.back {
+  text-align: left;
+  width: auto;
 }

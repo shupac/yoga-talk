@@ -1,35 +1,32 @@
 <div class="container">
   <div class="controls">
-    <h1 *ngIf="isPreview">Preview Sequence</h1>
-    <h1 *ngIf="!isPreview">Play Sequence</h1>
-
-    <label>Voice</label>
-    <div myButtonBar [(value)]="selectedVoice">
-      <span
-        *ngFor="let voice of voices"
-        [myRadioValue]="voice.dataName"
-        >
-        {{ voice.displayName }}
-      </span>
-    </div>
+    <button
+      class="btn btn-link btn-sm back"
+      (click)="goBack()">Back</button>
 
     <div class="button-container">
       <button
         class="btn btn-success"
         (click)="startSequence()"
-        *ngIf="!playing">{{ isPreview ? 'Preview' : 'Start' }}</button>
+        *ngIf="!playing">{{ isPreview ? 'Preview' : 'Play' }} Sequence</button>
       <button
         class="btn btn-danger"
         (click)="stopSequence()"
         *ngIf="playing">Stop</button>
-      <button
-        class="btn btn-outline-primary"
-        *ngIf="isPreview"
-        (click)="goBack()">Edit</button>
-      <button
-        class="btn btn-outline-primary"
-        *ngIf="!isPreview"
-        (click)="goBack()">Back to Sequences</button>
+    </div>
+
+    <div class="row">
+      <div>
+        <label>Voice</label>
+        <div myButtonBar [(value)]="selectedVoice">
+          <span
+            *ngFor="let voice of voices"
+            [myRadioValue]="voice.dataName"
+            >
+            {{ voice.displayName }}
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 
