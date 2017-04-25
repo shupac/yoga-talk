@@ -44,6 +44,11 @@
   display: flex;
 }
 
+.crumbs {
+  margin: 0;
+}
+
 .crumbs button {
   width: 100%;
+  text-align: left;
 }

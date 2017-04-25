@@ -10,7 +10,7 @@
   </div>
 </div>
 
-<div class="wrapper">
+<div class="wrapper" *ngIf="showAdd">
   <h4>Add Element</h4>
   <div class="row">
     <div>
@@ -29,13 +29,26 @@
   <app-series-detail *ngIf="newNodeType === 'series'">
   </app-series-detail>
 
-  <button
-    (click)="addRootNode()"
-    class="btn btn-sm btn-primary">Add {{ newNodeType[0].toUpperCase()+newNodeType.slice(1) }}</button>
+  <div class="row button-container">
+    <div class="col">
+      <button
+        (click)="addRootNode()"
+        class="btn btn-sm btn-primary">Add {{ newNodeType[0].toUpperCase()+newNodeType.slice(1) }}</button>
+    </div>
+    <div class="col">
+      <button
+        class="btn btn-secondary btn-sm"
+        (click)="showAdd = false">Done</button>
+    </div>
+  </div>
 </div>
 
 <div class="button-container">
-  <div class="row">
+  <button
+    *ngIf="!showAdd"
+    class="btn btn-primary btn-sm"
+    (click)="showAdd = true">Add to Sequence</button>
+  <div class="row" *ngIf="!showAdd">
     <div class="col">
       <button
         class="btn btn-sm"

@@ -34,6 +34,13 @@
         >
       </app-sequence-detail>
 
+      <div class="row crumbs" *ngIf="target.type !== 'sequence'">
+        <button
+          class="btn btn-sm btn-link"
+          (click)="resetEditNode()"
+          >Back to Sequence</button>
+      </div>
+
       <app-series-detail
         *ngIf="target.type === 'series'"
         [target]="target"
@@ -51,12 +58,6 @@
         >
       </app-pose-detail>
 
-      <div class="row crumbs" *ngIf="target.type !== 'sequence'">
-        <button
-          class="btn btn-sm btn-outline-success"
-          (click)="resetEditNode()"
-          >Back to Sequence</button>
-      </div>
     </div>
     <div class="footer right-side">
       <button class="btn btn-success" (click)="saveSequence()">Save Sequence</button>

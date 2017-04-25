@@ -24,6 +24,7 @@ export class SequenceDetailComponent {
   @Output() private deleteSequence: EventEmitter<any> = new EventEmitter();
 
   newNodeType: string = 'pose';
+  showAdd: boolean = false;
 
   constructor(
     private service: SequenceService,

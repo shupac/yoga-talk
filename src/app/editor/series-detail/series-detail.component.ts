@@ -20,6 +20,7 @@ export class SeriesDetailComponent {
 
   newNodeType: string = 'pose';
   series: Series = new Series();
+  showAdd: boolean = false;
 
   constructor(
     private service: SequenceService,

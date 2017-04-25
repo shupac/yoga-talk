@@ -20,7 +20,7 @@
     </div>
   </div>
 
-  <div class="wrapper">
+  <div class="wrapper" *ngIf="showAdd">
     <h4>Add Pose</h4>
     <div class="row">
       <div>
@@ -40,13 +40,26 @@
       (add)="onPoseAction($event)"
       ></app-pose-detail>
 
-    <button
-      (click)="addNewPose()"
-      class="btn btn-sm btn-primary">Add Pose</button>
+    <div class="row button-container">
+      <div class="col">
+        <button
+          (click)="addNewPose()"
+          class="btn btn-sm btn-primary">Add Pose</button>
+      </div>
+      <div class="col">
+        <button
+          class="btn btn-secondary btn-sm"
+          (click)="showAdd = false">Done</button>
+      </div>
+    </div>
   </div>
 
   <div class="button-container">
-    <div class="row">
+    <button
+      *ngIf="!showAdd"
+      class="btn btn-primary btn-sm"
+      (click)="showAdd = true">Add to Series</button>
+    <div class="row" *ngIf="!showAdd">
       <div class="col">
         <button
           class="btn btn-sm"
