@@ -1,0 +1,10 @@
+<div myButtonBar [(value)]="selectedVoice">
+  <span
+    *ngFor="let voice of voices"
+    [myRadioValue]="voice.dataName"
+    >
+    {{ voice.displayName }}
+  </span>
+</div>
+
+<input (keydown.enter)="speak()" [(ngModel)]="value">

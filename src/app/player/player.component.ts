@@ -6,6 +6,7 @@ import { PlayerService } from '../_data/player.service';
 import { Settings } from '../settings';
 import { Synth, Utterance } from './speech';
 import Lexicon from './lexicon';
+import Lexicon2 from './lexicon2';
 import { PlayerItemComponent } from './player-item/player-item.component';
 
 @Component({
@@ -75,7 +76,6 @@ export class PlayerComponent {
   }
 
   startSequence(index?: number) {
-    console.log('start', index);
     if (this.playing) this.stopSequence();
     this.voiceData = this.availableVoices
       .find(voice => voice.name === this.selectedVoice);
@@ -119,7 +119,10 @@ export class PlayerComponent {
   }
 
   private speak(text: string) {
-    text = Lexicon[text] || text;
+    // text = Lexicon[text] || text;
+    Lexicon2.forEach(word => {
+      text = text.replace(word.name, word.sound);
+    });
     let message = new Utterance(text);
     message.voice = this.voiceData;
     message.rate = 0.85;
@@ -129,7 +132,6 @@ export class PlayerComponent {
   }
 
   private cueNextNode(e) {
-    console.log('cue next');
     let node = this.playerService.currentNode;
     if (!node) {
       this.stopSequence();
