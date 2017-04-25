@@ -9,7 +9,7 @@ export class AuthService {
   userName: string;
 
   constructor() {
-    this.enableTest();
+    // this.enableTest();
 
   }
 
