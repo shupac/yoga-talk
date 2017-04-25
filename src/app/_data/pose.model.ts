@@ -8,7 +8,7 @@ export class Pose {
   repeat: string = 'once';
   seriesPose: boolean = false;
   speed: number = Settings.defaultSpeed;
-  timing: string = 'breaths';
+  timing: string = 'breaths'; // breaths, rounds, minutes
   duration: number = Settings.defaultBreaths;
   pronunciation: string;
 

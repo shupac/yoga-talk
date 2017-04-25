@@ -1,10 +1,33 @@
-section, .controls {
-  display: flex;
-  flex-direction: column;
+:host, .container {
+  display: block;
+  height: 100%;
 }
 
-select, button {
-  margin-top: 10px;
-  height: 30px;
-  font-size: 1.2em;
+.container {
+  max-width: 600px;
+}
+
+.controls {
+  height: 120px;
+}
+
+.sequence {
+  height: calc(100% - 120px);
+  overflow: auto;
+}
+
+.label {
+  font-style: italic;
+}
+
+.bold {
+ font-weight: bold;
+}
+
+label {
+  margin-right: 16px;
+}
+
+button {
+  width: 30%;
 }

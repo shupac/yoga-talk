@@ -1,24 +1,117 @@
-<h2>Player</h2>
-<section>
-  <select [(ngModel)]="selectedVoice">
-    <option
-      *ngFor="let voice of voices"
-      [ngValue]="voice.dataName">
-      {{ voice.displayName }}</option>
-  </select>
+<div class="container">
   <div class="controls">
-    <button (click)="startSequence()" *ngIf="!playing">Start</button>
-    <button (click)="stopSequence()" *ngIf="playing">Stop</button>
+    <h1 *ngIf="isPreview">Preview Sequence</h1>
+    <h1 *ngIf="!isPreview">Play Sequence</h1>
+
+    <label>Voice</label>
+    <div myButtonBar [(value)]="selectedVoice">
+      <span
+        *ngFor="let voice of voices"
+        [myRadioValue]="voice.dataName"
+        >
+        {{ voice.displayName }}
+      </span>
+    </div>
+
+    <div class="button-container">
+      <button
+        class="btn btn-success"
+        (click)="startSequence()"
+        *ngIf="!playing">{{ isPreview ? 'Preview' : 'Start' }}</button>
+      <button
+        class="btn btn-danger"
+        (click)="stopSequence()"
+        *ngIf="playing">Stop</button>
+      <button
+        class="btn btn-outline-primary"
+        *ngIf="isPreview"
+        (click)="goBack()">Edit</button>
+      <button
+        class="btn btn-outline-primary"
+        *ngIf="!isPreview"
+        (click)="goBack()">Back to Sequences</button>
+    </div>
   </div>
 
-  <div *ngIf="sequence">
+  <div *ngIf="displaySequence" class="sequence">
     <div
-      *ngFor="let node of sequence, let i = index"
+      *ngFor="let node of displaySequence.nodes"
       class="node-container"
       >
-      <div>
-        {{ node.name }}
+      <div *ngIf="node.type === 'pose'" class="pose">
+        <div *ngIf="node.repeat === 'once'" class="row">
+          <div class="col">
+            <app-player-item
+              [text]="node.name"
+              (select)="startSequence($event)"
+            ></app-player-item>
+          </div>
+        </div>
+        <div *ngIf="node.repeat === 'both'" class="row">
+          <div class="col">
+            <app-player-item
+              [text]="node.name + ' left side'"
+              (select)="startSequence($event)"
+            ></app-player-item>
+          </div>
+          <div class="col">
+            <app-player-item
+              [text]="node.name + ' right side'"
+              (select)="startSequence($event)"
+            ></app-player-item>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="node.type === 'series'" class="series">
+        <app-player-item
+          [text]="node.name"
+          (select)="startSequence($event)"
+          class="bold"
+        ></app-player-item>
+
+        <div class="row">
+          <div class="col" *ngIf="node.poses">
+            <div class="label">Left side</div>
+            <div *ngFor="let pose of node.poses" class="row">
+              <app-player-item
+                [text]="pose.name"
+                (select)="startSequence($event)"
+              ></app-player-item>
+            </div>
+
+            <div *ngIf="node.firstTransitions">
+              <div class="label">Transition</div>
+              <div *ngFor="let pose of node.firstTransitions" class="row">
+                <app-player-item
+                  [text]="pose.name"
+                  (select)="startSequence($event)"
+                ></app-player-item>
+              </div>
+            </div>
+          </div>
+
+          <div class="col" *ngIf="node.poses">
+            <div class="label">Right side</div>
+            <div *ngFor="let pose of node.poses" class="row">
+              <app-player-item
+                [text]="pose.name"
+                (select)="startSequence($event)"
+              ></app-player-item>
+            </div>
+
+            <div *ngIf="node.secondTransitions">
+              <div class="label">Transition</div>
+              <div *ngFor="let pose of node.secondTransitions" class="row">
+                <app-player-item
+                  [text]="pose.name"
+                  (select)="startSequence($event)"
+                ></app-player-item>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</section>
+</div>

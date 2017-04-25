@@ -16,13 +16,11 @@ export class SequenceService {
   sequences: any[] = [];
   currentEditNode: any;
   currentSequence: Sequence;
-  currentSpeechIndex: number = null;
   sortRoot: string;
 
   constructor(
     private modelsService: ModelsService
   ) {
-    // this.stubPoses();
     this.zone = new NgZone({enableLongStackTrace: false});
   }
 
@@ -36,15 +34,6 @@ export class SequenceService {
       })
       .catch(err => reject(err));
     });
-  }
-
-  get currentPoseId() {
-    if (this.currentSpeechIndex === null) return null;
-    return this.currentSequence.speechSequence[this.currentSpeechIndex].id;
-  }
-
-  get speechSequence() {
-    return this.currentSequence.speechSequence;
   }
 
   setCurrentSequence(id) {
@@ -143,7 +132,7 @@ export class SequenceService {
       if (sequence.id !== this.currentSequence.id) return sequence;
       else return this.currentSequence;
     });
-    this.fbRef.child(this.currentSequence.id).set(this.currentSequence);
+    this.saveSequences();
   }
 
   toggleSort(type) {
@@ -182,8 +171,7 @@ export class SequenceService {
   // }
 
   private cloneSequence(sequence) {
+    if (!sequence) return null;
     return JSON.parse(JSON.stringify(sequence)); // REWRITE?
   }
-
-
 }

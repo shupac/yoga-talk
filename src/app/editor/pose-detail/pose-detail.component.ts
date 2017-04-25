@@ -18,11 +18,14 @@ export class PoseDetailComponent {
       this.pose = this.target;
       this.seriesPose = this.target.seriesPose;
     }
+
     if (this.seriesPose) {
       this.pose.repeat = 'both';
       this.pose.seriesPose = true;
     }
     else this.pose.seriesPose = false;
+
+    if (this.pose.timing === 'rounds') this.pose.repeat = 'once';
   }
 
   getModel() {

@@ -2,6 +2,6 @@ export const Settings = {
   defaultBreaths: 3,
   defaultSpeed: 15,
   defaultVoice: 'Tessa',
-  breathCount: false,
+  sayBreathCount: false,
   noPoseDuration: 2
 }

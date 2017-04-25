@@ -9,7 +9,7 @@ import { SequenceService } from '../_data/sequence.service';
 })
 export class EditorComponent {
   type: string;
-  paramsSub;
+  paramsSub: any;
   showDetails: boolean = false;
 
   constructor(
