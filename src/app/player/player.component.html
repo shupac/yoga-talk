@@ -70,8 +70,9 @@
         <div class="row">
           <div class="col" *ngIf="node.poses">
             <div class="label">Left side</div>
-            <div *ngFor="let pose of node.poses" class="row">
+            <div *ngFor="let pose of node.poses">
               <app-player-item
+                class="row"
                 [text]="pose.name"
                 (select)="startSequence($event)"
               ></app-player-item>
@@ -79,19 +80,35 @@
 
             <div *ngIf="node.firstTransitions">
               <div class="label">Transition</div>
-              <div *ngFor="let pose of node.firstTransitions" class="row">
-                <app-player-item
-                  [text]="pose.name"
-                  (select)="startSequence($event)"
-                ></app-player-item>
+              <div *ngFor="let pose of node.firstTransitions">
+                <div *ngIf="pose.repeat === 'once'">
+                  <app-player-item
+                    class="row"
+                    [text]="pose.name"
+                    (select)="startSequence($event)"
+                  ></app-player-item>
+                </div>
+                <div *ngIf="pose.repeat === 'both'">
+                  <app-player-item
+                    class="row"
+                    [text]="pose.name + ' left side'"
+                    (select)="startSequence($event)"
+                  ></app-player-item>
+                  <app-player-item
+                    class="row"
+                    [text]="pose.name + ' right side'"
+                    (select)="startSequence($event)"
+                  ></app-player-item>
+                </div>
               </div>
             </div>
           </div>
 
           <div class="col" *ngIf="node.poses">
             <div class="label">Right side</div>
-            <div *ngFor="let pose of node.poses" class="row">
+            <div *ngFor="let pose of node.poses">
               <app-player-item
+                class="row"
                 [text]="pose.name"
                 (select)="startSequence($event)"
               ></app-player-item>
@@ -99,11 +116,26 @@
 
             <div *ngIf="node.secondTransitions">
               <div class="label">Transition</div>
-              <div *ngFor="let pose of node.secondTransitions" class="row">
-                <app-player-item
-                  [text]="pose.name"
-                  (select)="startSequence($event)"
-                ></app-player-item>
+              <div *ngFor="let pose of node.secondTransitions">
+                <div *ngIf="pose.repeat === 'once'">
+                  <app-player-item
+                    class="row"
+                    [text]="pose.name"
+                    (select)="startSequence($event)"
+                  ></app-player-item>
+                </div>
+                <div *ngIf="pose.repeat === 'both'">
+                  <app-player-item
+                    class="row"
+                    [text]="pose.name + ' left side'"
+                    (select)="startSequence($event)"
+                  ></app-player-item>
+                  <app-player-item
+                    class="row"
+                    [text]="pose.name + ' right side'"
+                    (select)="startSequence($event)"
+                  ></app-player-item>
+                </div>
               </div>
             </div>
           </div>

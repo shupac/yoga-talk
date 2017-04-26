@@ -146,36 +146,32 @@ export class SequenceService {
     if (this.sortRoot === type) this.sortRoot = null;
     else this.sortRoot = type;
   }
-  // private stubPoses() {
-  //   let sequence = new Sequence();
-  //   this.currentSequence = sequence;
-  //   // this.addSequence(sequence);
 
-  //   let SERIES = {};
-  //   STUB_SEQUENCE.forEach(node => {
-  //     if (node.type === 'pose') {
-  //       let pose = new Pose({
-  //         name: node.name,
-  //         sides: node['sides']
-  //       });
-  //       if (node['unilateralOnly']) pose.unilateralOnly = node['unilateralOnly'];
-  //       if (node['timing']) pose.timing = node['timing'];
-  //       if (node['duration']) pose.duration = node['duration'];
+  calcSequenceDuration(sequence) {
+    let duration = 0;
+    if (!sequence.nodes) return duration;
+    sequence.nodes.forEach(node => {
+      if (node.type === 'pose') duration += this.calcPoseDuration(node);
+      if (node.type === 'series') duration += this.calcSeriesDuration(node);
+    });
+    return duration;
+  }
 
-  //       if (node.parent.type === 'sequence')
-  //         this.currentSequence.addPose(pose);
-  //       if (node.parent.type === 'series') {
-  //         SERIES[node.parent['id']].addPose(pose, node['pose'] || 'pose');
-  //       }
-  //     }
+  calcSeriesDuration(series) {
+    let duration = 0;
+    if (series.poses) series.poses.forEach(pose => duration += this.calcPoseDuration(pose));
+    if (series.firstTransitions) series.firstTransitions.forEach(pose => duration += this.calcPoseDuration(pose));
+    if (series.secondTransitions) series.secondTransitions.forEach(pose => duration += this.calcPoseDuration(pose));
+    return duration;
+  }
 
-  //     if (node.type === 'series') {
-  //       let series = new Series({ name: node.name });
-  //       this.currentSequence.addSeries(series);
-  //       SERIES[series.id] = series;
-  //     }
-  //   });
-  // }
+  calcPoseDuration(pose) {
+    let duration;
+    if (pose.timing === 'minutes') duration = pose.duration * 60 + Settings.transitionInPause + Settings.transitionOutPause;
+    else duration = pose.duration * pose.speed + Settings.transitionInPause + Settings.transitionOutPause;
+    if (pose.repeat === 'both') duration *= 2;
+    return duration;
+  }
 
   private cloneSequence(sequence) {
     if (!sequence) return null;

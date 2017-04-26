@@ -113,7 +113,10 @@ export class PlayerComponent {
       return;
     }
     let text = node.name;
-    if (Settings.sayBreathCount) text += ' ' + node.duration + ' ' + node.timing;
+    if (Settings.sayBreathCount && node.duration) {
+      let timing = node.duration > 1 ? node.timing : node.timing.substring(0, node.timing.length - 1);
+      text += ', ' + node.duration + ' ' + timing;
+    }
     this.speak(text);
   }
 
@@ -125,12 +128,12 @@ export class PlayerComponent {
     let message = new Utterance(text);
     message.voice = this.voiceData;
     message.rate = 0.9;
-    message.onend = this.cueNextNode.bind(this);
+    message.onend = this.cueRelease.bind(this);
     this.currentMessage = message;
     Synth.speak(message);
   }
 
-  private cueNextNode(e) {
+  private cueRelease() {
     let node = this.playerService.currentNode;
     if (!node) {
       this.stopSequence();
@@ -141,14 +144,37 @@ export class PlayerComponent {
     if (node.timing === 'minutes') duration = node.duration * 60;
     else if (node.timing) duration = node.duration * node.speed;
     else duration = 0;
-    if (this.isPreview) duration = 0;
-    
+
+    if (this.isPreview || node.type !== 'pose') this.cueNextNode();
+    else this.cueTimeout = setTimeout(() => {
+      let text = node.timing === 'rounds' ? 'finish' : 'release';
+      let message = new Utterance(text);
+      message.voice = this.voiceData;
+      message.rate = 0.9;
+      message.onend = this.cueNextNode.bind(this);
+      this.currentMessage = message;
+      Synth.speak(message);
+    }, (duration + Settings.transitionInPause) * 1000);
+
+  }
+
+  private cueNextNode() {
+    let node = this.playerService.currentNode;
+    if (!node) {
+      this.stopSequence();
+      return;
+    }
+
+    let pause;
+    if (this.isPreview || node.type !== 'pose') {
+      pause = Settings.previewPause
+    }
+    else pause = Settings.transitionOutPause;
     this.cueTimeout = setTimeout(() => {
       this.zone.run(() => {
         this.playerService.currentIndex++;
         this.speakCurrentNode();
       });
-    }, (duration + Settings.pause) * 1000);
-
+    }, pause * 1000);
   }
 }

@@ -11,3 +11,11 @@
   font-size: 20px;
   font-weight: bold;
 }
+
+.duration {
+  cursor: auto;
+  height: 30px;
+  line-height: 30px;
+  font-weight: bold;
+  text-align: center;
+}

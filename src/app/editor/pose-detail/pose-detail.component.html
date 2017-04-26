@@ -59,7 +59,7 @@
       <div myButtonBar [(value)]="pose.repeat" (valueChange)="saveChanges()">
         <span
           myRadioValue="once"
-          *ngIf="!pose.seriesPose"
+          *ngIf="!pose.seriesPose || this.pose.timing === 'rounds'"
           >Once</span>
         <span
           myRadioValue="both"

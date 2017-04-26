@@ -73,7 +73,7 @@ export class AppService {
   }
 
   private getDefaultUser() {
-    return this.dbRef.child('defaultUser').once('value').then(snapshot => snapshot.val());
+    return this.dbRef.child('users').child('defaultUser').once('value').then(snapshot => snapshot.val());
   }
 
   private updateNewUser(defaultData) {

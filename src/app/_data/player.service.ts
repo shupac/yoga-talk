@@ -13,15 +13,19 @@ export class PlayerService {
 
   setCurrentSequence(sequence) {
     if (!(sequence && sequence.nodes)) return [];
-    let speech = [];
-    sequence.nodes.forEach(node => {
-      speech = speech.concat(this.expandNode(node))
-    });
-    this.sequence = speech;
+    this.sequence = this.expandSequence(sequence);
   }
 
   get currentNode() {
     return this.sequence[this.currentIndex];
+  }
+
+  expandSequence(sequence) {
+    let speech = [];
+    sequence.nodes.forEach(node => {
+      speech = speech.concat(this.expandNode(node))
+    });
+    return speech;
   }
 
   private expandNode(node) {

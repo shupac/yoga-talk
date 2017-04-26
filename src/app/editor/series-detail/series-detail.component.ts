@@ -46,6 +46,6 @@ export class SeriesDetailComponent {
     if (!pose.name) return;
     this.poseDetailComponent.createNewModel();
     this.service.addToSeries(pose, this.target, this.newNodeType);
-    this.add.emit();
+    // this.add.emit();
   }
 }

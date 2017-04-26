@@ -4,6 +4,7 @@ export default [
   { name: 'sitali', sound: 'seetaly' },
   { name: 'brahmari', sound: 'braamari' },
   { name: 'kapalabhati', sound: 'kapala baati' },
+  { name: 'kapalabhatti', sound: 'kapala baati' },
   { name: 'sivananda', sound: 'shiva naanda' },
   { name: 'vinyasa', sound: 'vin yaasa' },
   { name: 'nauli', sound: 'nowly' },

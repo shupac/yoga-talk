@@ -10,7 +10,6 @@ export class AuthService {
 
   constructor() {
     // this.enableTest();
-
   }
 
   loginGoogle() {

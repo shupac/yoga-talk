@@ -1,9 +1,11 @@
 export const Settings = {
-  defaultDuration: 3,
-  defaultSpeed: 15,
+  defaultDuration: 4,
+  defaultSpeed: 10,
   defaultVoice: 'Tessa',
-  sayBreathCount: false,
+  sayBreathCount: true,
   noPoseDuration: 2,
   defaultIndex: 10000,
-  pause: 1
+  previewPause: 1,
+  transitionInPause: 20,
+  transitionOutPause: 5
 }

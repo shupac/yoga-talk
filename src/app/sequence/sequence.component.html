@@ -35,12 +35,15 @@
         >
       </app-series>
     </div>
+    <div class="duration">
+      Total time: {{ duration }} minutes
+    </div>
     <div
       *ngIf="editable"
       class="row btn btn-primary btn-sm"
       style="width: 100%;"
       (click)="add.emit()">
-      Add Element
+      Add to Sequence
     </div>
   </div>
 </div>
