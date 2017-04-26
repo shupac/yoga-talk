@@ -1,15 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import * as firebase from 'firebase/app';
 
 @Injectable()
 export class AuthService {
 
+  zone: NgZone;
   fbApp: any;
   userId: string;
   userName: string;
 
   constructor() {
-    // this.enableTest();
+    this.enableAutoLogin();
+    this.zone = new NgZone({enableLongStackTrace: false});
   }
 
   loginGoogle() {
@@ -22,7 +24,8 @@ export class AuthService {
       this.userId = user.uid;
       this.userName = user.displayName.split(' ')[0];
 
-      localStorage.setItem('uid', user.uid);
+      localStorage.setItem('uid', this.userId);
+      localStorage.setItem('userName', this.userName);
 
       localStorage.setItem('previouslyLoggedIn', 'true');
       return user.uid;
@@ -39,13 +42,15 @@ export class AuthService {
     return this.fbApp.auth().signOut();
   }
 
-  private enableTest() {
-    console.log('enable testing');
-    this.loginGoogle = () => {
-      this.userId = localStorage['uid'];
-      this.userName = 'Test';
-      console.log('google login --test', this.userId);
-      return Promise.resolve(this.userId);
-    }
+  private enableAutoLogin() {
+    console.log('enable auto login');
+    if (localStorage['previouslyLoggedIn'])
+      this.loginGoogle = () => {
+        this.zone.run(() => {
+          this.userId = localStorage['uid'];
+          this.userName = localStorage['userName'];
+        });
+        return Promise.resolve(localStorage['uid']);
+      }
   }
 }
