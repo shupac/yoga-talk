@@ -1,16 +1,14 @@
 :host {
   display: block;
-  height: 80%;
+  height: 100%;
 }
 
 .container {
   text-align: center;
   position: relative;
-  top: 450px;
-}
-
-img {
-  position: fixed;
-  top: 0;
-  left: 0;
+  padding-top: 450px;
+  height: 100%;
+  background-image: url('assets/yogatalk-low.jpg');
+  background-size: 100%;
+  background-repeat: no-repeat;
 }

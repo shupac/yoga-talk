@@ -15,7 +15,10 @@
         <label class="detail-label">Name</label>
       </div>
       <div class="col">
-        <input [(ngModel)]="target.name" placeholder="Series name" />
+        <input
+          [(ngModel)]="target.name"
+          placeholder="Series name"
+          >
       </div>
     </div>
   </div>
@@ -37,7 +40,7 @@
 
     <app-pose-detail
       [seriesPose]="newNodeType === 'pose'"
-      (add)="onPoseAction($event)"
+      (addPose)="addNewPose()"
       ></app-pose-detail>
 
     <div class="row button-container">

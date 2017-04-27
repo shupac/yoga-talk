@@ -145,7 +145,7 @@ export class PlayerComponent {
     else if (node.timing) duration = node.duration * node.speed;
     else duration = 0;
 
-    if (this.isPreview || node.type !== 'pose') this.cueNextNode();
+    if (this.isPreview || node.type !== 'pose' || !node.seriesPose) this.cueNextNode();
     else this.cueTimeout = setTimeout(() => {
       let text = node.timing === 'rounds' ? 'finish' : 'release';
       let message = new Utterance(text);

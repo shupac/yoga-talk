@@ -55,7 +55,7 @@ export class SequenceService {
   addSequence() {
     let sequence = new Sequence();
     sequence.id = Sequence.nextId;
-    sequence.name += sequence.id;
+    // sequence.name += sequence.id;
     Sequence.nextId++;
     this.modelsService.updateSequenceIndex();
     this.zone.run(() => {
@@ -79,7 +79,7 @@ export class SequenceService {
     if (!sequence.nodes) sequence.nodes = [];
     sequence.nodes.push(node);
     this.saveCurrentSequence();
-    this.currentEditNode = node;
+    if (node.type === 'series') this.currentEditNode = node;
     return node;
   }
 

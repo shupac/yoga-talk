@@ -8,7 +8,11 @@
       <label class="detail-label">Name</label>
     </div>
     <div class="col">
-      <input [(ngModel)]="pose.name" placeholder="Pose name">
+      <input
+        [(ngModel)]="pose.name"
+        placeholder="Pose name"
+        (keydown.enter)="addPose.emit()"
+        >
     </div>
   </div>
 
@@ -21,7 +25,6 @@
         class="breaths"
         type="text"
         [(ngModel)]="pose.duration"
-        (keydown.enter)="addPose()"
         placeholder="Duration"
         >
 

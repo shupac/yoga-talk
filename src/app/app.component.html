@@ -1,7 +1,6 @@
 <div class="container">
-  <header>
-    <!-- <button class="btn btn-link"routerLink="/login"*ngIf="!userName">Login</button> -->
-    <span *ngIf="userName">Welcome, {{ userName }}!</span>
+  <header *ngIf="userName">
+    <span>Welcome, {{ userName }}!</span>
     <button
       class="btn btn-link"
       *ngIf="userName"

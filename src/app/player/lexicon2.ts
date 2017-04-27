@@ -14,7 +14,7 @@ export default [
   { name: 'pranayama', sound: 'prana yama' },
   { name: 'astavakrasana', sound: 'aasta vikraasina' },
   { name: 'savasana', sound: 'shavaasina' },
-  { name: 'asana', sound: 'aasina' },
+  { name: 'asana', sound: ' aasina' },
   { name: 'eka ', sound: 'ecaa ' },
   { name: 'baddha', sound: 'baada' },
 ];

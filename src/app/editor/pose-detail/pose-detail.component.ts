@@ -13,6 +13,7 @@ import { Settings } from '../../settings';
 export class PoseDetailComponent {
   @Input() private target: Pose;
   @Input() private seriesPose: boolean = false;
+  @Output() private addPose: EventEmitter<Pose> = new EventEmitter();
   @Output() private deletePose: EventEmitter<Pose> = new EventEmitter();
 
   pose: Pose = new Pose();
