@@ -5,8 +5,12 @@
 
 .container {
   text-align: center;
-
   position: relative;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 450px;
+}
+
+img {
+  position: fixed;
+  top: 0;
+  left: 0;
 }

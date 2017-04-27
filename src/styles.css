@@ -3,7 +3,7 @@ html, body {
 }
 
 body {
-  background-color: #e2cfbe;
+  background-color: #371152;
 }
 
 body * {
@@ -36,7 +36,6 @@ button:focus {
 }
 
 .container {
-  background-color: white;
   padding: 0 24px;
 }
 
@@ -100,7 +99,7 @@ button:focus {
 
 .detail-label {
   display: inline-block;
-  width: 80px;
+  width: 70px;
 }
 
 ::-webkit-scrollbar {

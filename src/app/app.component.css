@@ -16,8 +16,8 @@ header span {
   position: absolute;
   top: 60px;
   bottom: 0;
-  left: 12px;
-  right: 12px;
+  left: 24px;
+  right: 24px;
 }
 
 :host {

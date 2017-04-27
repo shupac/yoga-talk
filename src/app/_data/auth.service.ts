@@ -38,6 +38,7 @@ export class AuthService {
     this.userId = null;
     this.userName = null;
     localStorage.removeItem('uid');
+    localStorage.removeItem('userName');
     localStorage.removeItem('previouslyLoggedIn');
     return this.fbApp.auth().signOut();
   }
