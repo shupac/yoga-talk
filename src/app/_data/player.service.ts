@@ -54,6 +54,7 @@ export class PlayerService {
       }
       if (node.type === 'series') expanded = expanded.concat(this.expandSeries(node));
     });
+    if (expanded.length) expanded.push(new SpeechNode({ name: 'release,' }));
     if (series.firstTransitions) series.firstTransitions.forEach(node => {
       expanded = expanded.concat(this.expandNode(node));
     });
@@ -64,6 +65,7 @@ export class PlayerService {
       }
       if (node.type === 'series') expanded = expanded.concat(this.expandSeries(node));
     });
+    if (expanded.length) expanded.push(new SpeechNode({ name: 'release,' }));
     if (series.secondTransitions) series.secondTransitions.forEach(node => {
       expanded = expanded.concat(this.expandNode(node));
     });

@@ -1,6 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+
 import { SequenceService } from '../_data/sequence.service';
+import { ModalService } from '../_data/modal.service';
+
 import { SequenceDetailComponent } from './sequence-detail/sequence-detail.component';
 import { SequenceComponent } from '../sequence/sequence.component';
 
@@ -25,6 +28,7 @@ export class EditorComponent {
     private service: SequenceService,
     private router: Router,
     private route: ActivatedRoute,
+    private modal: ModalService
   ) {}
 
   ngOnInit() {
@@ -66,6 +70,7 @@ export class EditorComponent {
 
   saveSequence() {
     this.service.saveCurrentSequence();
+    this.modal.confirmSave();
   }
 
   deletePose(pose) {
@@ -91,10 +96,6 @@ export class EditorComponent {
     this.service.currentEditNode = null;
     this.saveSequence();
     this.router.navigate(['../'], { relativeTo: this.route });
-  }
-
-  showPreview() {
-    this.router.navigate([{ outlets: { player: 'preview' } }]);
   }
 
   showAddNew() {

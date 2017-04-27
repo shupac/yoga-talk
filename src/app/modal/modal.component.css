@@ -1,0 +1,19 @@
+.bg {
+  display: block;
+  position: fixed;
+  background-color: rgba(0,0,0,0.7);
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  text-align: center;
+  z-index: -1;
+}
+
+.save {
+  background-color: #5cb85c;
+  height: 50px;
+  line-height: 50px;
+  z-index: 2;
+  color: white;
+  text-align: center;
+}

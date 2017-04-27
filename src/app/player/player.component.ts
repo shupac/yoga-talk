@@ -117,10 +117,10 @@ export class PlayerComponent {
       let timing = node.duration > 1 ? node.timing : node.timing.substring(0, node.timing.length - 1);
       text += ', ' + node.duration + ' ' + timing;
     }
-    this.speak(text);
+    this.speak(text, this.cueNextNode.bind(this));
   }
 
-  private speak(text: string) {
+  private speak(text: string, onend?: () => any) {
     // text = Lexicon[text] || text;
     Lexicon2.forEach(word => {
       text = text.toLowerCase().replace(word.name, word.sound);
@@ -128,7 +128,7 @@ export class PlayerComponent {
     let message = new Utterance(text);
     message.voice = this.voiceData;
     message.rate = 0.9;
-    message.onend = this.cueRelease.bind(this);
+    message.onend = onend;
     this.currentMessage = message;
     Synth.speak(message);
   }
@@ -148,12 +148,7 @@ export class PlayerComponent {
     if (this.isPreview || node.type !== 'pose' || !node.seriesPose) this.cueNextNode();
     else this.cueTimeout = setTimeout(() => {
       let text = node.timing === 'rounds' ? 'finish' : 'release';
-      let message = new Utterance(text);
-      message.voice = this.voiceData;
-      message.rate = 0.9;
-      message.onend = this.cueNextNode.bind(this);
-      this.currentMessage = message;
-      Synth.speak(message);
+      this.speak(text, this.cueNextNode.bind(this));
     }, (duration + Settings.transitionInPause) * 1000);
 
   }

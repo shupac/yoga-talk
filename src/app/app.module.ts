@@ -16,9 +16,11 @@ import { AppService } from './_data/app.service';
 import { SequenceService } from './_data/sequence.service';
 import { PlayerService } from './_data/player.service';
 import { AuthService } from './_data/auth.service';
+import { ModalService } from './_data/modal.service';
 import { ModelsService } from './_data/models.service';
 
 import { LoginComponent } from './login/login.component';
+import { ModalComponent } from './modal/modal.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent }
@@ -38,14 +40,16 @@ const appRoutes: Routes = [
   ],
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    ModalComponent
   ],
   providers: [
     AppService,
     SequenceService,
     PlayerService,
     AuthService,
-    ModelsService
+    ModelsService,
+    ModalService
   ],
   bootstrap: [AppComponent]
 })
