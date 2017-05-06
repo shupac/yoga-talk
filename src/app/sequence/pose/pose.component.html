@@ -5,7 +5,7 @@
       target.duration > 1
         ? target.timing
         : target.timing.substring(0, target.timing.length - 1)
-    }} | {{ target.speed }} secs per {{ target.timing.substring(0, target.timing.length - 1) }}
+    }}<span *ngIf="target.timing !== 'minutes'"> | {{ target.speed }} secs per {{ target.timing.substring(0, target.timing.length - 1) }}</span>
     {{ target.repeat === 'both' ? '| both sides' : '' }}
   </div>
 </span>

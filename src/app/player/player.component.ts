@@ -81,7 +81,10 @@ export class PlayerComponent {
       .find(voice => voice.name === this.selectedVoice);
     this.playerService.currentIndex = index || 0;
     this.playing = true;
-    this.speakCurrentNode();
+    if (!this.isPreview) this.speak('Starting sequence in 5 seconds', 0, () => {
+      setTimeout(this.speakCurrentNode.bind(this), 5000);
+    });
+    else this.speakCurrentNode();
   }
 
   stopSequence() {
@@ -117,10 +120,17 @@ export class PlayerComponent {
       let timing = node.duration > 1 ? node.timing : node.timing.substring(0, node.timing.length - 1);
       text += ', ' + node.duration + ' ' + timing;
     }
-    this.speak(text, this.cueNextNode.bind(this));
+
+    let duration;
+    if (node.timing === 'minutes') duration = node.duration * 60;
+    else if (node.timing) duration = node.duration * node.speed;
+    else duration = 0;
+
+    if (node.release) this.speak(text, duration, this.sayRelease.bind(this));
+    else this.speak(text, duration, this.cueNext.bind(this));
   }
 
-  private speak(text: string, onend?: () => any) {
+  private speak(text: string, pause?: number, onend?: () => any) {
     // text = Lexicon[text] || text;
     Lexicon2.forEach(word => {
       text = text.toLowerCase().replace(word.name, word.sound);
@@ -128,48 +138,31 @@ export class PlayerComponent {
     let message = new Utterance(text);
     message.voice = this.voiceData;
     message.rate = 0.9;
-    message.onend = onend;
+    message.onend = () => setTimeout(onend, pause * 1000);
     this.currentMessage = message;
     Synth.speak(message);
   }
 
-  private cueRelease() {
+  private sayRelease() {
     let node = this.playerService.currentNode;
-    if (!node) {
-      this.stopSequence();
-      return;
+    let text, pause;
+    if (node.timing === 'rounds') {
+      text = 'finish round';
+      pause = 15;
     }
-
-    let duration;
-    if (node.timing === 'minutes') duration = node.duration * 60;
-    else if (node.timing) duration = node.duration * node.speed;
-    else duration = 0;
-
-    if (this.isPreview || node.type !== 'pose' || !node.seriesPose) this.cueNextNode();
-    else this.cueTimeout = setTimeout(() => {
-      let text = node.timing === 'rounds' ? 'finish' : 'release';
-      this.speak(text, this.cueNextNode.bind(this));
-    }, (duration + Settings.transitionInPause) * 1000);
-
+    else {
+      text = 'release';
+      pause = 5;
+    }
+    this.speak(text, pause, this.cueNext.bind(this));
   }
 
-  private cueNextNode() {
-    let node = this.playerService.currentNode;
-    if (!node) {
-      this.stopSequence();
-      return;
-    }
-
-    let pause;
-    if (this.isPreview || node.type !== 'pose') {
-      pause = Settings.previewPause
-    }
-    else pause = Settings.transitionOutPause;
+  private cueNext() {
     this.cueTimeout = setTimeout(() => {
       this.zone.run(() => {
         this.playerService.currentIndex++;
         this.speakCurrentNode();
       });
-    }, pause * 1000);
+    }, ( Settings.previewPause ) * 1000);
   }
 }

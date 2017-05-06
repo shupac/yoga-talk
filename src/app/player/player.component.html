@@ -78,10 +78,6 @@
               ></app-player-item>
             </div>
 
-            <div *ngIf="node.poses && node.poses.length">
-              <app-player-item></app-player-item>
-            </div>
-
             <div *ngIf="node.firstTransitions">
               <div class="label">Transition</div>
               <div *ngFor="let pose of node.firstTransitions">
@@ -116,10 +112,6 @@
                 [text]="pose.name"
                 (select)="startSequence($event)"
               ></app-player-item>
-            </div>
-
-            <div *ngIf="node.poses && node.poses.length">
-              <app-player-item></app-player-item>
             </div>
 
             <div *ngIf="node.secondTransitions">

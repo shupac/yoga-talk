@@ -6,6 +6,7 @@ export class Pose {
   id: number;
   name: string;
   repeat: string = 'once';
+  release: boolean = false;
   seriesPose: boolean = false;
   speed: number = Settings.defaultSpeed;
   timing: string = 'breaths'; // breaths, rounds, minutes

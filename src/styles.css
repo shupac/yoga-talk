@@ -106,3 +106,7 @@ button:focus {
     width: 0px;
     background: transparent;
 }
+
+.node-container {
+  cursor: auto !important;
+}
