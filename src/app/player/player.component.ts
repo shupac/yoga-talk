@@ -122,11 +122,11 @@ export class PlayerComponent {
     }
 
     let duration;
-    if (this.isPreview) duration = 0;
+    if (this.isPreview) duration = Settings.previewPause;
     else {
       if (node.timing === 'minutes') duration = node.duration * 60;
       else if (node.timing) duration = node.duration * node.speed;
-      else duration = 0;
+      else duration = Settings.previewPause;
     }
 
     if (node.release) this.speak(text, duration, this.sayRelease.bind(this));
@@ -157,16 +157,14 @@ export class PlayerComponent {
       text = 'release';
       pause = 5;
     }
-    if (this.isPreview) pause = 0;
+    if (this.isPreview) pause = Settings.previewPause;
     this.speak(text, pause, this.cueNext.bind(this));
   }
 
   private cueNext() {
-    this.cueTimeout = setTimeout(() => {
-      this.zone.run(() => {
-        this.playerService.currentIndex++;
-        this.speakCurrentNode();
-      });
-    }, ( Settings.previewPause ) * 1000);
+    this.zone.run(() => {
+      this.playerService.currentIndex++;
+      this.speakCurrentNode();
+    });
   }
 }
