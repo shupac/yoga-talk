@@ -157,6 +157,7 @@ export class PlayerComponent {
       text = 'release';
       pause = 5;
     }
+    if (this.isPreview) pause = 0;
     this.speak(text, pause, this.cueNext.bind(this));
   }
 
