@@ -58,6 +58,7 @@
         *ngIf="target.type === 'pose'"
         [target]="target"
         (deletePose)="deletePose($event)"
+        (save)="saveSequence()"
         >
       </app-pose-detail>
 

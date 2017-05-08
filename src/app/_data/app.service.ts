@@ -5,20 +5,13 @@ import * as firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
 
+import { FirebaseConfig } from '../config';
 import { AuthService } from './auth.service';
 import { SequenceService } from './sequence.service';
 import { ModelsService } from './models.service';
 import { AuthGuard } from './auth-guard.service';
 
-const firebaseConfig = {
-  apiKey: 'AIzaSyA5_AATRfXpkTmxBtz0TkiOG2AuAZW5LSE',
-  authDomain: 'yogatalk-c050a.firebaseapp.com',
-  databaseURL: 'https://yogatalk-c050a.firebaseio.com',
-  storageBucket: 'yogatalk-c050a.appspot.com',
-  messagingSenderId: '1063387354309'
-};
-
-const fbApp = firebase.initializeApp(firebaseConfig);
+const fbApp = firebase.initializeApp(FirebaseConfig);
 
 @Injectable()
 export class AppService {

@@ -15,6 +15,7 @@ export class PoseDetailComponent {
   @Input() private seriesPose: boolean = false;
   @Output() private addPose: EventEmitter<Pose> = new EventEmitter();
   @Output() private deletePose: EventEmitter<Pose> = new EventEmitter();
+  @Output() private save: EventEmitter<any> = new EventEmitter();
 
   pose: Pose = new Pose();
 
@@ -39,10 +40,6 @@ export class PoseDetailComponent {
 
   createNewModel() {
     this.pose = new Pose();
-  }
-
-  saveChanges() {
-    console.log('save model changes');
   }
 
   setDefault(setting) {

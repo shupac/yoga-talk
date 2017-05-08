@@ -138,7 +138,7 @@ export class PlayerComponent {
     let message = new Utterance(text);
     message.voice = this.voiceData;
     message.rate = 0.9;
-    message.onend = () => setTimeout(onend, pause * 1000);
+    message.onend = () => this.cueTimeout = setTimeout(onend, pause * 1000);
     this.currentMessage = message;
     Synth.speak(message);
   }

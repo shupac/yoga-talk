@@ -43,7 +43,7 @@ export class SequenceService {
 
   setCurrentSequence(id) {
     this.zone.run(() => {
-      this.currentSequence = this.cloneSequence(this.getSequence(id));
+      this.currentSequence = this.clone(this.getSequence(id));
     });
   }
 
@@ -52,8 +52,8 @@ export class SequenceService {
     return this.sequences.find(sequence => sequence.id === id);
   }
 
-  addSequence() {
-    let sequence = new Sequence();
+  addSequence(sequence?: Sequence) {
+    sequence = sequence || new Sequence();
     sequence.id = Sequence.nextId;
     // sequence.name += sequence.id;
     Sequence.nextId++;
@@ -63,6 +63,12 @@ export class SequenceService {
     });
     this.saveSequences();
     return sequence;
+  }
+
+  cloneSequence(sequence: Sequence) {
+    let clone = this.clone(sequence);
+    clone.name = 'Copy of ' + clone.name;
+    return this.addSequence(clone);
   }
 
   addToSequence(node, sequence) {
@@ -173,8 +179,8 @@ export class SequenceService {
     return duration;
   }
 
-  private cloneSequence(sequence) {
-    if (!sequence) return null;
-    return JSON.parse(JSON.stringify(sequence)); // REWRITE?
+  private clone(object) {
+    if (!object) return null;
+    return JSON.parse(JSON.stringify(object)); // REWRITE?
   }
 }

@@ -5,7 +5,6 @@ import { SequenceModule } from '../sequence/sequence.module';
 import { SharedModule } from '../_shared/shared.module';
 
 import { PlayerComponent } from './player.component';
-import { LexiconComponent } from './lexicon/lexicon.component';
 
 import { PlayerRouting } from './player-routing.module';
 import { PlayerItemComponent } from './player-item/player-item.component';
@@ -20,8 +19,7 @@ import { PlayerItemComponent } from './player-item/player-item.component';
   ],
   declarations: [
     PlayerComponent,
-    PlayerItemComponent,
-    LexiconComponent
+    PlayerItemComponent
   ],
   exports: []
 })

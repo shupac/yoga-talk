@@ -22,7 +22,7 @@ export class SequencesListComponent {
 
   ngOnInit() {
     this.paramsSub = this.route.params.subscribe(params => {
-      if (!params['id']) this.router.navigate(['sequence', this.service.newestSequenceId]);
+      // if (!params['id']) this.router.navigate(['sequence', this.service.newestSequenceId]);
       this.target = this.service.getSequence(+params['id']);
     });
   }
@@ -42,5 +42,11 @@ export class SequencesListComponent {
   addSequence() {
     let sequence = this.service.addSequence();
     this.router.navigate([`/sequence/${sequence.id}/edit`]);
+  }
+
+  cloneSequence() {
+    console.log('clone');
+    let clone = this.service.cloneSequence(this.target);
+    this.router.navigate([`/sequence/${clone.id}`]);
   }
 }

@@ -20,6 +20,7 @@
   <div class="button-container">
     <button class="btn btn-success" routerLink="play">Play Sequence</button>
     <button class="btn btn-primary" routerLink="edit">Edit Sequence</button>
+    <button class="btn btn-warning" (click)="cloneSequence()">Clone Sequence</button>
   </div>
   <div class="sequence-wrapper">
     <app-sequence [target]="target"></app-sequence>

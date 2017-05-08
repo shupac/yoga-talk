@@ -6,6 +6,6 @@ export const Settings = {
   noPoseDuration: 2,
   defaultIndex: 10000,
   previewPause: 1,
-  transitionInPause: 5,
+  transitionInPause: 0,
   transitionOutPause: 0
 }
