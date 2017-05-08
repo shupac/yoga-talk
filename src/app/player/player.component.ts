@@ -122,9 +122,12 @@ export class PlayerComponent {
     }
 
     let duration;
-    if (node.timing === 'minutes') duration = node.duration * 60;
-    else if (node.timing) duration = node.duration * node.speed;
-    else duration = 0;
+    if (this.isPreview) duration = 0;
+    else {
+      if (node.timing === 'minutes') duration = node.duration * 60;
+      else if (node.timing) duration = node.duration * node.speed;
+      else duration = 0;
+    }
 
     if (node.release) this.speak(text, duration, this.sayRelease.bind(this));
     else this.speak(text, duration, this.cueNext.bind(this));
