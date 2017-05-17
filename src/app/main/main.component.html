@@ -1,0 +1,19 @@
+<div class="container">
+  <header>
+    <a routerLink="/app" class="logo"><img src="assets/logo.png"></a>
+    <button
+      class="btn btn-link"
+      (click)="showDocs()">
+      Getting Started
+    </button>
+    <button
+      class="btn btn-link"
+      (click)="logout()"
+      >Logout
+    </button>
+  </header>
+
+  <div class="main">
+    <router-outlet></router-outlet>
+  </div>
+</div>

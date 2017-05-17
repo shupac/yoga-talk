@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../_shared/shared.module';
 import { SequenceModule } from '../sequence/sequence.module';
@@ -13,10 +14,10 @@ import { PoseDetailComponent } from './pose-detail/pose-detail.component';
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule,
     FormsModule,
     SharedModule,
-    SequenceModule,
-    EditorRouting
+    SequenceModule
   ],
   declarations: [
     EditorComponent,

@@ -8,18 +8,4 @@ import { AuthService } from './_data/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(
-    private service: AuthService,
-    private router: Router
-  ) {}
-
-  get userName() {
-    return this.service.userName;
-  }
-
-  logout() {
-    this.service.logout().then(() => {
-      this.router.navigate(['/login'])
-    });
-  }
 }

@@ -33,6 +33,7 @@ export class AppService {
     return this.authService.loginGoogle()
       .then(uid => {
         console.log('logged in', uid);
+        if (!uid) alert('login failed, try again');
         this.userRef = this.dbRef.child('users').child(uid);
         this.updateLastLogin();
         this.sequenceService.fbRef = this.userRef.child('sequences');

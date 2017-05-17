@@ -1,18 +1,4 @@
-<div class="container">
-  <header *ngIf="userName">
-    <a routerLink="" class="logo"><img src="assets/logo.png"></a>
-    <span>Welcome, {{ userName }}!</span>
-    <button
-      class="btn btn-link"
-      *ngIf="userName"
-      (click)="logout()"
-      >Logout</button>
-  </header>
-
-  <div class="main">
-    <router-outlet></router-outlet>
-  </div>
-</div>
+<router-outlet></router-outlet>
 <div class="modal">
   <app-modal></app-modal>
 </div>

@@ -9,7 +9,7 @@
       *ngFor="let sequence of sequences | reverse"
       class="list-group-item"
       [class.active]="target && target.id === sequence.id"
-      [routerLink]="'/sequence/' + sequence.id"
+      [routerLink]="'/app/sequence/' + sequence.id"
       >
       {{ sequence.name }}
     </div>

@@ -1,14 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { DndModule } from 'ng2-dnd';
 
 import { SharedModule } from './_shared/shared.module';
-import { EditorModule } from './editor/editor.module';
-import { SequencesListModule } from './sequences-list/sequences-list.module';
-import { PlayerModule } from './player/player.module';
+import { MainModule } from './main/main.module';
 
 import { AppComponent } from './app.component';
 
@@ -21,27 +17,26 @@ import { ModelsService } from './_data/models.service';
 
 import { LoginComponent } from './login/login.component';
 import { ModalComponent } from './modal/modal.component';
+import { DocsComponent } from './docs/docs.component';
 
 const appRoutes: Routes = [
-  { path: 'login', component: LoginComponent }
+  { path: '', component: LoginComponent },
+  { path: 'getting-started', component: DocsComponent }
 ];
 
 @NgModule({
   imports: [
     BrowserModule,
-    FormsModule,
-    HttpModule,
     SharedModule,
-    EditorModule,
-    SequencesListModule,
-    PlayerModule,
+    MainModule,
     DndModule.forRoot(),
     RouterModule.forRoot(appRoutes),
   ],
   declarations: [
     AppComponent,
     LoginComponent,
-    ModalComponent
+    ModalComponent,
+    DocsComponent,
   ],
   providers: [
     AppService,

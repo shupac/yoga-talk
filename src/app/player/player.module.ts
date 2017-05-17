@@ -5,8 +5,6 @@ import { SequenceModule } from '../sequence/sequence.module';
 import { SharedModule } from '../_shared/shared.module';
 
 import { PlayerComponent } from './player.component';
-
-import { PlayerRouting } from './player-routing.module';
 import { PlayerItemComponent } from './player-item/player-item.component';
 
 @NgModule({
@@ -14,8 +12,7 @@ import { PlayerItemComponent } from './player-item/player-item.component';
     CommonModule,
     FormsModule,
     SequenceModule,
-    SharedModule,
-    PlayerRouting
+    SharedModule
   ],
   declarations: [
     PlayerComponent,
