@@ -1,14 +1,70 @@
-:host {
-  display: block;
-  height: 100%;
+nav {
+  background-color: #371152;
+  z-index: 2;
 }
 
-.container {
+.brand {
+  height: 60px;
+  line-height: 60px;
+  font-size: 24px;
+  color: white;
+}
+
+.hero {
   text-align: center;
-  position: relative;
-  padding-top: 450px;
-  height: 100%;
   background-image: url('assets/yogatalk-low.jpg');
   background-size: 100%;
   background-repeat: no-repeat;
+  padding: 100px;
+  color: white;
+}
+
+.beta {
+  position: absolute;
+  background-color: red;
+  color: yellow;
+  font-size: 18px;
+  width: 200px;
+  top: 100px;
+  right: -50px;
+  transform: rotateZ(45deg);
+}
+
+.title {
+  font-size: 100px;
+  font-weight: lighter;
+  letter-spacing: 0.2em;
+}
+
+.subtitle {
+  margin-top: -12px;
+  font-family: Georgia;
+  font-weight: 100;
+  font-size: 24px;
+  margin-bottom: 60px;
+}
+
+.content {
+  text-align: center;
+  padding: 60px 0;
+}
+
+.content, .content li, .content p {
+  color: white;
+  font-family: Georgia;
+  font-size: 18px;
+}
+
+h1 {
+  font-size: 2em;
+  padding: 0.5em;
+}
+
+li {
+  text-align: left;
+}
+
+footer {
+  color: white;
+  padding: 24px 0;
 }
