@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../_shared/shared.module';
 import { SequenceModule } from '../sequence/sequence.module';
-import { EditorRouting } from './editor-routing.module';
 
 import { EditorComponent } from './editor.component';
 import { SequenceDetailComponent } from './sequence-detail/sequence-detail.component';
