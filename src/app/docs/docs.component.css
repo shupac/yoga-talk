@@ -1,0 +1,48 @@
+nav {
+  background-color: #371152;
+  z-index: 2;
+}
+
+.brand {
+  height: 60px;
+  line-height: 60px;
+  font-size: 24px;
+  color: white;
+}
+
+.content {
+  text-align: center;
+}
+
+.title {
+  margin-top: 0.5em;
+  font-family: Arial;
+  font-size: 3em;
+  font-weight: lighter;
+  color: white;
+}
+
+.content, .content li, .content p {
+  color: white;
+  font-family: Georgia;
+  font-size: 18px;
+}
+
+h1 {
+  font-size: 2em;
+  padding: 0.5em;
+  margin-top: 2em;
+}
+
+li {
+  text-align: left;
+}
+
+p {
+  text-align: left;
+}
+
+footer {
+  color: white;
+  padding: 24px 0;
+}
