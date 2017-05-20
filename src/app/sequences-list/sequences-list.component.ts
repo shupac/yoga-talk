@@ -41,12 +41,12 @@ export class SequencesListComponent {
 
   addSequence() {
     let sequence = this.service.addSequence();
-    this.router.navigate([`/sequence/${sequence.id}/edit`]);
+    this.router.navigate([`/app/sequence/${sequence.id}/edit`]);
   }
 
   cloneSequence() {
     console.log('clone');
     let clone = this.service.cloneSequence(this.target);
-    this.router.navigate([`/sequence/${clone.id}`]);
+    this.router.navigate([`/app/sequence/${clone.id}`]);
   }
 }
