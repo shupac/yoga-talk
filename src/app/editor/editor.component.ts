@@ -85,7 +85,7 @@ export class EditorComponent {
 
   deleteSequence(sequence) {
     this.service.deleteSequence(sequence.id);
-    this.router.navigate(['']);
+    this.router.navigate(['app']);
   }
 
   resetEditNode() {
